@@ -64,6 +64,7 @@ There are five character classes with distinct playing styles:
 * _Bomber:_ Able to damage surrounding enemies, poor defense.
 
 The following table is the detailed properties of each class:
+
 |                Class|   HP|  Atk|  Def|  Rng| Area|  Spd|  Mov|
 |---------------------|-----|-----|-----|-----|-----|-----|-----|
 |              Fighter|  500|   30|   45|    1|    0|   40|    2|
