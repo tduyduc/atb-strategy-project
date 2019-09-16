@@ -1,14 +1,14 @@
 # Active Time Battle-Based Strategy Game Project
 
-by Duc Tran Duy
+_by Duc Tran Duy, nicknamed T.D. Stoneheart_
 
 -----
 
 ## 1. Introduction
 
-This project is a game created as a project for Duc's research about _AI in strategy games_. Note that this notion of AI refers to the _["game AI"](https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games)_ (consisting of algorithms for NPCs) rather than _"true AI"_ (using machine learning).
+This project is a game created as a project for Duc’s research about _AI in strategy games_. Note that this notion of AI refers to the _[“game AI”](https://en.wikipedia.org/wiki/Artificial_intelligence_in_video_games)_ (consisting of algorithms for NPCs) rather than _“true AI”_ (using machine learning).
 
-This game combines Active Time Battle as seen in games such as Final Fantasy 6 and strategy found in Final Fantasy Tactics Advance. It uses AutoIt scripting language, which can be easily used for GUI, simple graphics, easy array copying, and dynamic array resizing operations.
+This game combines _Active Time Battle_ as seen in games such as _Final Fantasy 6_ and strategy found in _Final Fantasy Tactics Advance_. It uses AutoIt scripting language, which can be easily used for GUI, simple graphics, easy array copying, and dynamic array resizing operations.
 
 Sprite images _(from Final Fantasy 6)_ are not included. They can be downloaded at http://www.videogamesprites.net/FinalFantasy6/. Images might need to be renamed in the script.
 
@@ -18,13 +18,13 @@ Sprite images _(from Final Fantasy 6)_ are not included. They can be downloaded 
 
 ### 2.1. Map
 
-The map consists of a 6×6 board with no terrain _(the map size is customizable)_. Each team, consisting of 3 members, is located at either side of the board. The left (enemy) team can select the initial location for characters within the first two columns of the board. Likewise, the right (ally) team can select within the last two columns of the board. The position of a character is unique; no squares are occupied by more than one character.
+The map consists of a flat 6×6 board _(the map size is customizable)_. Each team, consisting of 3 members, is located at either side of the board. The left _(enemy)_ team can select the initial location for characters within the first two columns of the board. Likewise, the right _(ally)_ team can select within the last two columns of the board. The position of a character is unique; no squares are occupied by more than one character.
 
 ![Figure 1. The Battle Scene window, consisting of the map](screenshots/map.png)
 
 ### 2.2. Method of Determining Distance
 
-The distance between two squares is calculated upon the Manhattan distance formula.
+The distance between two squares is calculated upon the _Manhattan distance_ formula.
 
 Let `abs` be the absolute value function and `distance` be the distance from the point with coordinates `(x1, y1)` to the point `(x2, y2)`, the formula is:
 ```
@@ -37,7 +37,7 @@ Properties of a character include the following:
 * _Hit Points:_ Determines how much damage a character can sustain. Characters with 0 HP are considered knocked out and are removed from the map for the remainder of the game.
 * _Magic Points:_ Determines how many special abilities a character can cast until the end of the game. However, special abilities are temporarily removed for simplicity; therefore, this property is unused.
 * _Attack:_ Determines the amount of damage a character can deal to the target.
-* _Defense:_ Determines the amount of damage to be reduced. The incoming damage multiplier is calculated based on the formula from League of Legends:
+* _Defense:_ Determines the amount of damage to be reduced. The incoming damage multiplier is calculated based on the formula from _League of Legends_:
   ```
   if (defense >= 0) 
     damageMultiplier = 100 / (100 + defense);
@@ -51,8 +51,8 @@ Properties of a character include the following:
 
 There are in-game properties in addition to the preceding ones:
 * _Time:_ ATB bar filling progress.
-* _X:_ Abscissa of the character (i.e. the column he is standing).
-* _Y:_ Ordinate of the character (i.e. the row he is standing).
+* _X:_ Abscissa of the character _(i.e. the column he is standing)_.
+* _Y:_ Ordinate of the character _(i.e. the row he is standing)_.
 
 ### 2.4. Character Classes
 
@@ -66,7 +66,7 @@ There are five character classes with distinct playing styles:
 The following table is the detailed properties of each class:
 
 |                Class|   HP|  Atk|  Def|  Rng| Area|  Spd|  Mov|
-|---------------------|-----|-----|-----|-----|-----|-----|-----|
+|--------------------:|----:|----:|----:|----:|----:|----:|----:|
 |              Fighter|  500|   30|   45|    1|    0|   40|    2|
 |           Black Belt|  400|   70|   30|    1|    0|   25|    2|
 |               Archer|  300|   30|   15|    3|    0|   35|    2|
@@ -87,11 +87,13 @@ Up to two actions can be done per turn, in any order: _(1)_ move, and _(2)_ atta
 
 A character might end the turn with only one action or zero actions taken. His ATB bar will be partially filled, depending on the number of actions taken _(i.e. the fewer actions he takes, the sooner he will take his turn)_. If a character has his ATB bar full when someone else’s turn is being taken, he will be queued to be the next character to take a turn.
 
+To reduce determinism, ATB bar progress on re-filling will be randomly increased or decreased to a slight extent. Likewise, damage dealt will also vary insignificantly.
+
 ### 2.6. Game Ending Conditions
 
 That at least one team is completely annihilated _(i.e. all team members have 0 HP)_ will cause the game to end. The team with at least one member alive wins.
 
-If no attack command is issued in a turn, the turn is considered “inactive.” Thirty consecutive inactive turns _(i.e. 30 consecutive turns without anyone attacking)_ will terminate the game. The team with more surviving characters wins. If number of survivors of both teams is the same, the team with higher total HP of members wins. Equal number of survivors and equal total HP of members will lead to a drawn game.
+If no attack command is issued in a turn, the turn is considered _“inactive”._ Thirty consecutive inactive turns _(i.e. 30 consecutive turns without anyone attacking)_ will terminate the game. The team with more surviving characters wins. If number of survivors of both teams is the same, the team with higher total HP of members wins. Equal number of survivors and equal total HP of members will lead to a drawn game.
 
 A drawn game can also occur when all characters have 0 HP; however, it typically cannot happen because turns are taken sequentially, not simultaneously.
 
@@ -107,7 +109,7 @@ In the status window, the player can read the battle log _(primarily for reading
 
 ### 3.1. Random Moves (AI 1)
 
-The player randomly attacks an enemy in range with 75% chance at the beginning of the turn. Then, it tries up to 10 random legal destinations to move (i.e. within the Movement Range and not occupied by anyone). After 10 attempts, if it cannot find a legal move, it will not move. Finally, it attacks an enemy in range if it did not attack beforehand.
+The player randomly attacks an enemy in range with 75% chance at the beginning of the turn. Then, it tries up to 10 random legal destinations to move _(i.e. within the Movement Range and not occupied by anyone)_. After 10 attempts, if it cannot find a legal move, it will not move. Finally, it attacks an enemy in range if it did not attack beforehand.
 
 This is the worst and most basic AI. It is the base for Monte Carlo AI, which predicts the outcome of the game using random moves.
 
@@ -197,7 +199,7 @@ Porting to another language _(e.g. Java, Python)_ might be needed to facilitate 
 
 -----
 
-_Duc Tran Duy_
+_Duc Tran Duy / T.D. Stoneheart_
 
 _Original report: 2017/08/24, Nomi, Ishikawa, Japan_
 
