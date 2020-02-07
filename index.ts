@@ -1,3 +1,5 @@
+/// <reference path="angular.d.ts" />
+
 class App {
   constructor() {
     angular.module("myApp", []);

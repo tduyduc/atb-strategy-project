@@ -1,3 +1,5 @@
+/// <reference path="definitions.ts" />
+
 /**
  * Represents in-game character position in 2D.
  *
