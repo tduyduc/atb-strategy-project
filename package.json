@@ -1,0 +1,29 @@
+{
+  "name": "atb-strategy-project",
+  "version": "1.0.0",
+  "description": "Active Time Battle-Based Strategy Game Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tduyduc/atb-strategy-project.git"
+  },
+  "keywords": [
+    "game",
+    "ai-players",
+    "strategy-games",
+    "research-project"
+  ],
+  "author": "T.D. Stoneheart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tduyduc/atb-strategy-project/issues"
+  },
+  "homepage": "https://github.com/tduyduc/atb-strategy-project#readme",
+  "dependencies": {
+    "angular": "^1.7.9",
+    "typescript": "^3.7.5"
+  }
+}
