@@ -1,5 +1,5 @@
 /// <reference path="definitions/interfaces.d.ts" />
-/// <reference path="definitions/static-interfaces.ts" />
+/// <reference path="static-interfaces.ts" />
 
 /**
  * Contains common utility functions.

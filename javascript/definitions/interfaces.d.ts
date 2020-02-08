@@ -1,4 +1,4 @@
-/// <reference path="enum.ts" />
+/// <reference path="../enum.ts" />
 
 /**
  * Interface for the global config object.
