@@ -34,7 +34,7 @@ class CharacterPosition implements IPosition {
 /**
  * Static class that uses Manhattan distance formula for calculating distance between two IPosition objects.
  *
- * @class ManhattanDistance
+ * @class
  * @static
  */
 class ManhattanDistance implements IDistanceFunction {
@@ -43,6 +43,12 @@ class ManhattanDistance implements IDistanceFunction {
   }
 }
 
+/**
+ * Static class that uses damage calculation formula from League of Legends.
+ *
+ * @class
+ * @static
+ */
 class DefaultDamage implements IDamageFunction {
   static calculate(
     originalDamage: number,
@@ -57,7 +63,11 @@ class DefaultDamage implements IDamageFunction {
   }
 }
 
-class Attributes implements ICharacterAttributes {
+/**
+ * Stores attributes of a character.
+ * @class
+ */
+class CharacterAttributes implements ICharacterAttributes {
   hp: number;
   mp: number;
   attack: number;
@@ -93,6 +103,10 @@ class AttributeFriendlyNamesObject implements IAttributes {
   }
 }
 
+/**
+ * Stores a key-value pair of an attribute, but with a friendly name.
+ * @class
+ */
 class AttributeDisplayObject implements IAttributeDisplayObject {
   name: string;
   value: any;
@@ -103,11 +117,18 @@ class AttributeDisplayObject implements IAttributeDisplayObject {
   }
 }
 
+/**
+ * Facilitates generating an object that shows character attributes in friendly names.
+ * @class
+ * @static
+ * @see AttributeFriendlyNamesObject
+ * @see AttributeDisplayObject
+ */
 class AttributesDisplay {
   /**
    * Friendly names of attributes, to display.
    * @static
-   * @member {object}
+   * @member {AttributeFriendlyNamesObject}
    */
   static friendlyNames = new AttributeFriendlyNamesObject({
     hp: "HP",
