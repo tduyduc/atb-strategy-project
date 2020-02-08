@@ -90,8 +90,12 @@ class CharacterAttributes implements ICharacterAttributes {
   attackArea: number;
   speed: number;
   movementRange: number;
-  time: number;
-  position: CharacterPosition;
+  time: number = 0;
+  position: CharacterPosition = new CharacterPosition(0, 0);
+
+  constructor(arg: ICharacterAttributes) {
+    Object.assign(this, arg);
+  }
 }
 
 /**
@@ -172,5 +176,16 @@ class AttributesDisplay {
       );
     }
     return result;
+  }
+}
+
+class CharacterClass implements ICharacterClass {
+  className: string;
+  initialAttributes: CharacterAttributes;
+  defaultCharacterNames?: string[];
+  sprite: FilePath;
+
+  constructor(arg: ICharacterClass) {
+    Object.assign(this, arg);
   }
 }

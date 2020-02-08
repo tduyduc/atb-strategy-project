@@ -210,13 +210,13 @@ interface ICharacterAttributes extends IAttributes {
    * Time. ATB bar filling progress.
    * @member {number}
    */
-  time: number;
+  time?: number;
 
   /**
    * Position on the game board.
    * @member {IPosition}
    */
-  position: IPosition;
+  position?: IPosition;
 }
 
 /**
