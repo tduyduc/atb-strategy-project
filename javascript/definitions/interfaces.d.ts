@@ -63,28 +63,6 @@ interface IPosition {
 }
 
 /**
- * Wraps a string that is designated to be a file path.
- *
- * @interface
- */
-interface IFilePath {
-  /** Wrapped file path.
-   * @member {string}
-   */
-  filePath: string;
-
-  /** Wrapped file path, as a helper function.
-   * @method string
-   */
-  toString: () => string;
-
-  /** Wrapped file path, as a helper function.
-   * @method string
-   */
-  valueOf: () => string;
-}
-
-/**
  * Represents an in-game character class.
  *
  * @interface
@@ -112,8 +90,15 @@ interface ICharacterClass {
    * File path for the default sprite image of the class.
    * @member {IFilePath}
    */
-  sprite: IFilePath;
+  sprite: FilePath;
 }
+
+/**
+ * Wraps a string that is designated to be a file path.
+ *
+ * @typedef
+ */
+type FilePath = string;
 
 /**
  * Represents an in-game character. A character must be of a character class.
