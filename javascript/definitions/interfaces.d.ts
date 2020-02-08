@@ -1,5 +1,3 @@
-/// <reference path="../enum.ts" />
-
 /**
  * Interface for the global config object.
  *
@@ -14,17 +12,17 @@ interface IGlobalConfig {
   /** Playing mode (e.g. single player or zero player).
    * @member {PlayMode}
    */
-  playMode: PlayMode;
+  playMode: any;
 
   /** AI mode of the ally team (applicable on AI vs. AI play mode).
    * @member {AIMode}
    */
-  allyAIMode: AIMode;
+  allyAIMode: any;
 
   /** AI mode of the enemy team.
    * @member {AIMode}
    */
-  enemyAIMode: AIMode;
+  enemyAIMode: any;
 
   /** Number of character in a team.
    * @member {number}
@@ -102,7 +100,7 @@ interface ICharacterClass {
    * Initial attributes of the class.
    * @member {IAttributes}
    */
-  initialAttributes: IAttributes;
+  initialAttributes: ICharacterAttributes;
 
   /**
    * Default character names for the class.
@@ -133,7 +131,28 @@ interface ICharacter extends ICharacterClass {
    * Current attributes of the character.
    * @member {IAttributes}
    */
-  inGameAttributes: IAttributes;
+  inGameAttributes: ICharacterAttributes;
+}
+
+/**
+ * Represents attributes of an in-game character, but in a more generic way to make an "attribute friendly names" class a sub-class.
+ *
+ * @interface
+ * @see ICharacterAttributes
+ */
+interface IAttributes {
+  hp?: any;
+  mp?: any;
+  attack?: any;
+  defense?: any;
+  intelligence?: any;
+  mind?: any;
+  attackRange?: any;
+  attackArea?: any;
+  speed?: any;
+  movementRange?: any;
+  time?: any;
+  position?: any;
 }
 
 /**
@@ -141,7 +160,7 @@ interface ICharacter extends ICharacterClass {
  *
  * @interface
  */
-interface IAttributes {
+interface ICharacterAttributes extends IAttributes {
   /**
    * Hit points. Amount of damage a character can sustain before getting knocked out, unable to take any further action.
    * @member {number}

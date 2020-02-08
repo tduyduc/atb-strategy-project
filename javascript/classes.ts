@@ -13,7 +13,7 @@ class Common {
   }
 
   static randomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min) ) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }
 
@@ -57,7 +57,7 @@ class DefaultDamage implements IDamageFunction {
   }
 }
 
-class Attributes implements IAttributes {
+class Attributes implements ICharacterAttributes {
   hp: number;
   mp: number;
   attack: number;
@@ -72,9 +72,31 @@ class Attributes implements IAttributes {
   position: CharacterPosition;
 }
 
+/**
+ * Stores friendly names of attributes.
+ * @class
+ */
+class AttributeFriendlyNamesObject implements IAttributes {
+  hp: string;
+  mp: string;
+  attack: string;
+  defense: string;
+  intelligence: string;
+  mind: string;
+  attackRange: string;
+  attackArea: string;
+  speed: string;
+  movementRange: string;
+
+  constructor(friendlyNamesObject: IAttributes) {
+    Object.assign(this, friendlyNamesObject);
+  }
+}
+
 class AttributeDisplayObject implements IAttributeDisplayObject {
   name: string;
   value: any;
+
   constructor(name: string, value: any) {
     this.name = name;
     this.value = value;
@@ -87,7 +109,7 @@ class AttributesDisplay {
    * @static
    * @member {object}
    */
-  static friendlyNames = {
+  static friendlyNames = new AttributeFriendlyNamesObject({
     hp: "HP",
     mp: "MP",
     attack: "Attack",
@@ -98,19 +120,22 @@ class AttributesDisplay {
     attackArea: "Area",
     speed: "Speed",
     movementRange: "Move"
-  };
+  });
 
   /**
    * Generate an array of attributes, with display names.
    * @static
    * @method AttributeDisplayObject[]
    */
-  static generate(attributes: Attributes): AttributeDisplayObject[] {
+  static generate(actualAttributes: IAttributes): AttributeDisplayObject[] {
     const result = [];
     for (const field in this.friendlyNames) {
-      if (!(field in attributes)) continue;
+      if (!(field in actualAttributes)) continue;
       result.push(
-        new AttributeDisplayObject(this.friendlyNames[field], attributes[field])
+        new AttributeDisplayObject(
+          this.friendlyNames[field],
+          actualAttributes[field]
+        )
       );
     }
     return result;
