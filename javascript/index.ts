@@ -1,5 +1,5 @@
-/// <reference path="angular.d/angular.d.ts" />
-/// <reference path="interfaces.ts" />
+/// <reference path="definitions/angular.d/angular.d.ts" />
+/// <reference path="definitions/interfaces.d.ts" />
 /// <reference path="controller.ts" />
 
 class Module {

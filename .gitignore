@@ -1,2 +1,3 @@
 /node_modules
 /javascript/*.js
+/javascript/definitions/*.js

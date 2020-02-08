@@ -1,3 +1,5 @@
+/// <reference path="enum.ts" />
+
 /**
  * Interface for the global config object.
  *
@@ -60,20 +62,6 @@ interface IPosition {
    * @member {number}
    */
   y: number;
-}
-
-/**
- * Interface for wrapping a function which calculates distance between two IPosition objects.
- *
- * @interface
- * @static
- */
-class IDistanceFunction {
-  /** Performs calculation using the implemented function.
-   * @method number
-   * @static
-   */
-  static calculate: (p1: IPosition, p2: IPosition) => number;
 }
 
 /**
@@ -228,24 +216,6 @@ interface IAttributes {
 }
 
 /**
- * Interface for wrapping a function which calculates damage dealt on a character.
- *
- * @interface
- * @static
- */
-class IDamageFunction {
-  /** Performs calculation using the implemented function.
-   * @method number
-   * @static
-   */
-  static calculate: (
-    originalDamage: number,
-    defense: number,
-    variation?: number
-  ) => number;
-}
-
-/**
  * Interface for displaying an attribute with its friendly name and its actual value.
  *
  * @interface
@@ -273,31 +243,4 @@ interface IGameState {
    * @member {ICharacter[]}
    */
   turnQueue: ICharacter[];
-}
-
-/**
- * Enumeration for playing mode.
- *
- * @enum
- * @readonly
- */
-enum PlayMode {
-  PLAYER_VS_AI,
-  AI_VS_AI_GUI,
-  AI_VS_AI_FAST
-}
-
-/**
- * Enumeration for game AI mode.
- *
- * @enum
- * @readonly
- */
-enum AIMode {
-  RANDOM_MOVES,
-  OFFENSIVE,
-  NINJA,
-  MONTE_CARLO,
-  MINIMAX,
-  MONTE_CARLO_TREE_SEARCH
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "light-server -s . -p 8080 -b localhost",
-    "compile": "tsc javascript/*.ts"
+    "compile": "tsc javascript/definitions/*.ts && tsc javascript/*.ts"
   },
   "repository": {
     "type": "git",

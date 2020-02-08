@@ -1,8 +1,5 @@
-/// <reference path="angular.d/angular.d.ts" />
-
-interface CustomScope extends angular.IScope {
-  something: string;
-}
+/// <reference path="definitions/angular.d/angular.d.ts" />
+/// <reference path="definitions/scope.d.ts" />
 
 class MainController implements angular.IController {
   controller: ($scope: CustomScope) => void;
