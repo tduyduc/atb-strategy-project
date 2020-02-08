@@ -88,7 +88,7 @@ interface ICharacterClass {
 
   /**
    * File path for the default sprite image of the class.
-   * @member {IFilePath}
+   * @member {FilePath}
    */
   sprite: FilePath;
 }
