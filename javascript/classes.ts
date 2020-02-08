@@ -1,4 +1,4 @@
-/// <reference path="definitions.ts" />
+/// <reference path="interfaces.ts" />
 
 /**
  * Contains common utility functions.

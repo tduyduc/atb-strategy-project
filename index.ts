@@ -1,10 +1,12 @@
-/// <reference path="angular.d.ts" />
+/// <reference path="javascript/angular.d/angular.d.ts" />
+/// <reference path="javascript/interfaces.ts" />
+/// <reference path="javascript/controller.ts" />
 
-class App {
+class Module {
   module: angular.IModule;
 
-  constructor() {
-    this.module = angular.module("myApp", []);
+  constructor(name: string) {
+    this.module = angular.module(name, []);
   }
 
   controller(
@@ -15,10 +17,7 @@ class App {
   }
 }
 
-const program: App = new App();
+const app: Module = new Module("myApp");
 const mainController = new MainController();
 
-program.controller("mainController", [
-  "$scope",
-  mainController.getController()
-]);
+app.controller("mainController", ["$scope", mainController.getController()]);
