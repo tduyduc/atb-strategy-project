@@ -1,5 +1,6 @@
 /// <reference path="definitions/interfaces.d.ts" />
 /// <reference path="static-interfaces.ts" />
+/// <reference path="enums.ts" />
 
 /**
  * Contains common utility functions.
@@ -15,6 +16,17 @@ class Common {
   static randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+}
+
+class GlobalConfig implements IGlobalConfig {
+  battleSpeed: number;
+  playMode: PlayMode;
+  allyAIMode: AIMode;
+  enemyAIMode: AIMode;
+  teamMembers: number;
+  cellSize: number;
+  mapSize: number;
+  inactiveTurnLimit: number;
 }
 
 /**
