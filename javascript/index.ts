@@ -1,6 +1,6 @@
-/// <reference path="javascript/angular.d/angular.d.ts" />
-/// <reference path="javascript/interfaces.ts" />
-/// <reference path="javascript/controller.ts" />
+/// <reference path="angular.d/angular.d.ts" />
+/// <reference path="interfaces.ts" />
+/// <reference path="controller.ts" />
 
 class Module {
   module: angular.IModule;
