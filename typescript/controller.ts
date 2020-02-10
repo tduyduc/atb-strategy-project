@@ -1,7 +1,7 @@
 /// <reference path="definitions/angular.d/angular.d.ts" />
 /// <reference path="definitions/scope.d.ts" />
 
-class MainController implements IController {
+class MainController implements IAngularInjectable {
   private _injectors: angular.Injectable<angular.IControllerConstructor>;
 
   constructor() {

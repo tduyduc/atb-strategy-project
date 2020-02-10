@@ -1,8 +1,9 @@
-interface IController extends angular.IController {
-  injectors: angular.Injectable<angular.IControllerConstructor>;
-}
-
-interface IDirective extends angular.IDirective {
+/**
+ * Common interface for declaring AngularJS controllers & directives.
+ *
+ * @interface IAngularInjectable
+ */
+interface IAngularInjectable {
   injectors: angular.Injectable<angular.IControllerConstructor>;
 }
 
