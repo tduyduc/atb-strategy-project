@@ -3,7 +3,7 @@
 const characterClasses = [
   new CharacterClass({
     className: "Fighter",
-    sprite: "res/cyan.gif",
+    spritePath: "res/cyan.gif",
     defaultCharacterNames: ["Cyan", "Firion", "Cecil"],
     initialAttributes: new CharacterAttributes({
       hp: 500,
@@ -20,7 +20,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Black Belt",
-    sprite: "res/sabin.gif",
+    spritePath: "res/sabin.gif",
     defaultCharacterNames: ["Sabin", "Yang", "Galuf"],
     initialAttributes: new CharacterAttributes({
       hp: 400,
@@ -37,7 +37,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Archer",
-    sprite: "res/edgar.gif",
+    spritePath: "res/edgar.gif",
     defaultCharacterNames: ["Edgar", "Ceodore", "Edward"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -54,7 +54,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Assassin",
-    sprite: "res/shadow.gif",
+    spritePath: "res/shadow.gif",
     defaultCharacterNames: ["Shadow", "Edge", "Jinnai"],
     initialAttributes: new CharacterAttributes({
       hp: 250,
@@ -71,7 +71,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Bomber",
-    sprite: "res/relm.gif",
+    spritePath: "res/relm.gif",
     defaultCharacterNames: ["Relm", "Krile", "Matoya"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -88,7 +88,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "White Mage",
-    sprite: "res/terra.gif",
+    spritePath: "res/terra.gif",
     defaultCharacterNames: ["Terra", "Rosa", "Refia"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -105,7 +105,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Black Mage",
-    sprite: "res/celes.gif",
+    spritePath: "res/celes.gif",
     defaultCharacterNames: ["Celes", "Rydia", "Alba"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -122,7 +122,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Time Mage",
-    sprite: "../res/strago.gif",
+    spritePath: "../res/strago.gif",
     defaultCharacterNames: ["Strago", "Leon", "Palom"],
     initialAttributes: new CharacterAttributes({
       hp: 300,

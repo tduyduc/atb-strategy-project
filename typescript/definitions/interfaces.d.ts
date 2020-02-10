@@ -90,7 +90,7 @@ interface ICharacterClass {
    * File path for the default sprite image of the class.
    * @member {FilePath}
    */
-  sprite: FilePath;
+  spritePath: FilePath;
 }
 
 /**

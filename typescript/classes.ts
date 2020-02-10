@@ -183,7 +183,7 @@ class CharacterClass implements ICharacterClass {
   className: string;
   initialAttributes: CharacterAttributes;
   defaultCharacterNames?: string[];
-  sprite: FilePath;
+  spritePath: FilePath;
 
   constructor(arg: ICharacterClass) {
     Object.assign(this, arg);
