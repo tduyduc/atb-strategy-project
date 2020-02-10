@@ -246,6 +246,23 @@ interface IAttributeDisplayObject {
 }
 
 /**
+ * Stores friendly names of attributes.
+ * @interface
+ */
+interface IAttributeFriendlyNamesObject extends IAttributes {
+  hp: string;
+  mp: string;
+  attack: string;
+  defense: string;
+  intelligence: string;
+  mind: string;
+  attackRange: string;
+  attackArea: string;
+  speed: string;
+  movementRange: string;
+}
+
+/**
  * Keeps track of the current game state.
  *
  * @interface

@@ -9,15 +9,32 @@
  * @static
  */
 class Common {
+  /**
+   * Generates a random Boolean value.
+   *
+   * @method
+   * @static
+   */
   static randomBool(): boolean {
     return !!Math.round(Math.random());
   }
 
+  /**
+   * Generates a random integer, from min inclusive to max exclusive.
+   *
+   * @method
+   * @static
+   */
   static randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 }
 
+/**
+ * Stores global config of the entire application.
+ *
+ * @class
+ */
 class GlobalConfig implements IGlobalConfig {
   battleSpeed: number;
   playMode: PlayMode;
@@ -27,6 +44,10 @@ class GlobalConfig implements IGlobalConfig {
   cellSize: number;
   mapSize: number;
   inactiveTurnLimit: number;
+
+  constructor(arg: GlobalConfig) {
+    Object.assign(this, arg);
+  }
 }
 
 /**
@@ -37,9 +58,14 @@ class GlobalConfig implements IGlobalConfig {
 class CharacterPosition implements IPosition {
   x: number = 0;
   y: number = 0;
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
+
+  constructor(x?: number | CharacterPosition, y?: number) {
+    if (x instanceof CharacterPosition) {
+      Object.assign(this, x);
+    } else {
+      this.x = x;
+      this.y = y;
+    }
   }
 }
 
@@ -50,7 +76,7 @@ class CharacterPosition implements IPosition {
  * @static
  */
 class ManhattanDistance implements IDistanceFunction {
-  static calculate(a: CharacterPosition, b: CharacterPosition) {
+  static calculate(a: IPosition, b: IPosition): number {
     return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
   }
 }
@@ -66,12 +92,28 @@ class DefaultDamage implements IDamageFunction {
     originalDamage: number,
     defense: number,
     variation: number = 0
-  ) {
+  ): number {
     const damageMultiplier =
       defense >= 0 ? 100 / (100 + defense) : 2 - 100 / (100 - defense);
     const variedDamage =
       Math.floor(Math.random() * variation) * (Common.randomBool() ? 1 : -1);
     return originalDamage * damageMultiplier + variedDamage;
+  }
+}
+
+/**
+ * Stores a concrete character class. A character extends a character class.
+ * @class
+ * @see ICharacter
+ */
+class CharacterClass implements ICharacterClass {
+  className: string;
+  initialAttributes: CharacterAttributes;
+  defaultCharacterNames?: string[];
+  spritePath: FilePath;
+
+  constructor(arg: ICharacterClass) {
+    Object.assign(this, arg);
   }
 }
 
@@ -91,45 +133,10 @@ class CharacterAttributes implements ICharacterAttributes {
   speed: number;
   movementRange: number;
   time: number = 0;
-  position: CharacterPosition = new CharacterPosition(0, 0);
+  position: CharacterPosition = new CharacterPosition();
 
   constructor(arg: ICharacterAttributes) {
     Object.assign(this, arg);
-  }
-}
-
-/**
- * Stores friendly names of attributes.
- * @class
- */
-class AttributeFriendlyNamesObject implements IAttributes {
-  hp: string;
-  mp: string;
-  attack: string;
-  defense: string;
-  intelligence: string;
-  mind: string;
-  attackRange: string;
-  attackArea: string;
-  speed: string;
-  movementRange: string;
-
-  constructor(friendlyNamesObject: IAttributes) {
-    Object.assign(this, friendlyNamesObject);
-  }
-}
-
-/**
- * Stores a key-value pair of an attribute, but with a friendly name.
- * @class
- */
-class AttributeDisplayObject implements IAttributeDisplayObject {
-  name: string;
-  value: any;
-
-  constructor(name: string, value: any) {
-    this.name = name;
-    this.value = value;
   }
 }
 
@@ -144,9 +151,9 @@ class AttributesDisplay {
   /**
    * Friendly names of attributes, to display.
    * @static
-   * @member {AttributeFriendlyNamesObject}
+   * @member {IAttributeFriendlyNamesObject}
    */
-  static friendlyNames = new AttributeFriendlyNamesObject({
+  static friendlyNames: IAttributeFriendlyNamesObject = {
     hp: "HP",
     mp: "MP",
     attack: "Attack",
@@ -157,35 +164,22 @@ class AttributesDisplay {
     attackArea: "Area",
     speed: "Speed",
     movementRange: "Move"
-  });
+  };
 
   /**
    * Generate an array of attributes, with display names.
    * @static
-   * @method AttributeDisplayObject[]
+   * @method IAttributeDisplayObject[]
    */
-  static generate(actualAttributes: IAttributes): AttributeDisplayObject[] {
-    const result = [];
+  static generate(actualAttributes: IAttributes): IAttributeDisplayObject[] {
+    const result: IAttributeDisplayObject[] = [];
     for (const field in this.friendlyNames) {
       if (!(field in actualAttributes)) continue;
-      result.push(
-        new AttributeDisplayObject(
-          this.friendlyNames[field],
-          actualAttributes[field]
-        )
-      );
+      result.push({
+        name: this.friendlyNames[field],
+        value: actualAttributes[field]
+      });
     }
     return result;
-  }
-}
-
-class CharacterClass implements ICharacterClass {
-  className: string;
-  initialAttributes: CharacterAttributes;
-  defaultCharacterNames?: string[];
-  spritePath: FilePath;
-
-  constructor(arg: ICharacterClass) {
-    Object.assign(this, arg);
   }
 }
