@@ -3,21 +3,18 @@
 /// <reference path="controller.ts" />
 
 class Module {
-  module: angular.IModule;
+  private module: angular.IModule;
 
-  constructor(name: string) {
-    this.module = angular.module(name, []);
+  constructor(name: string, requires: string[] = []) {
+    this.module = angular.module(name, requires);
   }
 
-  controller(
-    name: string,
-    controllerConstructor: angular.Injectable<angular.IControllerConstructor>
-  ): angular.IModule {
-    return this.module.controller(name, controllerConstructor);
+  getModule(): angular.IModule {
+    return this.module;
   }
 }
 
 const app: Module = new Module("myApp");
-const mainController = new MainController();
+const mainController = new MainController(app);
 
-app.controller("mainController", ["$scope", mainController.getController()]);
+mainController.controller("mainController");

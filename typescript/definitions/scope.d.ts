@@ -1,5 +1,5 @@
 /// <reference path="angular.d/angular.d.ts" />
 
-interface CustomScope extends angular.IScope {
+interface ICustomScope extends angular.IScope {
   something: string;
 }
