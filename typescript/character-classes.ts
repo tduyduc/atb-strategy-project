@@ -138,3 +138,9 @@ const characterClasses = [
     })
   }),
 ];
+const autoCharacterNames = characterClasses.reduce(
+  (previous: string[], { defaultCharacterNames }: CharacterClass): string[] => {
+    previous.push(...defaultCharacterNames);
+    return previous;
+  }, []
+);
