@@ -9,13 +9,13 @@ class MainController implements angular.IController {
   constructor(module: Module) {
     this.module = module;
     this._controller = ($scope: ICustomScope) => {
-      $scope.something = 'This is a string!';
-    }
+      $scope.something = "This is a string!";
+    };
   }
 
-  controller(
-    name: string
-  ): angular.IModule {
-    return this.module.getModule().controller(name, ["$scope", this._controller]);
+  controller(name: string): angular.IModule {
+    return this.module
+      .getModule()
+      .controller(name, ["$scope", this._controller]);
   }
 }
