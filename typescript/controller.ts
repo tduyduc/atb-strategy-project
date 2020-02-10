@@ -1,21 +1,17 @@
 /// <reference path="definitions/angular.d/angular.d.ts" />
 /// <reference path="definitions/scope.d.ts" />
-/// <reference path="index.ts" />
 
-class MainController implements angular.IController {
-  module: Module;
-  _controller: ($scope: ICustomScope) => void;
+class MainController implements IController {
+  private _injectors: angular.Injectable<angular.IControllerConstructor>;
 
-  constructor(module: Module) {
-    this.module = module;
-    this._controller = ($scope: ICustomScope) => {
+  constructor() {
+    const controller = ($scope: ICustomScope) => {
       $scope.something = "This is a string!";
     };
+    this._injectors = ["$scope", controller];
   }
 
-  controller(name: string): angular.IModule {
-    return this.module
-      .getModule()
-      .controller(name, ["$scope", this._controller]);
+  get injectors() {
+    return this._injectors;
   }
 }

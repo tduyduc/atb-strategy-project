@@ -12,9 +12,17 @@ class Module {
   getModule(): angular.IModule {
     return this.module;
   }
+
+  controller(name: string, _controller: IController): angular.IModule {
+    return this.module.controller(name, _controller.injectors);
+  }
+
+  directive(name: string, _directive: IDirective): angular.IModule {
+    return this.module.controller(name, _directive.injectors);
+  }
 }
 
 const app: Module = new Module("myApp");
-const mainController = new MainController(app);
+const mainController = new MainController();
 
-mainController.controller("mainController");
+app.controller("mainController", mainController);

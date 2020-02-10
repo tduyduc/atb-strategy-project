@@ -1,3 +1,11 @@
+interface IController extends angular.IController {
+  injectors: angular.Injectable<angular.IControllerConstructor>;
+}
+
+interface IDirective extends angular.IDirective {
+  injectors: angular.Injectable<angular.IControllerConstructor>;
+}
+
 /**
  * Interface for the global config object.
  *
