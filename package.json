@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "light-server -s . -p 8080 -b localhost",
-    "compile": "tsc -t ES2015 --outfile index.js javascript/*.ts"
+    "compile": "tsc -t ES2015 --outfile index.js typescript/*.ts"
   },
   "repository": {
     "type": "git",

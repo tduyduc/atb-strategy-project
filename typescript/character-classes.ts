@@ -69,4 +69,21 @@ const characterClasses = [
       movementRange: 3
     })
   }),
+  new CharacterClass({
+    className: "Bomber",
+    sprite: "../res/relm.gif",
+    defaultCharacterNames: ["Relm", "Krile", "Matoya"],
+    initialAttributes: new CharacterAttributes({
+      hp: 300,
+      mp: 35,
+      attack: 30,
+      defense: 15,
+      intelligence: 40,
+      mind: 25,
+      attackRange: 2,
+      attackArea: 1,
+      speed: 30,
+      movementRange: 2
+    })
+  }),
 ];
