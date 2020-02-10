@@ -3,7 +3,7 @@
 const characterClasses = [
   new CharacterClass({
     className: "Fighter",
-    sprite: "../res/cyan.gif",
+    sprite: "res/cyan.gif",
     defaultCharacterNames: ["Cyan", "Firion", "Cecil"],
     initialAttributes: new CharacterAttributes({
       hp: 500,
@@ -20,7 +20,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Black Belt",
-    sprite: "../res/sabin.gif",
+    sprite: "res/sabin.gif",
     defaultCharacterNames: ["Sabin", "Yang", "Galuf"],
     initialAttributes: new CharacterAttributes({
       hp: 400,
@@ -37,7 +37,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Archer",
-    sprite: "../res/edgar.gif",
+    sprite: "res/edgar.gif",
     defaultCharacterNames: ["Edgar", "Ceodore", "Edward"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -54,7 +54,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Assassin",
-    sprite: "../res/shadow.gif",
+    sprite: "res/shadow.gif",
     defaultCharacterNames: ["Shadow", "Edge", "Jinnai"],
     initialAttributes: new CharacterAttributes({
       hp: 250,
@@ -71,7 +71,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Bomber",
-    sprite: "../res/relm.gif",
+    sprite: "res/relm.gif",
     defaultCharacterNames: ["Relm", "Krile", "Matoya"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -84,6 +84,57 @@ const characterClasses = [
       attackArea: 1,
       speed: 30,
       movementRange: 2
+    })
+  }),
+  new CharacterClass({
+    className: "White Mage",
+    sprite: "res/terra.gif",
+    defaultCharacterNames: ["Terra", "Rosa", "Refia"],
+    initialAttributes: new CharacterAttributes({
+      hp: 300,
+      mp: 100,
+      attack: 20,
+      defense: 15,
+      intelligence: 50,
+      mind: 30,
+      attackRange: 2,
+      attackArea: 1,
+      speed: 30,
+      movementRange: 1
+    })
+  }),
+  new CharacterClass({
+    className: "Black Mage",
+    sprite: "res/celes.gif",
+    defaultCharacterNames: ["Celes", "Rydia", "Alba"],
+    initialAttributes: new CharacterAttributes({
+      hp: 300,
+      mp: 200,
+      attack: 20,
+      defense: 15,
+      intelligence: 60,
+      mind: 30,
+      attackRange: 2,
+      attackArea: 1,
+      speed: 30,
+      movementRange: 1
+    })
+  }),
+  new CharacterClass({
+    className: "Time Mage",
+    sprite: "../res/strago.gif",
+    defaultCharacterNames: ["Strago", "Leon", "Palom"],
+    initialAttributes: new CharacterAttributes({
+      hp: 300,
+      mp: 40,
+      attack: 20,
+      defense: 15,
+      intelligence: 70,
+      mind: 40,
+      attackRange: 2,
+      attackArea: 1,
+      speed: 30,
+      movementRange: 1
     })
   }),
 ];
