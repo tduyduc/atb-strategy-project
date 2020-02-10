@@ -35,7 +35,7 @@ class Common {
  *
  * @class
  */
-class GlobalConfig implements IGlobalConfig {
+class GlobalConfig implements IGlobalConfig {appState: AppState;
   battleSpeed: number;
   playMode: PlayMode;
   allyAIMode: AIMode;
@@ -48,6 +48,18 @@ class GlobalConfig implements IGlobalConfig {
   constructor(arg: GlobalConfig) {
     Object.assign(this, arg);
   }
+}
+
+/**
+ * Facilitates easy access to common members from AngularJS scope.
+ *
+ * @class
+ */
+class Static {
+  PlayMode: object;
+  AIMode: object;
+  AppState: object;
+  Common: Common;
 }
 
 /**

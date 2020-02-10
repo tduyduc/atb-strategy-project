@@ -8,6 +8,8 @@
     <script src="index.js"></script>
   </head>
   <body ng-app="myApp" ng-controller="mainController">
-    <p ng-bind="something"></p>
+    <div ng-if="static.AppState.CLASS_SELECT === globalConfig.appState">
+      <p ng-bind="something"></p>
+    </div>
   </body>
 </html>

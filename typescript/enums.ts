@@ -24,3 +24,15 @@ enum AIMode {
   MINIMAX,
   MONTE_CARLO_TREE_SEARCH
 }
+
+/**
+ * Enumeration for current screen in the application.
+ *
+ * @enum
+ * @readonly
+ */
+enum AppState {
+  CLASS_SELECT,
+  DISPATCH_UNITS,
+  BATTLE_SCREEN
+}

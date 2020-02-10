@@ -2,4 +2,6 @@
 
 interface ICustomScope extends angular.IScope {
   something: string;
+  globalConfig: GlobalConfig;
+  static: Static;
 }
