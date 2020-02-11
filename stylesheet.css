@@ -17,6 +17,11 @@ fieldset {
   border-radius: .4em;
 }
 
+fieldset[disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+
 fieldset > legend {
   font-weight: bold;
   font-size: 120%;
