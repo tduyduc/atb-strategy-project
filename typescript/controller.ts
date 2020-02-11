@@ -32,6 +32,34 @@ class MainController implements IAngularInjectable {
       $scope.allyCharacters = [];
       $scope.enemyCharacters = [];
       $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+      $scope.classSelectNameInput = "";
+
+      $scope.setAutoName = setAutoName;
+      $scope.selectCharacterClass = selectCharacterClass;
+      $scope.removeLastCharacter = removeLastCharacter;
+      $scope.removeAllCharacters = removeAllCharacters;
+
+      function setAutoName(): void {
+        $scope.classSelectNameInput =
+          autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
+      }
+
+      function selectCharacterClass(characterClass: CharacterClass): void {
+        $scope.allyCharacters.push(new Character({
+          ...characterClass,
+          characterName: $scope.classSelectNameInput,
+          inGameAttributes: { ...characterClass.initialAttributes }
+        }));
+        $scope.classSelectNameInput = "";
+      }
+
+      function removeLastCharacter(): void {
+        $scope.allyCharacters.pop();
+      }
+
+      function removeAllCharacters(): void {
+        $scope.allyCharacters.length = 0;
+      }
     }
   }
 

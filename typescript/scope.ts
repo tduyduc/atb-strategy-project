@@ -15,4 +15,10 @@ interface ICustomScope extends angular.IScope {
   characterClasses: CharacterClass[];
   autoCharacterNames: string[];
   classAttributeDisplayObjects: IAttributeDisplayObject[][];
+
+  classSelectNameInput: string;
+  setAutoName: () => void;
+  selectCharacterClass: (characterClass: CharacterClass) => void;
+  removeLastCharacter: () => void;
+  removeAllCharacters: () => void;
 }

@@ -33,19 +33,21 @@
               title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
             />
             <button
-              ng-click="onAutoNameButtonClick()"
+              ng-click="setAutoName()"
               title="Get a random name for this character."
             >
               Auto-Name
             </button>
             <button
-              ng-click=""
+              ng-click="removeLastCharacter()"
+              ng-disabled="0 === allyCharacters.length"
               title="Change class selection of the previous character."
             >
               Back
             </button>
             <button
-              ng-click=""
+              ng-click="removeAllCharacters()"
+              ng-disabled="0 === allyCharacters.length"
               title="Discard all class selections and choose character classes from scratch."
             >
               Reset All
@@ -72,7 +74,9 @@
                   </tr>
                   <tr>
                     <td>
-                      <button>Select</button>
+                      <button ng-click="selectCharacterClass(class)">
+                        Select
+                      </button>
                     </td>
                     <td>
                       <img ng-src="{{ class.spritePath }}" />
@@ -80,10 +84,13 @@
                   </tr>
                 </table>
               </fieldset>
+              <!-- Single Character Class Field Set End -->
             </div>
           </div>
         </fieldset>
+        <!-- Character Field Set End -->
       </fieldset>
+      <!-- Class Select Field Set End -->
     </div>
     <!-- Class Select Section End -->
     <!-- <p ng-bind="something"></p> -->
