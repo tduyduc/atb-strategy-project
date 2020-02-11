@@ -15,83 +15,80 @@
   </head>
   <body ng-app="myApp" ng-controller="mainController">
     <!-- Class Select Section Start -->
-    <div
+    <fieldset
       id="character-class-select-window"
       ng-if="static.AppState.CLASS_SELECT === globalConfig.appState"
     >
+      <legend>Character Class Select</legend>
+
+      <div class="row">
+        <div class="col-lg-6">Select classes for your characters.</div>
+
+        <div class="col-lg-6 class-selection-buttons">
+          <input
+            ng-model="classSelectNameInput"
+            type="text"
+            placeholder="Character name"
+            title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
+          />
+          <button
+            ng-click="setAutoName()"
+            title="Get a random name for this character."
+          >
+            Auto-Name
+          </button>
+          <button
+            ng-click="removeLastCharacter()"
+            ng-disabled="0 === allyCharacters.length"
+            title="Change class selection of the previous character."
+          >
+            Back
+          </button>
+          <button
+            ng-click="removeAllCharacters()"
+            ng-disabled="0 === allyCharacters.length"
+            title="Discard all class selections and choose character classes from scratch."
+          >
+            Reset All
+          </button>
+        </div>
+      </div>
+
       <fieldset>
-        <legend>Character Class Select</legend>
+        <legend>Character {{ allyCharacters.length + 1 }}</legend>
 
         <div class="row">
-          <div class="col-lg-6">Select classes for your characters.</div>
-
-          <div class="col-lg-6 class-selection-buttons">
-            <input
-              ng-model="classSelectNameInput"
-              type="text"
-              placeholder="Character name"
-              title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
-            />
-            <button
-              ng-click="setAutoName()"
-              title="Get a random name for this character."
-            >
-              Auto-Name
-            </button>
-            <button
-              ng-click="removeLastCharacter()"
-              ng-disabled="0 === allyCharacters.length"
-              title="Change class selection of the previous character."
-            >
-              Back
-            </button>
-            <button
-              ng-click="removeAllCharacters()"
-              ng-disabled="0 === allyCharacters.length"
-              title="Discard all class selections and choose character classes from scratch."
-            >
-              Reset All
-            </button>
+          <div
+            ng-repeat="class in characterClasses track by $index"
+            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12"
+          >
+            <fieldset class="character-class-fieldset">
+              <legend>{{ class.className }}</legend>
+              <table>
+                <tr
+                  ng-repeat="attribute in classAttributeDisplayObjects[$index]"
+                >
+                  <td>{{ attribute.name }}</td>
+                  <td>{{ attribute.value }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <button ng-click="selectCharacterClass(class)">
+                      Select
+                    </button>
+                  </td>
+                  <td>
+                    <img ng-src="{{ class.spritePath }}" />
+                  </td>
+                </tr>
+              </table>
+            </fieldset>
+            <!-- Single Character Class Field Set End -->
           </div>
         </div>
-
-        <fieldset>
-          <legend>Character {{ allyCharacters.length + 1 }}</legend>
-
-          <div class="row">
-            <div
-              ng-repeat="class in characterClasses track by $index"
-              class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12"
-            >
-              <fieldset class="character-class-fieldset">
-                <legend>{{ class.className }}</legend>
-                <table>
-                  <tr
-                    ng-repeat="attribute in classAttributeDisplayObjects[$index]"
-                  >
-                    <td>{{ attribute.name }}</td>
-                    <td>{{ attribute.value }}</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <button ng-click="selectCharacterClass(class)">
-                        Select
-                      </button>
-                    </td>
-                    <td>
-                      <img ng-src="{{ class.spritePath }}" />
-                    </td>
-                  </tr>
-                </table>
-              </fieldset>
-              <!-- Single Character Class Field Set End -->
-            </div>
-          </div>
-        </fieldset>
-        <!-- Character Field Set End -->
       </fieldset>
-      <!-- Class Select Field Set End -->
-    </div>
+      <!-- Character Field Set End -->
+    </fieldset>
     <!-- Class Select Section End -->
     <!-- <p ng-bind="something"></p> -->
   </body>
