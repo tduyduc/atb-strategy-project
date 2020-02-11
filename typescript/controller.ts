@@ -3,6 +3,7 @@
 /// <reference path="enums.ts" />
 /// <reference path="classes.ts" />
 /// <reference path="scope.ts" />
+/// <reference path="character-classes.ts" />
 
 class MainController implements IAngularInjectable {
   private _injectors: angular.Injectable<angular.IControllerConstructor>;
