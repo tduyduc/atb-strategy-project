@@ -40,7 +40,7 @@ class GlobalConfig implements IGlobalConfig {
   playMode: PlayMode;
   allyAIMode: AIMode;
   enemyAIMode: AIMode;
-  teamMembers: number;
+  teamSize: number;
   cellSize: number;
   mapSize: number;
   inactiveTurnLimit: number;

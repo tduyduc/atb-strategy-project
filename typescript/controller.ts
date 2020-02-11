@@ -27,7 +27,7 @@ function mainControllerFunction($scope: ICustomScope): void {
     playMode: PlayMode.PLAYER_VS_AI,
     allyAIMode: AIMode.OFFENSIVE,
     enemyAIMode: AIMode.MONTE_CARLO,
-    teamMembers: 3,
+    teamSize: 3,
     cellSize: 32,
     mapSize: 6,
     inactiveTurnLimit: 30
@@ -76,5 +76,9 @@ function mainControllerFunction($scope: ICustomScope): void {
 
   function removeCharacterByIndex(index: number): void {
     $scope.allyCharacters.splice(index, 1);
+  }
+
+  function isCompletedClassLineUp() {
+    return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
   }
 }

@@ -36,7 +36,7 @@ interface IGlobalConfig {
   /** Number of character in a team.
    * @member {number}
    */
-  teamMembers: number;
+  teamSize: number;
 
   /** Displayed width and height of an in-game square, in pixels.
    * @member {number}
