@@ -38,6 +38,7 @@ function mainControllerFunction($scope: ICustomScope): void {
   $scope.removeLastCharacter = removeLastCharacter;
   $scope.removeAllCharacters = removeAllCharacters;
   $scope.removeCharacterByIndex = removeCharacterByIndex;
+  $scope.isCompletedClassLineup = isCompletedClassLineup;
 
   init();
 
@@ -78,7 +79,7 @@ function mainControllerFunction($scope: ICustomScope): void {
     $scope.allyCharacters.splice(index, 1);
   }
 
-  function isCompletedClassLineUp() {
+  function isCompletedClassLineup(): boolean {
     return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
   }
 }

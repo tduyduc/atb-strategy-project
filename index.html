@@ -22,17 +22,24 @@
       <legend>Character Class Select</legend>
 
       <div class="row">
-        <div class="col-lg-6">Select classes for your characters.</div>
+        <div class="col-lg-6" ng-if="!isCompletedClassLineup()">
+          Select classes for your characters.
+        </div>
+        <div class="col-lg-6" ng-if="isCompletedClassLineup()">
+          Character class lineup completed.
+        </div>
 
-        <div class="col-lg-6 class-selection-buttons">
+        <div class="col-lg-6 align-right">
           <input
             ng-model="inputModel.classSelectNameInput"
+            ng-show="!isCompletedClassLineup()"
             type="text"
             placeholder="Character name"
             title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
           />
           <button
             ng-click="setAutoName()"
+            ng-show="!isCompletedClassLineup()"
             title="Get a random name for this character."
           >
             Auto-Name
@@ -55,7 +62,7 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8" ng-if="!isCompletedClassLineup()">
           <fieldset>
             <legend>
               Character {{ allyCharacters.length + 1 }} / {{
@@ -94,25 +101,38 @@
           </fieldset>
           <!-- New Character Field Set End -->
         </div>
+        <div class="col-lg-3" ng-if="isCompletedClassLineup()">
+          <fieldset>
+            <legend>Confirmation</legend>
+            <p>
+              You have completed your character class lineup. To start
+              organizing your character positions, click the button below.
+            </p>
+            <div class="align-center">
+              <button ng-click="">Continue</button>
+            </div>
+          </fieldset>
+        </div>
 
-        <div class="col-lg-4">
+        <div ng-class="isCompletedClassLineup() ? 'col-lg-9' : 'col-lg-4'">
           <fieldset>
             <legend>Added Characters</legend>
 
-            <div class="row">
+            <p ng-if="0 === allyCharacters.length">
+              None added. Add characters by selecting a character class.
+            </p>
+
+            <div class="row" ng-if="allyCharacters.length > 0">
               <div
                 ng-repeat="character in allyCharacters track by $index"
-                class="col-xl-6"
+                ng-class="isCompletedClassLineup() ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12' : 'col-xl-6'"
               >
                 <fieldset class="character-fieldset">
                   <legend>{{ character.characterName }}</legend>
                   <div class="align-center">
                     <img ng-src="{{ character.spritePath }}" />
                     <p>{{ character.className }}</p>
-                    <button
-                      ng-click="removeCharacterByIndex($index)"
-                      title="Remove this character."
-                    >
+                    <button ng-click="removeCharacterByIndex($index)">
                       Remove
                     </button>
                   </div>

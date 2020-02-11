@@ -55,7 +55,3 @@ fieldset.character-class-fieldset > table tr td:nth-child(2) {
 fieldset.character-class-fieldset > table button {
   font-size: 100%;
 }
-
-fieldset .class-selection-buttons {
-  text-align: right;
-}

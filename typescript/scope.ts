@@ -23,6 +23,7 @@ interface ICustomScope extends angular.IScope {
   removeLastCharacter: () => void;
   removeAllCharacters: () => void;
   removeCharacterByIndex: (index: number) => void;
+  isCompletedClassLineup: () => boolean;
 }
 
 /**
