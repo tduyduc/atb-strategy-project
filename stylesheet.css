@@ -14,11 +14,6 @@ fieldset > legend {
   font-size: 120%;
 }
 
-fieldset.character-class-fieldset {
-  display: inline-block;
-  width: 10em;
-}
-
 fieldset.character-class-fieldset > legend {
   font-weight: normal;
   font-style: italic;
@@ -36,5 +31,19 @@ fieldset.character-class-fieldset > table tr td:nth-child(1) {
 }
 
 fieldset.character-class-fieldset > table tr td:nth-child(2) {
+  text-align: right;
+}
+
+fieldset.character-class-fieldset > table button {
+  font-size: 100%;
+}
+
+div.col-6 {
+  display: flex;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+fieldset .class-selection-buttons {
   text-align: right;
 }
