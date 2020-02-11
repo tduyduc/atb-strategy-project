@@ -10,6 +10,7 @@ interface ICustomScope extends angular.IScope {
   globalConfig: GlobalConfig;
   static: Static;
   inputModel: IInputModel;
+  appState: AppState;
 
   allyCharacters: Character[];
   enemyCharacters: Character[];

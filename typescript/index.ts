@@ -23,6 +23,6 @@ class Module {
 }
 
 const app: Module = new Module("myApp");
-const mainController = new MainController();
+const mainController = new MainController(mainControllerFunction);
 
 app.controller("mainController", mainController);

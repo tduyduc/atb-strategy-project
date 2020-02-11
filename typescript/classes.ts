@@ -36,7 +36,6 @@ class Common {
  * @class
  */
 class GlobalConfig implements IGlobalConfig {
-  appState: AppState;
   battleSpeed: number;
   playMode: PlayMode;
   allyAIMode: AIMode;
