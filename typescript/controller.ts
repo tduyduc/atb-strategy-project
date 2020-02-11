@@ -1,5 +1,8 @@
 /// <reference path="definitions/angular.d/angular.d.ts" />
+/// <reference path="definitions/interfaces.d.ts" />
 /// <reference path="definitions/scope.d.ts" />
+/// <reference path="enums.ts" />
+/// <reference path="classes.ts" />
 
 class MainController implements IAngularInjectable {
   private _injectors: angular.Injectable<angular.IControllerConstructor>;
