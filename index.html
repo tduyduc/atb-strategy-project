@@ -4,12 +4,44 @@
     <meta charset="UTF-8" />
     <title>atb-strategy-project</title>
 
+    <link rel="stylesheet" href="stylesheet.css" />
+
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="index.js"></script>
   </head>
   <body ng-app="myApp" ng-controller="mainController">
+    <!-- Class Select Section Start -->
     <div ng-if="static.AppState.CLASS_SELECT === globalConfig.appState">
-      <p ng-bind="something"></p>
+      <fieldset>
+        <legend>Character Class Select</legend>
+        Select classes for your characters.
+        <fieldset>
+          <legend>Character {{ allyCharacters.length + 1 }}</legend>
+
+          <fieldset
+            ng-repeat="class in characterClasses track by $index"
+            class="character-class-fieldset"
+          >
+            <legend>{{ class.className }}</legend>
+            <table>
+              <tr ng-repeat="attribute in classAttributeDisplayObjects[$index]">
+                <td>{{ attribute.name }}</td>
+                <td>{{ attribute.value }}</td>
+              </tr>
+              <tr>
+                <td>
+                  <button>Select</button>
+                </td>
+                <td>
+                  <img src="{{ class.spritePath }}" />
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+        </fieldset>
+      </fieldset>
     </div>
+    <!-- Class Select Section End -->
+    <!-- <p ng-bind="something"></p> -->
   </body>
 </html>

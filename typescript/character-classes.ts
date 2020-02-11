@@ -1,6 +1,6 @@
 /// <reference path="classes.ts" />
 
-const characterClasses = [
+const characterClasses: CharacterClass[] = [
   new CharacterClass({
     className: "Fighter",
     spritePath: "res/cyan.gif",
@@ -122,7 +122,7 @@ const characterClasses = [
   }),
   new CharacterClass({
     className: "Time Mage",
-    spritePath: "../res/strago.gif",
+    spritePath: "res/strago.gif",
     defaultCharacterNames: ["Strago", "Leon", "Palom"],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -136,11 +136,17 @@ const characterClasses = [
       speed: 30,
       movementRange: 1
     })
-  }),
+  })
 ];
-const autoCharacterNames = characterClasses.reduce(
+
+const autoCharacterNames: string[] = characterClasses.reduce(
   (previous: string[], { defaultCharacterNames }: CharacterClass): string[] => {
     previous.push(...defaultCharacterNames);
     return previous;
-  }, []
+  },
+  []
+);
+
+const classAttributeDisplayObjects: IAttributeDisplayObject[][] = characterClasses.map(
+  characterClass => AttributesDisplay.generate(characterClass.initialAttributes)
 );

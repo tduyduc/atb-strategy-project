@@ -130,6 +130,24 @@ class CharacterClass implements ICharacterClass {
 }
 
 /**
+ * Stores a concrete character. A character extends a character class.
+ * @class
+ * @see ICharacterClass
+ */
+class Character implements ICharacter {
+  characterName: string;
+  inGameAttributes: ICharacterAttributes;
+  className: string;
+  initialAttributes: ICharacterAttributes;
+  defaultCharacterNames?: string[];
+  spritePath: string;
+
+  constructor(arg: ICharacter) {
+    Object.assign(this, arg);
+  }
+}
+
+/**
  * Stores attributes of a character.
  * @class
  */
