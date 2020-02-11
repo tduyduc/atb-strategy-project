@@ -119,13 +119,13 @@ interface ICharacter extends ICharacterClass {
    * Name of the character.
    * @member {string}
    */
-  characterName: string;
+  characterName?: string;
 
   /**
    * Current attributes of the character.
    * @member {IAttributes}
    */
-  inGameAttributes: ICharacterAttributes;
+  inGameAttributes?: ICharacterAttributes;
 }
 
 /**

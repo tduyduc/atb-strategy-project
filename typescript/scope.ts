@@ -9,6 +9,7 @@ interface ICustomScope extends angular.IScope {
   something: string;
   globalConfig: GlobalConfig;
   static: Static;
+  inputModel: IInputModel;
 
   allyCharacters: Character[];
   enemyCharacters: Character[];
@@ -16,9 +17,18 @@ interface ICustomScope extends angular.IScope {
   autoCharacterNames: string[];
   classAttributeDisplayObjects: IAttributeDisplayObject[][];
 
-  classSelectNameInput: string;
   setAutoName: () => void;
   selectCharacterClass: (characterClass: CharacterClass) => void;
   removeLastCharacter: () => void;
   removeAllCharacters: () => void;
+  removeCharacterByIndex: (index: number) => void;
+}
+
+/**
+ * Contains fields used in input fields.
+ *
+ * @interface
+ */
+interface IInputModel {
+  [x: string]: string;
 }

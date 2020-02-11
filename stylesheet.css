@@ -3,6 +3,14 @@ body, button, input, select, label, textarea {
   font-size: 90%;
 }
 
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
 fieldset {
   margin: 1em .5em;
   border-style: groove;
@@ -17,6 +25,11 @@ fieldset > legend {
 fieldset.character-class-fieldset > legend {
   font-weight: normal;
   font-style: italic;
+  font-size: 100%;
+}
+
+fieldset.character-fieldset > legend {
+  font-weight: normal;
   font-size: 100%;
 }
 
@@ -36,12 +49,6 @@ fieldset.character-class-fieldset > table tr td:nth-child(2) {
 
 fieldset.character-class-fieldset > table button {
   font-size: 100%;
-}
-
-div.col-6 {
-  display: flex;
-  flex: 0 0 50%;
-  max-width: 50%;
 }
 
 fieldset .class-selection-buttons {

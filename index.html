@@ -26,7 +26,7 @@
 
         <div class="col-lg-6 class-selection-buttons">
           <input
-            ng-model="classSelectNameInput"
+            ng-model="inputModel.classSelectNameInput"
             type="text"
             placeholder="Character name"
             title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
@@ -54,40 +54,72 @@
         </div>
       </div>
 
-      <fieldset>
-        <legend>Character {{ allyCharacters.length + 1 }}</legend>
+      <div class="row">
+        <div class="col-lg-8">
+          <fieldset>
+            <legend>Character {{ allyCharacters.length + 1 }}</legend>
 
-        <div class="row">
-          <div
-            ng-repeat="class in characterClasses track by $index"
-            class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12"
-          >
-            <fieldset class="character-class-fieldset">
-              <legend>{{ class.className }}</legend>
-              <table>
-                <tr
-                  ng-repeat="attribute in classAttributeDisplayObjects[$index]"
-                >
-                  <td>{{ attribute.name }}</td>
-                  <td>{{ attribute.value }}</td>
-                </tr>
-                <tr>
-                  <td>
-                    <button ng-click="selectCharacterClass(class)">
-                      Select
-                    </button>
-                  </td>
-                  <td>
-                    <img ng-src="{{ class.spritePath }}" />
-                  </td>
-                </tr>
-              </table>
-            </fieldset>
-            <!-- Single Character Class Field Set End -->
-          </div>
+            <div class="row">
+              <div
+                ng-repeat="class in characterClasses track by $index"
+                class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+              >
+                <fieldset class="character-class-fieldset">
+                  <legend>{{ class.className }}</legend>
+                  <table>
+                    <tr
+                      ng-repeat="attribute in classAttributeDisplayObjects[$index]"
+                    >
+                      <td>{{ attribute.name }}</td>
+                      <td>{{ attribute.value }}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button ng-click="selectCharacterClass(class)">
+                          Select
+                        </button>
+                      </td>
+                      <td>
+                        <img ng-src="{{ class.spritePath }}" />
+                      </td>
+                    </tr>
+                  </table>
+                </fieldset>
+                <!-- Single Character Class Field Set End -->
+              </div>
+            </div>
+          </fieldset>
+          <!-- New Character Field Set End -->
         </div>
-      </fieldset>
-      <!-- Character Field Set End -->
+
+        <div class="col-lg-4">
+          <fieldset>
+            <legend>Added Characters</legend>
+
+            <div class="row">
+              <div
+                ng-repeat="character in allyCharacters track by $index"
+                class="col-xl-6"
+              >
+                <fieldset class="character-fieldset">
+                  <legend>{{ character.characterName }}</legend>
+                  <div class="align-center">
+                    <img ng-src="{{ character.spritePath }}" />
+                    <p>{{ character.className }}</p>
+                    <button
+                      ng-click="removeCharacterByIndex($index)"
+                      title="Remove this character."
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </fieldset>
+                <!-- Single Character Class Field Set End -->
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
     </fieldset>
     <!-- Class Select Section End -->
     <!-- <p ng-bind="something"></p> -->

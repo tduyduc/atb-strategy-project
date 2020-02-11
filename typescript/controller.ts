@@ -27,30 +27,32 @@ class MainController implements IAngularInjectable {
         inactiveTurnLimit: 30,
         appState: AppState.CLASS_SELECT
       };
+      $scope.inputModel = {
+        classSelectNameInput: ""
+      };
       $scope.characterClasses = characterClasses;
       $scope.autoCharacterNames = autoCharacterNames;
       $scope.allyCharacters = [];
       $scope.enemyCharacters = [];
       $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
-      $scope.classSelectNameInput = "";
 
       $scope.setAutoName = setAutoName;
       $scope.selectCharacterClass = selectCharacterClass;
       $scope.removeLastCharacter = removeLastCharacter;
       $scope.removeAllCharacters = removeAllCharacters;
+      $scope.removeCharacterByIndex = removeCharacterByIndex;
 
       function setAutoName(): void {
-        $scope.classSelectNameInput =
+        $scope.inputModel.classSelectNameInput =
           autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
       }
 
       function selectCharacterClass(characterClass: CharacterClass): void {
         $scope.allyCharacters.push(new Character({
           ...characterClass,
-          characterName: $scope.classSelectNameInput,
-          inGameAttributes: { ...characterClass.initialAttributes }
+          characterName: $scope.inputModel.classSelectNameInput
         }));
-        $scope.classSelectNameInput = "";
+        $scope.inputModel.classSelectNameInput = "";
       }
 
       function removeLastCharacter(): void {
@@ -59,6 +61,10 @@ class MainController implements IAngularInjectable {
 
       function removeAllCharacters(): void {
         $scope.allyCharacters.length = 0;
+      }
+
+      function removeCharacterByIndex(index: number): void {
+        $scope.allyCharacters.splice(index, 1);
       }
     }
   }

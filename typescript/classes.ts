@@ -35,7 +35,8 @@ class Common {
  *
  * @class
  */
-class GlobalConfig implements IGlobalConfig {appState: AppState;
+class GlobalConfig implements IGlobalConfig {
+  appState: AppState;
   battleSpeed: number;
   playMode: PlayMode;
   allyAIMode: AIMode;
@@ -135,8 +136,8 @@ class CharacterClass implements ICharacterClass {
  * @see ICharacterClass
  */
 class Character implements ICharacter {
-  characterName: string;
-  inGameAttributes: ICharacterAttributes;
+  characterName?: string;
+  inGameAttributes?: ICharacterAttributes;
   className: string;
   initialAttributes: ICharacterAttributes;
   defaultCharacterNames?: string[];
@@ -144,6 +145,15 @@ class Character implements ICharacter {
 
   constructor(arg: ICharacter) {
     Object.assign(this, arg);
+
+    if (!arg.characterName) {
+      this.characterName = this.defaultCharacterNames[
+        Common.randomInt(0, this.defaultCharacterNames.length)
+      ];
+    }
+    if (!arg.inGameAttributes) {
+      this.inGameAttributes = Object.assign({}, this.initialAttributes);
+    }
   }
 }
 
