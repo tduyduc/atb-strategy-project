@@ -1,4 +1,4 @@
-body, button, input, select {
+body, button, input, select, label, textarea {
   font-family: Sans-Serif;
   font-size: 90%;
 }
