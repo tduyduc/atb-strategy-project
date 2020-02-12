@@ -19,6 +19,7 @@ interface ICustomScope extends angular.IScope {
   autoCharacterNames: string[];
   classAttributeDisplayObjects: IAttributeDisplayObject[][];
 
+  initValues: () => void;
   goToClassSelectionWindow: () => void;
   goToUnitDispatchWindow: () => void;
   goToBattleSceneWindow: () => void;

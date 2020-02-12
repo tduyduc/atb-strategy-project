@@ -18,6 +18,64 @@ class MainController implements IAngularController {
 }
 
 function mainControllerFunction($scope: ICustomScope): void {
+  const internalFunctions: object = {
+    initValues(): void {
+      $scope.appState = AppState.CLASS_SELECT;
+      $scope.inputModel = { classSelectNameInput: '' };
+      $scope.characterClasses = characterClasses;
+      $scope.autoCharacterNames = autoCharacterNames;
+      $scope.allyCharacters = [];
+      $scope.enemyCharacters = [];
+      $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+    },
+
+    goToClassSelectionWindow(): void {
+      $scope.appState = AppState.CLASS_SELECT;
+    },
+
+    goToUnitDispatchWindow(): void {
+      if ($scope.isCompletedClassLineup()) return;
+      $scope.appState = AppState.UNIT_DISPATCH;
+    },
+
+    goToBattleSceneWindow(): void {
+      $scope.appState = AppState.BATTLE_SCENE;
+    },
+
+    setAutoName(): void {
+      $scope.inputModel.classSelectNameInput =
+        autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
+    },
+
+    selectCharacterClass(characterClass: CharacterClass): void {
+      $scope.allyCharacters.push(
+        new Character({
+          ...characterClass,
+          characterName: $scope.inputModel.classSelectNameInput,
+        })
+      );
+      $scope.inputModel.classSelectNameInput = '';
+    },
+
+    removeLastCharacter(): void {
+      $scope.allyCharacters.pop();
+    },
+
+    removeAllCharacters(): void {
+      $scope.allyCharacters.length = 0;
+    },
+
+    removeCharacterByIndex(index: number): void {
+      $scope.allyCharacters.splice(index, 1);
+    },
+
+    isCompletedClassLineup(): boolean {
+      return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
+    },
+  };
+
+  // --- End of internal functions object. Main logic starts here. --- //
+
   globalThis.$scope = $scope;
 
   $scope.something = 'This is a string!';
@@ -33,72 +91,6 @@ function mainControllerFunction($scope: ICustomScope): void {
     inactiveTurnLimit: 30,
   };
 
-  $scope.goToClassSelectionWindow = goToClassSelectionWindow;
-  $scope.goToUnitDispatchWindow = goToUnitDispatchWindow;
-  $scope.goToBattleSceneWindow = goToBattleSceneWindow;
-
-  $scope.setAutoName = setAutoName;
-  $scope.selectCharacterClass = selectCharacterClass;
-  $scope.removeLastCharacter = removeLastCharacter;
-  $scope.removeAllCharacters = removeAllCharacters;
-  $scope.removeCharacterByIndex = removeCharacterByIndex;
-  $scope.isCompletedClassLineup = isCompletedClassLineup;
-
-  init();
-
-  // --- End of main logic. Internal functions start here. ---
-
-  function init(): void {
-    $scope.appState = AppState.CLASS_SELECT;
-    $scope.inputModel = { classSelectNameInput: '' };
-    $scope.characterClasses = characterClasses;
-    $scope.autoCharacterNames = autoCharacterNames;
-    $scope.allyCharacters = [];
-    $scope.enemyCharacters = [];
-    $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
-  }
-
-  function goToClassSelectionWindow(): void {
-    $scope.appState = AppState.CLASS_SELECT;
-  }
-
-  function goToUnitDispatchWindow(): void {
-    if (!isCompletedClassLineup()) return;
-    $scope.appState = AppState.UNIT_DISPATCH;
-  }
-
-  function goToBattleSceneWindow(): void {
-    $scope.appState = AppState.BATTLE_SCENE;
-  }
-
-  function setAutoName(): void {
-    $scope.inputModel.classSelectNameInput =
-      autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
-  }
-
-  function selectCharacterClass(characterClass: CharacterClass): void {
-    $scope.allyCharacters.push(
-      new Character({
-        ...characterClass,
-        characterName: $scope.inputModel.classSelectNameInput,
-      })
-    );
-    $scope.inputModel.classSelectNameInput = '';
-  }
-
-  function removeLastCharacter(): void {
-    $scope.allyCharacters.pop();
-  }
-
-  function removeAllCharacters(): void {
-    $scope.allyCharacters.length = 0;
-  }
-
-  function removeCharacterByIndex(index: number): void {
-    $scope.allyCharacters.splice(index, 1);
-  }
-
-  function isCompletedClassLineup(): boolean {
-    return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
-  }
+  Object.assign($scope, internalFunctions);
+  $scope.initValues();
 }

@@ -383,6 +383,49 @@ class MainController {
     }
 }
 function mainControllerFunction($scope) {
+    const internalFunctions = {
+        initValues() {
+            $scope.appState = AppState.CLASS_SELECT;
+            $scope.inputModel = { classSelectNameInput: '' };
+            $scope.characterClasses = characterClasses;
+            $scope.autoCharacterNames = autoCharacterNames;
+            $scope.allyCharacters = [];
+            $scope.enemyCharacters = [];
+            $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+        },
+        goToClassSelectionWindow() {
+            $scope.appState = AppState.CLASS_SELECT;
+        },
+        goToUnitDispatchWindow() {
+            if ($scope.isCompletedClassLineup())
+                return;
+            $scope.appState = AppState.UNIT_DISPATCH;
+        },
+        goToBattleSceneWindow() {
+            $scope.appState = AppState.BATTLE_SCENE;
+        },
+        setAutoName() {
+            $scope.inputModel.classSelectNameInput =
+                autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
+        },
+        selectCharacterClass(characterClass) {
+            $scope.allyCharacters.push(new Character(Object.assign(Object.assign({}, characterClass), { characterName: $scope.inputModel.classSelectNameInput })));
+            $scope.inputModel.classSelectNameInput = '';
+        },
+        removeLastCharacter() {
+            $scope.allyCharacters.pop();
+        },
+        removeAllCharacters() {
+            $scope.allyCharacters.length = 0;
+        },
+        removeCharacterByIndex(index) {
+            $scope.allyCharacters.splice(index, 1);
+        },
+        isCompletedClassLineup() {
+            return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
+        },
+    };
+    // --- End of internal functions object. Main logic starts here. ---
     globalThis.$scope = $scope;
     $scope.something = 'This is a string!';
     $scope.static = { PlayMode, AIMode, AppState, Common };
@@ -396,57 +439,8 @@ function mainControllerFunction($scope) {
         mapSize: 6,
         inactiveTurnLimit: 30,
     };
-    $scope.goToClassSelectionWindow = goToClassSelectionWindow;
-    $scope.goToUnitDispatchWindow = goToUnitDispatchWindow;
-    $scope.goToBattleSceneWindow = goToBattleSceneWindow;
-    $scope.setAutoName = setAutoName;
-    $scope.selectCharacterClass = selectCharacterClass;
-    $scope.removeLastCharacter = removeLastCharacter;
-    $scope.removeAllCharacters = removeAllCharacters;
-    $scope.removeCharacterByIndex = removeCharacterByIndex;
-    $scope.isCompletedClassLineup = isCompletedClassLineup;
-    init();
-    // --- End of main logic. Internal functions start here. ---
-    function init() {
-        $scope.appState = AppState.CLASS_SELECT;
-        $scope.inputModel = { classSelectNameInput: '' };
-        $scope.characterClasses = characterClasses;
-        $scope.autoCharacterNames = autoCharacterNames;
-        $scope.allyCharacters = [];
-        $scope.enemyCharacters = [];
-        $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
-    }
-    function setAutoName() {
-        $scope.inputModel.classSelectNameInput =
-            autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
-    }
-    function selectCharacterClass(characterClass) {
-        $scope.allyCharacters.push(new Character(Object.assign(Object.assign({}, characterClass), { characterName: $scope.inputModel.classSelectNameInput })));
-        $scope.inputModel.classSelectNameInput = '';
-    }
-    function removeLastCharacter() {
-        $scope.allyCharacters.pop();
-    }
-    function removeAllCharacters() {
-        $scope.allyCharacters.length = 0;
-    }
-    function removeCharacterByIndex(index) {
-        $scope.allyCharacters.splice(index, 1);
-    }
-    function isCompletedClassLineup() {
-        return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
-    }
-    function goToClassSelectionWindow() {
-        $scope.appState = AppState.CLASS_SELECT;
-    }
-    function goToUnitDispatchWindow() {
-        if (!isCompletedClassLineup())
-            return;
-        $scope.appState = AppState.UNIT_DISPATCH;
-    }
-    function goToBattleSceneWindow() {
-        $scope.appState = AppState.BATTLE_SCENE;
-    }
+    Object.assign($scope, internalFunctions);
+    $scope.initValues();
 }
 /// <reference path="definitions/angular.d/angular.d.ts" />
 /// <reference path="definitions/interfaces.d.ts" />
