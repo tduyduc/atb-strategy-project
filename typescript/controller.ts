@@ -18,7 +18,7 @@ class MainController implements IAngularController {
 }
 
 function mainControllerFunction($scope: ICustomScope): void {
-  const internalFunctions: object = {
+  const scopeFunctions: ICustomScopeFunctions = {
     initValues(): void {
       $scope.appState = AppState.CLASS_SELECT;
       $scope.inputModel = { classSelectNameInput: '' };
@@ -91,6 +91,6 @@ function mainControllerFunction($scope: ICustomScope): void {
     inactiveTurnLimit: 30,
   };
 
-  Object.assign($scope, internalFunctions);
+  Object.assign($scope, scopeFunctions);
   $scope.initValues();
 }

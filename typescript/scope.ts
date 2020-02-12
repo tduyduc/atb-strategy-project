@@ -2,11 +2,11 @@
 /// <reference path="classes.ts" />
 
 /**
- * Contains members to be included to an AngularJS scope.
+ * Contains members to be included in an AngularJS scope.
  *
  * @interface
  */
-interface ICustomScope extends angular.IScope {
+interface ICustomScope extends angular.IScope, ICustomScopeFunctions {
   something: string;
   globalConfig: GlobalConfig;
   static: Static;
@@ -18,7 +18,14 @@ interface ICustomScope extends angular.IScope {
   characterClasses: CharacterClass[];
   autoCharacterNames: string[];
   classAttributeDisplayObjects: IAttributeDisplayObject[][];
+}
 
+/**
+ * Contains functions to be included in an AngularJS scope.
+ *
+ * @interface
+ */
+interface ICustomScopeFunctions {
   initValues: () => void;
   goToClassSelectionWindow: () => void;
   goToUnitDispatchWindow: () => void;
