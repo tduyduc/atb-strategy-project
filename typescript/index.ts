@@ -3,21 +3,21 @@
 /// <reference path="controller.ts" />
 
 class Module {
-  private module: angular.IModule;
+  private _module: angular.IModule;
 
   constructor(name: string, requires: string[] = []) {
-    this.module = angular.module(name, requires);
+    this._module = angular.module(name, requires);
   }
 
-  getModule(): angular.IModule {
-    return this.module;
+  get module(): angular.IModule {
+    return this._module;
   }
 
   controller(
     name: string,
     _controller: IAngularInjectable<angular.IControllerConstructor>
   ): angular.IModule {
-    return this.module.controller(name, _controller.injectors);
+    return this._module.controller(name, _controller.injectors);
   }
 
   directive(
@@ -31,7 +31,7 @@ class Module {
       >
     >
   ): angular.IModule {
-    return this.module.directive(name, _directive.injectors);
+    return this._module.directive(name, _directive.injectors);
   }
 }
 
