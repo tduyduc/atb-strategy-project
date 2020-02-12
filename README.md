@@ -10,7 +10,7 @@ This project is a game created as a project for Duc’s research about _AI in st
 
 This game combines _Active Time Battle_ as seen in games such as _Final Fantasy 6_ and strategy found in _Final Fantasy Tactics Advance_. It uses AutoIt scripting language, which can be easily used for GUI, simple graphics, easy array copying, and dynamic array resizing operations.
 
-Sprite images _(from Final Fantasy 6)_ are not included. They can be downloaded at http://www.videogamesprites.net/FinalFantasy6/. Images might need to be renamed in the script.
+_Character sprites © 1994–2020 Square Enix. All rights reserved._
 
 -----
 
