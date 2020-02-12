@@ -34,7 +34,7 @@ function mainControllerFunction($scope: ICustomScope): void {
     },
 
     goToUnitDispatchWindow(): void {
-      if ($scope.isCompletedClassLineup()) return;
+      if (!$scope.isCompletedClassLineup()) return;
       $scope.appState = AppState.UNIT_DISPATCH;
     },
 
