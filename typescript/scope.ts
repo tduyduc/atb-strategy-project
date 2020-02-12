@@ -7,7 +7,7 @@
  * @interface
  */
 interface ICustomScope extends angular.IScope, ICustomScopeFunctions {
-  something: string;
+  appName: string;
   globalConfig: GlobalConfig;
   static: Static;
   inputModel: IInputModel;

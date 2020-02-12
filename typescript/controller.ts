@@ -86,7 +86,7 @@ function mainControllerFunction($scope: ICustomScope): void {
 
   globalThis.$scope = $scope;
 
-  $scope.something = 'This is a string!';
+  $scope.appName = 'atb-strategy-project';
   $scope.static = { PlayMode, AIMode, AppState, Common };
   $scope.globalConfig = {
     battleSpeed: 2,
