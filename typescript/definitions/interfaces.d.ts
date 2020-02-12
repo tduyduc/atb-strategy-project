@@ -3,8 +3,8 @@
  *
  * @interface IAngularInjectable
  */
-interface IAngularInjectable {
-  injectors: angular.Injectable<angular.IControllerConstructor>;
+interface IAngularInjectable<T extends Function> {
+  injectors: angular.Injectable<T>;
 }
 
 /**

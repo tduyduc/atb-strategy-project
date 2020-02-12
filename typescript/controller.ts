@@ -5,7 +5,8 @@
 /// <reference path="scope.ts" />
 /// <reference path="character-classes.ts" />
 
-class MainController implements IAngularInjectable {
+class MainController
+  implements IAngularInjectable<angular.IControllerConstructor> {
   private _injectors: angular.Injectable<angular.IControllerConstructor>;
 
   constructor(controllerFunction: ($scope: ICustomScope) => void) {
