@@ -20,13 +20,21 @@ class MainController implements IAngularController {
 function mainControllerFunction($scope: ICustomScope): void {
   const scopeFunctions: ICustomScopeFunctions = {
     initValues(): void {
-      $scope.appState = AppState.CLASS_SELECT;
       $scope.inputModel = { classSelectNameInput: '' };
       $scope.characterClasses = characterClasses;
       $scope.autoCharacterNames = autoCharacterNames;
       $scope.allyCharacters = [];
       $scope.enemyCharacters = [];
       $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+    },
+
+    setInitialAppState(): void {
+      if (PlayMode.PLAYER_VS_AI === $scope.globalConfig.playMode) {
+        $scope.appState = AppState.CLASS_SELECT;
+        return;
+      }
+      // TODO: Initialize computer characters in another function to be called here!
+      $scope.appState = AppState.BATTLE_SCENE;
     },
 
     goToClassSelectionWindow(): void {
@@ -92,5 +100,6 @@ function mainControllerFunction($scope: ICustomScope): void {
   };
 
   Object.assign($scope, scopeFunctions);
+  $scope.setInitialAppState();
   $scope.initValues();
 }
