@@ -33,6 +33,10 @@ function mainControllerFunction($scope: ICustomScope): void {
     inactiveTurnLimit: 30,
   };
 
+  $scope.goToClassSelectionWindow = goToClassSelectionWindow;
+  $scope.goToUnitDispatchWindow = goToUnitDispatchWindow;
+  $scope.goToBattleSceneWindow = goToBattleSceneWindow;
+
   $scope.setAutoName = setAutoName;
   $scope.selectCharacterClass = selectCharacterClass;
   $scope.removeLastCharacter = removeLastCharacter;
@@ -52,6 +56,19 @@ function mainControllerFunction($scope: ICustomScope): void {
     $scope.allyCharacters = [];
     $scope.enemyCharacters = [];
     $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+  }
+
+  function goToClassSelectionWindow(): void {
+    $scope.appState = AppState.CLASS_SELECT;
+  }
+
+  function goToUnitDispatchWindow(): void {
+    if (!isCompletedClassLineup()) return;
+    $scope.appState = AppState.UNIT_DISPATCH;
+  }
+
+  function goToBattleSceneWindow(): void {
+    $scope.appState = AppState.BATTLE_SCENE;
   }
 
   function setAutoName(): void {

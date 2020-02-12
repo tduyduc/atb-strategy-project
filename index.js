@@ -51,8 +51,8 @@ var AIMode;
 var AppState;
 (function (AppState) {
     AppState[AppState["CLASS_SELECT"] = 0] = "CLASS_SELECT";
-    AppState[AppState["DISPATCH_UNITS"] = 1] = "DISPATCH_UNITS";
-    AppState[AppState["BATTLE_SCREEN"] = 2] = "BATTLE_SCREEN";
+    AppState[AppState["UNIT_DISPATCH"] = 1] = "UNIT_DISPATCH";
+    AppState[AppState["BATTLE_SCENE"] = 2] = "BATTLE_SCENE";
 })(AppState || (AppState = {}));
 /// <reference path="definitions/interfaces.d.ts" />
 /// <reference path="static-interfaces.ts" />
@@ -396,6 +396,9 @@ function mainControllerFunction($scope) {
         mapSize: 6,
         inactiveTurnLimit: 30,
     };
+    $scope.goToClassSelectionWindow = goToClassSelectionWindow;
+    $scope.goToUnitDispatchWindow = goToUnitDispatchWindow;
+    $scope.goToBattleSceneWindow = goToBattleSceneWindow;
     $scope.setAutoName = setAutoName;
     $scope.selectCharacterClass = selectCharacterClass;
     $scope.removeLastCharacter = removeLastCharacter;
@@ -432,6 +435,17 @@ function mainControllerFunction($scope) {
     }
     function isCompletedClassLineup() {
         return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
+    }
+    function goToClassSelectionWindow() {
+        $scope.appState = AppState.CLASS_SELECT;
+    }
+    function goToUnitDispatchWindow() {
+        if (!isCompletedClassLineup())
+            return;
+        $scope.appState = AppState.UNIT_DISPATCH;
+    }
+    function goToBattleSceneWindow() {
+        $scope.appState = AppState.BATTLE_SCENE;
     }
 }
 /// <reference path="definitions/angular.d/angular.d.ts" />

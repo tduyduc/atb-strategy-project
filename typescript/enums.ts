@@ -33,6 +33,6 @@ enum AIMode {
  */
 enum AppState {
   CLASS_SELECT,
-  DISPATCH_UNITS,
-  BATTLE_SCREEN,
+  UNIT_DISPATCH,
+  BATTLE_SCENE,
 }

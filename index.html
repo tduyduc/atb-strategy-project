@@ -113,7 +113,7 @@
               organizing your character positions, click the button below.
             </p>
             <p class="align-center">
-              <button ng-click="">Continue</button>
+              <button ng-click="goToUnitDispatchWindow()">Continue</button>
             </p>
           </fieldset>
         </div>
@@ -149,6 +149,24 @@
       </div>
     </fieldset>
     <!-- Class Select Section End -->
+
+    <!-- Unit Dispatch Section Start -->
+    <fieldset
+      id="unit-dispatch-window"
+      ng-if="static.AppState.UNIT_DISPATCH === appState"
+    >
+      <legend>Unit Dispatch</legend>
+    </fieldset>
+    <!-- Unit Dispatch Section End -->
+
+    <!-- Battle Scene Section Start -->
+    <fieldset
+      id="battle-scene-window"
+      ng-if="static.AppState.BATTLE_SCENE === appState"
+    >
+      <legend>Battle Scene</legend>
+    </fieldset>
+    <!-- Battle Scene Section End -->
     <!-- <p ng-bind="something"></p> -->
   </body>
 </html>
