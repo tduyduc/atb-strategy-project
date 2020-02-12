@@ -22,6 +22,7 @@ interface ICustomScope extends angular.IScope, ICustomScopeFunctions {
 
 /**
  * Contains functions to be included in an AngularJS scope.
+ * They are stored in a separate interface for easier declaration and copying.
  *
  * @interface
  */
