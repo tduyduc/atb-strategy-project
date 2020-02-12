@@ -13,24 +13,11 @@ class Module {
     return this._module;
   }
 
-  controller(
-    name: string,
-    _controller: IAngularInjectable<angular.IControllerConstructor>
-  ): angular.IModule {
+  controller(name: string, _controller: IAngularController): angular.IModule {
     return this._module.controller(name, _controller.injectors);
   }
 
-  directive(
-    name: string,
-    _directive: IAngularInjectable<
-      angular.IDirectiveFactory<
-        angular.IScope,
-        JQLite,
-        angular.IAttributes,
-        angular.IController
-      >
-    >
-  ): angular.IModule {
+  directive(name: string, _directive: IAngularDirective): angular.IModule {
     return this._module.directive(name, _directive.injectors);
   }
 }

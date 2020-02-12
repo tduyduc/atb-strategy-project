@@ -1,3 +1,4 @@
+/// <reference path="angular.d/angular.d.ts" />
 /**
  * Common interface for declaring AngularJS controllers & directives.
  *
@@ -6,6 +7,19 @@
 interface IAngularInjectable<T extends Function> {
   injectors: angular.Injectable<T>;
 }
+
+interface IAngularController
+  extends IAngularInjectable<angular.IControllerConstructor> {}
+
+interface IAngularDirective
+  extends IAngularInjectable<
+    angular.IDirectiveFactory<
+      angular.IScope,
+      JQLite,
+      angular.IAttributes,
+      angular.IController
+    >
+  > {}
 
 /**
  * Interface for the global config object.
