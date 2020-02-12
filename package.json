@@ -43,6 +43,7 @@
     "semi": true,
     "singleQuote": true,
     "arrowParens": "avoid",
-    "quoteProps": "consistent"
+    "quoteProps": "consistent",
+    "endOfLine": "lf"
   }
 }
