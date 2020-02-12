@@ -2,9 +2,9 @@
 
 const characterClasses: CharacterClass[] = [
   new CharacterClass({
-    className: "Fighter",
-    spritePath: "res/cyan.gif",
-    defaultCharacterNames: ["Cyan", "Firion", "Cecil"],
+    className: 'Fighter',
+    spritePath: 'res/cyan.gif',
+    defaultCharacterNames: ['Cyan', 'Firion', 'Cecil'],
     initialAttributes: new CharacterAttributes({
       hp: 500,
       mp: 20,
@@ -15,13 +15,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 1,
       attackArea: 0,
       speed: 40,
-      movementRange: 2
-    })
+      movementRange: 2,
+    }),
   }),
   new CharacterClass({
-    className: "Black Belt",
-    spritePath: "res/sabin.gif",
-    defaultCharacterNames: ["Sabin", "Yang", "Galuf"],
+    className: 'Black Belt',
+    spritePath: 'res/sabin.gif',
+    defaultCharacterNames: ['Sabin', 'Yang', 'Galuf'],
     initialAttributes: new CharacterAttributes({
       hp: 400,
       mp: 25,
@@ -32,13 +32,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 1,
       attackArea: 0,
       speed: 25,
-      movementRange: 2
-    })
+      movementRange: 2,
+    }),
   }),
   new CharacterClass({
-    className: "Archer",
-    spritePath: "res/edgar.gif",
-    defaultCharacterNames: ["Edgar", "Ceodore", "Edward"],
+    className: 'Archer',
+    spritePath: 'res/edgar.gif',
+    defaultCharacterNames: ['Edgar', 'Ceodore', 'Edward'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 300,
@@ -49,13 +49,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 3,
       attackArea: 0,
       speed: 35,
-      movementRange: 2
-    })
+      movementRange: 2,
+    }),
   }),
   new CharacterClass({
-    className: "Assassin",
-    spritePath: "res/shadow.gif",
-    defaultCharacterNames: ["Shadow", "Edge", "Jinnai"],
+    className: 'Assassin',
+    spritePath: 'res/shadow.gif',
+    defaultCharacterNames: ['Shadow', 'Edge', 'Jinnai'],
     initialAttributes: new CharacterAttributes({
       hp: 250,
       mp: 20,
@@ -66,13 +66,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 1,
       attackArea: 0,
       speed: 80,
-      movementRange: 3
-    })
+      movementRange: 3,
+    }),
   }),
   new CharacterClass({
-    className: "Bomber",
-    spritePath: "res/relm.gif",
-    defaultCharacterNames: ["Relm", "Krile", "Matoya"],
+    className: 'Bomber',
+    spritePath: 'res/relm.gif',
+    defaultCharacterNames: ['Relm', 'Krile', 'Matoya'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 35,
@@ -83,13 +83,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 2,
       attackArea: 1,
       speed: 30,
-      movementRange: 2
-    })
+      movementRange: 2,
+    }),
   }),
   new CharacterClass({
-    className: "White Mage",
-    spritePath: "res/terra.gif",
-    defaultCharacterNames: ["Terra", "Rosa", "Refia"],
+    className: 'White Mage',
+    spritePath: 'res/terra.gif',
+    defaultCharacterNames: ['Terra', 'Rosa', 'Refia'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 100,
@@ -100,13 +100,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 2,
       attackArea: 1,
       speed: 30,
-      movementRange: 1
-    })
+      movementRange: 1,
+    }),
   }),
   new CharacterClass({
-    className: "Black Mage",
-    spritePath: "res/celes.gif",
-    defaultCharacterNames: ["Celes", "Rydia", "Alba"],
+    className: 'Black Mage',
+    spritePath: 'res/celes.gif',
+    defaultCharacterNames: ['Celes', 'Rydia', 'Alba'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 200,
@@ -117,13 +117,13 @@ const characterClasses: CharacterClass[] = [
       attackRange: 2,
       attackArea: 1,
       speed: 30,
-      movementRange: 1
-    })
+      movementRange: 1,
+    }),
   }),
   new CharacterClass({
-    className: "Time Mage",
-    spritePath: "res/strago.gif",
-    defaultCharacterNames: ["Strago", "Leon", "Palom"],
+    className: 'Time Mage',
+    spritePath: 'res/strago.gif',
+    defaultCharacterNames: ['Strago', 'Leon', 'Palom'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 40,
@@ -134,9 +134,9 @@ const characterClasses: CharacterClass[] = [
       attackRange: 2,
       attackArea: 1,
       speed: 30,
-      movementRange: 1
-    })
-  })
+      movementRange: 1,
+    }),
+  }),
 ];
 
 const autoCharacterNames: string[] = characterClasses.reduce(

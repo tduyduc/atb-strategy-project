@@ -193,16 +193,16 @@ class AttributesDisplay {
    * @member {IAttributeFriendlyNamesObject}
    */
   static friendlyNames: IAttributeFriendlyNamesObject = {
-    hp: "HP",
-    mp: "MP",
-    attack: "Attack",
-    defense: "Defense",
-    intelligence: "Int.",
-    mind: "Mind",
-    attackRange: "Range",
-    attackArea: "Area",
-    speed: "Speed",
-    movementRange: "Move"
+    hp: 'HP',
+    mp: 'MP',
+    attack: 'Attack',
+    defense: 'Defense',
+    intelligence: 'Int.',
+    mind: 'Mind',
+    attackRange: 'Range',
+    attackArea: 'Area',
+    speed: 'Speed',
+    movementRange: 'Move',
   };
 
   /**
@@ -216,7 +216,7 @@ class AttributesDisplay {
       if (!(field in actualAttributes)) continue;
       result.push({
         name: this.friendlyNames[field],
-        value: actualAttributes[field]
+        value: actualAttributes[field],
       });
     }
     return result;

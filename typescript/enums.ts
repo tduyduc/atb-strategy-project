@@ -7,7 +7,7 @@
 enum PlayMode {
   PLAYER_VS_AI,
   AI_VS_AI_GUI,
-  AI_VS_AI_FAST
+  AI_VS_AI_FAST,
 }
 
 /**
@@ -22,7 +22,7 @@ enum AIMode {
   NINJA,
   MONTE_CARLO,
   MINIMAX,
-  MONTE_CARLO_TREE_SEARCH
+  MONTE_CARLO_TREE_SEARCH,
 }
 
 /**
@@ -34,5 +34,5 @@ enum AIMode {
 enum AppState {
   CLASS_SELECT,
   DISPATCH_UNITS,
-  BATTLE_SCREEN
+  BATTLE_SCREEN,
 }

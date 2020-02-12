@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "light-server -s . -p 8080 -b localhost",
+    "format": "prettier --write index.html typescript/*.ts",
     "compile": "tsc --target ES2015 --outfile index.js typescript/*.ts"
   },
   "repository": {
@@ -31,5 +32,17 @@
     "light-server": "^2.6.4",
     "popper.js": "^1.16.1",
     "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "prettier": "1.19.1"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "quoteProps": "consistent"
   }
 }

@@ -1,3 +1,4 @@
+/// <reference path="definitions/angular.d/angular.d.ts" />
 /// <reference path="classes.ts" />
 
 /**
