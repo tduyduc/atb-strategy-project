@@ -23,10 +23,10 @@
       <legend>Character Class Select</legend>
 
       <div class="row">
-        <div class="col-lg-6" ng-if="!isCompletedClassLineup()">
+        <div class="col-lg-6" ng-show="!isCompletedClassLineup()">
           Select classes for your characters.
         </div>
-        <div class="col-lg-6" ng-if="isCompletedClassLineup()">
+        <div class="col-lg-6" ng-show="isCompletedClassLineup()">
           Character class lineup completed.
         </div>
 
