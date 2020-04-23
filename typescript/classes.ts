@@ -136,9 +136,9 @@ class CharacterClass implements ICharacterClass {
  */
 class Character implements ICharacter {
   characterName?: string;
-  inGameAttributes?: ICharacterAttributes;
+  inGameAttributes?: IAttributes;
   className: string;
-  initialAttributes: ICharacterAttributes;
+  initialAttributes: IAttributes;
   defaultCharacterNames?: string[];
   spritePath: string;
 
@@ -160,7 +160,7 @@ class Character implements ICharacter {
  * Stores attributes of a character.
  * @class
  */
-class CharacterAttributes implements ICharacterAttributes {
+class CharacterAttributes implements IAttributes {
   hp: number;
   mp: number;
   attack: number;
@@ -174,7 +174,7 @@ class CharacterAttributes implements ICharacterAttributes {
   time: number = 0;
   position: CharacterPosition = new CharacterPosition();
 
-  constructor(arg: ICharacterAttributes) {
+  constructor(arg: IAttributes) {
     Object.assign(this, arg);
   }
 }
@@ -190,9 +190,9 @@ class AttributesDisplay {
   /**
    * Friendly names of attributes, to display.
    * @static
-   * @member {IAttributeFriendlyNamesObject}
+   * @member {AttributeFriendlyNamesObject}
    */
-  static friendlyNames: IAttributeFriendlyNamesObject = {
+  static friendlyNames: AttributeFriendlyNamesObject = {
     hp: 'HP',
     mp: 'MP',
     attack: 'Attack',

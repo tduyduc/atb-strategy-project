@@ -101,7 +101,7 @@ interface ICharacterClass {
    * Initial attributes of the class.
    * @member {IAttributes}
    */
-  initialAttributes: ICharacterAttributes;
+  initialAttributes: IAttributes;
 
   /**
    * Default character names for the class.
@@ -139,28 +139,7 @@ interface ICharacter extends ICharacterClass {
    * Current attributes of the character.
    * @member {IAttributes}
    */
-  inGameAttributes?: ICharacterAttributes;
-}
-
-/**
- * Represents attributes of an in-game character, but in a more generic way to make an "attribute friendly names" class a sub-class.
- *
- * @interface
- * @see ICharacterAttributes
- */
-interface IAttributes {
-  hp?: any;
-  mp?: any;
-  attack?: any;
-  defense?: any;
-  intelligence?: any;
-  mind?: any;
-  attackRange?: any;
-  attackArea?: any;
-  speed?: any;
-  movementRange?: any;
-  time?: any;
-  position?: any;
+  inGameAttributes?: IAttributes;
 }
 
 /**
@@ -168,7 +147,7 @@ interface IAttributes {
  *
  * @interface
  */
-interface ICharacterAttributes extends IAttributes {
+interface IAttributes {
   /**
    * Hit points. Amount of damage a character can sustain before getting knocked out, unable to take any further action.
    * @member {number}
@@ -261,20 +240,9 @@ interface IAttributeDisplayObject {
 
 /**
  * Stores friendly names of attributes.
- * @interface
+ * @typedef
  */
-interface IAttributeFriendlyNamesObject extends IAttributes {
-  hp: string;
-  mp: string;
-  attack: string;
-  defense: string;
-  intelligence: string;
-  mind: string;
-  attackRange: string;
-  attackArea: string;
-  speed: string;
-  movementRange: string;
-}
+type AttributeFriendlyNamesObject = { [x in keyof IAttributes]?: string };
 
 /**
  * Keeps track of the current game state.
