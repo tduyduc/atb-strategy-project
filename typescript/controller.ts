@@ -19,13 +19,30 @@ class MainController implements IAngularController {
 
 function mainControllerFunction($scope: ICustomScope): void {
   const scopeFunctions: ICustomScopeFunctions = {
+    initConfig(): void {
+      $scope.globalConfig = {
+        battleSpeed: 2,
+        playMode: PlayMode.PLAYER_VS_AI,
+        allyAIMode: AIMode.OFFENSIVE,
+        enemyAIMode: AIMode.MONTE_CARLO,
+        teamSize: 3,
+        cellSize: 32,
+        mapSize: 6,
+        inactiveTurnLimit: 30,
+      };
+    },
+
     initValues(): void {
+      $scope.appName = 'atb-strategy-project';
+      $scope.static = { PlayMode, AIMode, AppState, Common };
       $scope.inputModel = { classSelectNameInput: '' };
-      $scope.characterClasses = characterClasses;
-      $scope.autoCharacterNames = autoCharacterNames;
       $scope.allyCharacters = [];
       $scope.enemyCharacters = [];
-      $scope.classAttributeDisplayObjects = classAttributeDisplayObjects;
+      Object.assign($scope, {
+        characterClasses,
+        autoCharacterNames,
+        classAttributeDisplayObjects,
+      });
     },
 
     setInitialAppState(): void {
@@ -41,8 +58,8 @@ function mainControllerFunction($scope: ICustomScope): void {
       $scope.appState = AppState.CLASS_SELECT;
     },
 
-    goToUnitDispatchWindow(): void {
-      if (!$scope.isCompletedClassLineup()) return;
+    goToUnitDispatchWindow(force: boolean = false): void {
+      if (!force && !$scope.isCompletedClassLineup()) return;
       $scope.appState = AppState.UNIT_DISPATCH;
     },
 
@@ -86,20 +103,8 @@ function mainControllerFunction($scope: ICustomScope): void {
 
   globalThis.$scope = $scope;
 
-  $scope.appName = 'atb-strategy-project';
-  $scope.static = { PlayMode, AIMode, AppState, Common };
-  $scope.globalConfig = {
-    battleSpeed: 2,
-    playMode: PlayMode.PLAYER_VS_AI,
-    allyAIMode: AIMode.OFFENSIVE,
-    enemyAIMode: AIMode.MONTE_CARLO,
-    teamSize: 3,
-    cellSize: 32,
-    mapSize: 6,
-    inactiveTurnLimit: 30,
-  };
-
   Object.assign($scope, scopeFunctions);
-  $scope.setInitialAppState();
+  $scope.initConfig();
   $scope.initValues();
+  $scope.setInitialAppState();
 }

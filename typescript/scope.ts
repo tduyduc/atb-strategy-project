@@ -27,6 +27,7 @@ interface ICustomScope extends angular.IScope, ICustomScopeFunctions {
  * @interface
  */
 interface ICustomScopeFunctions {
+  initConfig: () => void;
   initValues: () => void;
   setInitialAppState: () => void;
   goToClassSelectionWindow: () => void;
