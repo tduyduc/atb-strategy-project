@@ -45,7 +45,7 @@ class GlobalConfig implements IGlobalConfig {
   mapSize: number;
   inactiveTurnLimit: number;
 
-  constructor(arg: GlobalConfig) {
+  constructor(arg: IGlobalConfig) {
     Object.assign(this, arg);
   }
 }
@@ -56,10 +56,10 @@ class GlobalConfig implements IGlobalConfig {
  * @class
  */
 class Static {
-  PlayMode: object;
-  AIMode: object;
-  AppState: object;
-  Common: Common;
+  PlayMode: typeof PlayMode;
+  AIMode: typeof AIMode;
+  AppState: typeof AppState;
+  Common: typeof Common;
 }
 
 /**
@@ -75,8 +75,8 @@ class CharacterPosition implements IPosition {
     if (x instanceof CharacterPosition) {
       Object.assign(this, x);
     } else {
-      this.x = x;
-      this.y = y;
+      if (undefined !== x) this.x = x;
+      if (undefined !== y) this.y = y;
     }
   }
 }
@@ -108,8 +108,11 @@ class DefaultDamage implements IDamageFunction {
     const damageMultiplier =
       defense >= 0 ? 100 / (100 + defense) : 2 - 100 / (100 - defense);
     const variedDamage =
-      Math.floor(Math.random() * variation) * (Common.randomBool() ? 1 : -1);
-    return originalDamage * damageMultiplier + variedDamage;
+      Math.random() * variation * (Common.randomBool() ? 1 : -1);
+    return Math.max(
+      Math.floor(originalDamage * damageMultiplier + variedDamage),
+      0
+    );
   }
 }
 
@@ -121,11 +124,19 @@ class DefaultDamage implements IDamageFunction {
 class CharacterClass implements ICharacterClass {
   className: string;
   initialAttributes: CharacterAttributes;
-  defaultCharacterNames?: string[];
+  defaultCharacterNames: string[];
   spritePath: FilePath;
 
   constructor(arg: ICharacterClass) {
-    Object.assign(this, arg);
+    Object.assign(this, {
+      className: arg.className,
+      spritePath: arg.spritePath,
+    });
+    this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
+    this.defaultCharacterNames =
+      arg.defaultCharacterNames instanceof Array
+        ? arg.defaultCharacterNames.slice()
+        : [''];
   }
 }
 
@@ -134,24 +145,19 @@ class CharacterClass implements ICharacterClass {
  * @class
  * @see ICharacterClass
  */
-class Character implements ICharacter {
+class Character extends CharacterClass implements ICharacter {
   characterName?: string;
-  inGameAttributes?: IAttributes;
-  className: string;
-  initialAttributes: IAttributes;
-  defaultCharacterNames?: string[];
-  spritePath: string;
+  inGameAttributes?: CharacterAttributes;
 
   constructor(arg: ICharacter) {
-    Object.assign(this, arg);
-
+    super(arg);
     if (!arg.characterName) {
       this.characterName = this.defaultCharacterNames[
         Common.randomInt(0, this.defaultCharacterNames.length)
       ];
     }
-    if (!arg.inGameAttributes) {
-      this.inGameAttributes = Object.assign({}, this.initialAttributes);
+    if (!(arg.inGameAttributes instanceof CharacterAttributes)) {
+      this.inGameAttributes = new CharacterAttributes(this.initialAttributes);
     }
   }
 }
@@ -176,6 +182,9 @@ class CharacterAttributes implements IAttributes {
 
   constructor(arg: IAttributes) {
     Object.assign(this, arg);
+    if (arg.position instanceof CharacterPosition) {
+      this.position = new CharacterPosition(arg.position);
+    }
   }
 }
 

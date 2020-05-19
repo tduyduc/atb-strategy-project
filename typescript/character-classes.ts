@@ -140,10 +140,8 @@ const characterClasses: CharacterClass[] = [
 ];
 
 const autoCharacterNames: string[] = characterClasses.reduce(
-  (previous: string[], { defaultCharacterNames }: CharacterClass): string[] => {
-    previous.push(...defaultCharacterNames);
-    return previous;
-  },
+  (result: string[], { defaultCharacterNames }: CharacterClass): string[] =>
+    result.concat(defaultCharacterNames),
   []
 );
 
