@@ -75,7 +75,7 @@ function mainControllerFunction($scope: ICustomScope): void {
     selectCharacterClass(characterClass: CharacterClass): void {
       $scope.allyCharacters.push(
         new Character({
-          ...characterClass,
+          characterClass,
           characterName: $scope.inputModel.classSelectNameInput,
         })
       );

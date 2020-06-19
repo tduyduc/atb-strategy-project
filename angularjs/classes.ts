@@ -122,16 +122,14 @@ class DefaultDamage implements IDamageFunction {
  * @see ICharacter
  */
 class CharacterClass implements ICharacterClass {
-  className: string = '';
-  initialAttributes: CharacterAttributes = new CharacterAttributes();
-  defaultCharacterNames: string[] = [];
-  spritePath: FilePath = '';
+  className: string;
+  initialAttributes: CharacterAttributes;
+  defaultCharacterNames: string[];
+  spritePath: FilePath;
 
   constructor(arg: ICharacterClass) {
-    Object.assign(this, {
-      className: arg.className,
-      spritePath: arg.spritePath,
-    });
+    this.className = arg.className;
+    this.spritePath = arg.spritePath;
     this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
     this.defaultCharacterNames =
       arg.defaultCharacterNames instanceof Array
@@ -145,20 +143,23 @@ class CharacterClass implements ICharacterClass {
  * @class
  * @see ICharacterClass
  */
-class Character extends CharacterClass implements ICharacter {
-  characterName?: string;
-  inGameAttributes?: CharacterAttributes;
+class Character implements ICharacter {
+  characterName: string;
+  characterClass: CharacterClass;
+  inGameAttributes: CharacterAttributes;
 
   constructor(arg: ICharacter) {
-    super(arg);
-    if (!arg.characterName) {
-      this.characterName = this.defaultCharacterNames[
-        Common.randomInt(0, this.defaultCharacterNames.length)
+    this.characterClass = new CharacterClass(arg.characterClass);
+
+    this.characterName =
+      arg.characterName ??
+      this.characterClass.defaultCharacterNames[
+        Common.randomInt(0, this.characterClass.defaultCharacterNames.length)
       ];
-    }
-    if (!(arg.inGameAttributes instanceof CharacterAttributes)) {
-      this.inGameAttributes = new CharacterAttributes(this.initialAttributes);
-    }
+
+    this.inGameAttributes = new CharacterAttributes(
+      arg.inGameAttributes ?? this.characterClass.initialAttributes
+    );
   }
 }
 
@@ -178,13 +179,11 @@ class CharacterAttributes implements IAttributes {
   speed: number = 1;
   movementRange: number = 1;
   time: number = 0;
-  position: CharacterPosition = new CharacterPosition();
+  position: CharacterPosition;
 
   constructor(arg?: IAttributes) {
     Object.assign<this, IAttributes | undefined>(this, arg);
-    if (arg?.position instanceof CharacterPosition) {
-      this.position = new CharacterPosition(arg.position);
-    }
+    this.position = new CharacterPosition(arg?.position ?? undefined);
   }
 }
 

@@ -128,7 +128,13 @@ type FilePath = string;
  *
  * @interface
  */
-interface ICharacter extends ICharacterClass {
+interface ICharacter {
+  /**
+   * Class to which the character belongs.
+   * @member {ICharacterClass}
+   */
+  characterClass: ICharacterClass;
+
   /**
    * Name of the character.
    * @member {string}
