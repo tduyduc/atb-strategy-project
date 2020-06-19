@@ -4,6 +4,7 @@
     "angularjs/*.ts"
   ],
   "compilerOptions": {
+    "outFile": "angularjs/index.js",
     "target": "ES2015",
     "strict": true,
     "alwaysStrict": true
