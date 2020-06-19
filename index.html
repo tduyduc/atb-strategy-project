@@ -17,16 +17,12 @@
   <body ng-app="myApp" ng-controller="mainController">
     <!-- JavaScript Disabled Warning -->
     <noscript>
-      <style>
-        fieldset {
-          display: none;
-        }
-      </style>
       This application requires JavaScript to be enabled.
     </noscript>
 
     <!-- Class Select Section Start -->
     <fieldset
+      ng-cloak
       id="character-class-select-window"
       ng-if="static.AppState.CLASS_SELECT === appState"
     >
@@ -159,6 +155,7 @@
 
     <!-- Unit Dispatch Section Start -->
     <fieldset
+      ng-cloak
       id="unit-dispatch-window"
       ng-if="static.AppState.UNIT_DISPATCH === appState"
     >
@@ -168,6 +165,7 @@
 
     <!-- Battle Scene Section Start -->
     <fieldset
+      ng-cloak
       id="battle-scene-window"
       ng-if="static.AppState.BATTLE_SCENE === appState"
     >

@@ -3,6 +3,10 @@ body, button, input, select, label, textarea {
   font-size: 90%;
 }
 
+[ng-cloak] {
+  display: none;
+}
+
 .align-center {
   text-align: center;
 }
