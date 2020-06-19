@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "light-server -s . -p 8080 -b localhost",
+    "start": "light-server -s ./angularjs/ -p 8080 -b localhost",
     "format": "prettier --write \"angularjs/index.html\" \"angularjs/*.ts\"",
     "compile": "tsc"
   },
