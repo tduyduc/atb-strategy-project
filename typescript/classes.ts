@@ -1,5 +1,5 @@
 /// <reference path="definitions/interfaces.d.ts" />
-/// <reference path="static-interfaces.ts" />
+/// <reference path="definitions/static-interfaces.d.ts" />
 /// <reference path="enums.ts" />
 
 /**

@@ -1,5 +1,5 @@
 /// <reference path="definitions/angular.d/angular.d.ts" />
-/// <reference path="classes.ts" />
+/// <reference path="../typescript/classes.ts" />
 
 /**
  * Contains members to be included in an AngularJS scope.

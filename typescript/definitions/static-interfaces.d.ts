@@ -6,7 +6,7 @@
  * @interface
  * @static
  */
-class IDistanceFunction {
+declare class IDistanceFunction {
   /** Performs calculation using the implemented function.
    * @method number
    * @static
@@ -20,7 +20,7 @@ class IDistanceFunction {
  * @interface
  * @static
  */
-class IDamageFunction {
+declare class IDamageFunction {
   /** Performs calculation using the implemented function.
    * @method number
    * @static

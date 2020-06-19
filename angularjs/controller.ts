@@ -1,9 +1,32 @@
 /// <reference path="definitions/angular.d/angular.d.ts" />
-/// <reference path="definitions/interfaces.d.ts" />
-/// <reference path="enums.ts" />
-/// <reference path="classes.ts" />
+/// <reference path="../typescript/definitions/interfaces.d.ts" />
+/// <reference path="../typescript/enums.ts" />
+/// <reference path="../typescript/classes.ts" />
+/// <reference path="../typescript/character-classes.ts" />
 /// <reference path="scope.ts" />
-/// <reference path="character-classes.ts" />
+
+/**
+ * Common interface for declaring AngularJS controllers & directives.
+ *
+ * @interface IAngularInjectable
+ */
+interface IAngularInjectable<T extends Function> {
+  injectors: angular.Injectable<T>;
+}
+
+interface IAngularController
+  extends IAngularInjectable<angular.IControllerConstructor> {}
+
+interface IAngularDirective
+  extends IAngularInjectable<
+    angular.IDirectiveFactory<
+      angular.IScope,
+      JQLite,
+      angular.IAttributes,
+      angular.IController
+    >
+  > {}
+
 
 class MainController implements IAngularController {
   private _injectors: angular.Injectable<angular.IControllerConstructor>;
