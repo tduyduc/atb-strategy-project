@@ -16,7 +16,7 @@ class Common {
    * @static
    */
   static randomBool(): boolean {
-    return !!Math.round(Math.random());
+    return Boolean(Math.round(Math.random()));
   }
 
   /**
@@ -36,17 +36,17 @@ class Common {
  * @class
  */
 class GlobalConfig implements IGlobalConfig {
-  battleSpeed: number;
-  playMode: PlayMode;
-  allyAIMode: AIMode;
-  enemyAIMode: AIMode;
-  teamSize: number;
-  cellSize: number;
-  mapSize: number;
-  inactiveTurnLimit: number;
+  battleSpeed: number = 2;
+  playMode: PlayMode = PlayMode.PLAYER_VS_AI;
+  allyAIMode: AIMode = AIMode.OFFENSIVE;
+  enemyAIMode: AIMode = AIMode.MONTE_CARLO;
+  teamSize: number = 3;
+  cellSize: number = 32;
+  mapSize: number = 6;
+  inactiveTurnLimit: number = 30;
 
-  constructor(arg: IGlobalConfig) {
-    Object.assign(this, arg);
+  constructor(arg?: IGlobalConfig) {
+    Object.assign<this, IGlobalConfig | undefined>(this, arg);
   }
 }
 
@@ -56,10 +56,10 @@ class GlobalConfig implements IGlobalConfig {
  * @class
  */
 class Static {
-  PlayMode: typeof PlayMode;
-  AIMode: typeof AIMode;
-  AppState: typeof AppState;
-  Common: typeof Common;
+  PlayMode: typeof PlayMode = PlayMode;
+  AIMode: typeof AIMode = AIMode;
+  AppState: typeof AppState = AppState;
+  Common: typeof Common = Common;
 }
 
 /**
@@ -71,12 +71,12 @@ class CharacterPosition implements IPosition {
   x: number = 0;
   y: number = 0;
 
-  constructor(x?: number | CharacterPosition, y?: number) {
+  constructor(x: number | CharacterPosition = 0, y: number = 0) {
     if (x instanceof CharacterPosition) {
       Object.assign(this, x);
     } else {
-      if (undefined !== x) this.x = x;
-      if (undefined !== y) this.y = y;
+      this.x = x;
+      this.y = y;
     }
   }
 }
@@ -122,10 +122,10 @@ class DefaultDamage implements IDamageFunction {
  * @see ICharacter
  */
 class CharacterClass implements ICharacterClass {
-  className: string;
-  initialAttributes: CharacterAttributes;
-  defaultCharacterNames: string[];
-  spritePath: FilePath;
+  className: string = '';
+  initialAttributes: CharacterAttributes = new CharacterAttributes();
+  defaultCharacterNames: string[] = [];
+  spritePath: FilePath = '';
 
   constructor(arg: ICharacterClass) {
     Object.assign(this, {
@@ -167,22 +167,22 @@ class Character extends CharacterClass implements ICharacter {
  * @class
  */
 class CharacterAttributes implements IAttributes {
-  hp: number;
-  mp: number;
-  attack: number;
-  defense: number;
-  intelligence: number;
-  mind: number;
-  attackRange: number;
-  attackArea: number;
-  speed: number;
-  movementRange: number;
+  hp: number = 1;
+  mp: number = 1;
+  attack: number = 1;
+  defense: number = 1;
+  intelligence: number = 1;
+  mind: number = 1;
+  attackRange: number = 1;
+  attackArea: number = 0;
+  speed: number = 1;
+  movementRange: number = 1;
   time: number = 0;
   position: CharacterPosition = new CharacterPosition();
 
-  constructor(arg: IAttributes) {
-    Object.assign(this, arg);
-    if (arg.position instanceof CharacterPosition) {
+  constructor(arg?: IAttributes) {
+    Object.assign<this, IAttributes | undefined>(this, arg);
+    if (arg?.position instanceof CharacterPosition) {
       this.position = new CharacterPosition(arg.position);
     }
   }

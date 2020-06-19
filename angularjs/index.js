@@ -1,3 +1,4 @@
+"use strict";
 /* Contains interfaces having static members, which are currently not declarable as TypeScript interfaces. */
 /**
  * Interface for wrapping a function which calculates distance between two IPosition objects.
@@ -71,7 +72,7 @@ class Common {
      * @static
      */
     static randomBool() {
-        return !!Math.round(Math.random());
+        return Boolean(Math.round(Math.random()));
     }
     /**
      * Generates a random integer, from min inclusive to max exclusive.
@@ -90,6 +91,14 @@ class Common {
  */
 class GlobalConfig {
     constructor(arg) {
+        this.battleSpeed = 2;
+        this.playMode = PlayMode.PLAYER_VS_AI;
+        this.allyAIMode = AIMode.OFFENSIVE;
+        this.enemyAIMode = AIMode.MONTE_CARLO;
+        this.teamSize = 3;
+        this.cellSize = 32;
+        this.mapSize = 6;
+        this.inactiveTurnLimit = 30;
         Object.assign(this, arg);
     }
 }
@@ -99,6 +108,12 @@ class GlobalConfig {
  * @class
  */
 class Static {
+    constructor() {
+        this.PlayMode = PlayMode;
+        this.AIMode = AIMode;
+        this.AppState = AppState;
+        this.Common = Common;
+    }
 }
 /**
  * Represents in-game character position in 2D.
@@ -106,17 +121,15 @@ class Static {
  * @class
  */
 class CharacterPosition {
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         this.x = 0;
         this.y = 0;
         if (x instanceof CharacterPosition) {
             Object.assign(this, x);
         }
         else {
-            if (undefined !== x)
-                this.x = x;
-            if (undefined !== y)
-                this.y = y;
+            this.x = x;
+            this.y = y;
         }
     }
 }
@@ -151,6 +164,10 @@ class DefaultDamage {
  */
 class CharacterClass {
     constructor(arg) {
+        this.className = '';
+        this.initialAttributes = new CharacterAttributes();
+        this.defaultCharacterNames = [];
+        this.spritePath = '';
         Object.assign(this, {
             className: arg.className,
             spritePath: arg.spritePath,
@@ -184,10 +201,21 @@ class Character extends CharacterClass {
  */
 class CharacterAttributes {
     constructor(arg) {
+        var _a;
+        this.hp = 1;
+        this.mp = 1;
+        this.attack = 1;
+        this.defense = 1;
+        this.intelligence = 1;
+        this.mind = 1;
+        this.attackRange = 1;
+        this.attackArea = 0;
+        this.speed = 1;
+        this.movementRange = 1;
         this.time = 0;
         this.position = new CharacterPosition();
         Object.assign(this, arg);
-        if (arg.position instanceof CharacterPosition) {
+        if (((_a = arg) === null || _a === void 0 ? void 0 : _a.position) instanceof CharacterPosition) {
             this.position = new CharacterPosition(arg.position);
         }
     }

@@ -1,13 +1,13 @@
 {
   "name": "atb-strategy-project",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Active Time Battle-Based Strategy Game Project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "light-server -s . -p 8080 -b localhost",
     "format": "prettier --write \"angularjs/index.html\" \"angularjs/*.ts\"",
-    "compile": "tsc --strictNullChecks --noImplicitAny --target ES2015 --outfile angularjs/index.js angularjs/*.ts"
+    "compile": "tsc --strict --target ES2015 --outfile angularjs/index.js angularjs/*.ts"
   },
   "repository": {
     "type": "git",
