@@ -101,7 +101,7 @@ function mainControllerFunction($scope: ICustomScope): void {
 
   // --- End of internal functions object. Main logic starts here. --- //
 
-  globalThis.$scope = $scope;
+  (globalThis as any).$scope = $scope;
 
   Object.assign($scope, scopeFunctions);
   $scope.initConfig();

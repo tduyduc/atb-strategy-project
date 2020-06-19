@@ -1,9 +1,15 @@
 /// <reference path="classes.ts" />
 
+const PATH_PREFIX: string = '../res/';
+
+function prependPath(fileName: string): string {
+  return PATH_PREFIX + fileName;
+}
+
 const characterClasses: CharacterClass[] = [
   new CharacterClass({
     className: 'Fighter',
-    spritePath: 'res/cyan.gif',
+    spritePath: prependPath('cyan.gif'),
     defaultCharacterNames: ['Cyan', 'Firion', 'Cecil'],
     initialAttributes: new CharacterAttributes({
       hp: 500,
@@ -20,7 +26,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Black Belt',
-    spritePath: 'res/sabin.gif',
+    spritePath: prependPath('sabin.gif'),
     defaultCharacterNames: ['Sabin', 'Yang', 'Galuf'],
     initialAttributes: new CharacterAttributes({
       hp: 400,
@@ -37,7 +43,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Archer',
-    spritePath: 'res/edgar.gif',
+    spritePath: prependPath('edgar.gif'),
     defaultCharacterNames: ['Edgar', 'Ceodore', 'Edward'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -54,7 +60,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Assassin',
-    spritePath: 'res/shadow.gif',
+    spritePath: prependPath('shadow.gif'),
     defaultCharacterNames: ['Shadow', 'Edge', 'Jinnai'],
     initialAttributes: new CharacterAttributes({
       hp: 250,
@@ -71,7 +77,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Bomber',
-    spritePath: 'res/relm.gif',
+    spritePath: prependPath('relm.gif'),
     defaultCharacterNames: ['Relm', 'Krile', 'Matoya'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -88,7 +94,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'White Mage',
-    spritePath: 'res/terra.gif',
+    spritePath: prependPath('terra.gif'),
     defaultCharacterNames: ['Terra', 'Rosa', 'Refia'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -105,7 +111,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Black Mage',
-    spritePath: 'res/celes.gif',
+    spritePath: prependPath('celes.gif'),
     defaultCharacterNames: ['Celes', 'Rydia', 'Alba'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -122,7 +128,7 @@ const characterClasses: CharacterClass[] = [
   }),
   new CharacterClass({
     className: 'Time Mage',
-    spritePath: 'res/strago.gif',
+    spritePath: prependPath('strago.gif'),
     defaultCharacterNames: ['Strago', 'Leon', 'Palom'],
     initialAttributes: new CharacterAttributes({
       hp: 300,

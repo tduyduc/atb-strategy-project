@@ -224,8 +224,8 @@ class AttributesDisplay {
     for (const field in this.friendlyNames) {
       if (!(field in actualAttributes)) continue;
       result.push({
-        name: this.friendlyNames[field],
-        value: actualAttributes[field],
+        name: this.friendlyNames[field as keyof IAttributes] as string,
+        value: actualAttributes[field as keyof IAttributes],
       });
     }
     return result;
