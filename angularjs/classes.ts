@@ -152,7 +152,7 @@ class Character implements ICharacter {
     this.characterClass = new CharacterClass(arg.characterClass);
 
     this.characterName =
-      arg.characterName ??
+      arg.characterName ||
       this.characterClass.defaultCharacterNames[
         Common.randomInt(0, this.characterClass.defaultCharacterNames.length)
       ];

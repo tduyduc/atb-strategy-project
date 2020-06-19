@@ -135,8 +135,8 @@
                 <fieldset class="character-fieldset">
                   <legend>{{ character.characterName }}</legend>
                   <div class="align-center">
-                    <img ng-src="{{ character.spritePath }}" />
-                    <p>{{ character.className }}</p>
+                    <img ng-src="{{ character.characterClass.spritePath }}" />
+                    <p>{{ character.characterClass.className }}</p>
                     <button ng-click="removeCharacterByIndex($index)">
                       Remove
                     </button>
