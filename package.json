@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "light-server -s . -p 8080 -b localhost",
     "format": "prettier --write \"angularjs/index.html\" \"angularjs/*.ts\"",
-    "compile": "tsc --strict --target ES2015 --outfile angularjs/index.js angularjs/*.ts"
+    "compile": "tsc"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "jquery": "^3.4.1",
     "light-server": "^2.6.4",
     "popper.js": "^1.16.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.5"
   },
   "devDependencies": {
     "prettier": "1.19.1"

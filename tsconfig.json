@@ -1,0 +1,11 @@
+{
+  "include": [
+    "typescript/*.ts",
+    "angularjs/*.ts"
+  ],
+  "compilerOptions": {
+    "target": "ES2015",
+    "strict": true,
+    "alwaysStrict": true
+  },
+}
