@@ -8,7 +8,7 @@ import { PlayMode, AIMode, AppState } from './enums';
  * @class
  * @static
  */
-export class Common {
+class Common {
   /**
    * Generates a random Boolean value.
    *
@@ -35,7 +35,7 @@ export class Common {
  *
  * @class
  */
-export class GlobalConfig implements Interfaces.IGlobalConfig {
+class GlobalConfig implements Interfaces.IGlobalConfig {
   battleSpeed: number = 2;
   playMode: PlayMode = PlayMode.PLAYER_VS_AI;
   allyAIMode: AIMode = AIMode.OFFENSIVE;
@@ -55,7 +55,7 @@ export class GlobalConfig implements Interfaces.IGlobalConfig {
  *
  * @class
  */
-export class Static {
+class Static {
   PlayMode: typeof PlayMode = PlayMode;
   AIMode: typeof AIMode = AIMode;
   AppState: typeof AppState = AppState;
@@ -67,7 +67,7 @@ export class Static {
  *
  * @class
  */
-export class CharacterPosition implements Interfaces.IPosition {
+class CharacterPosition implements Interfaces.IPosition {
   x: number = 0;
   y: number = 0;
 
@@ -87,7 +87,7 @@ export class CharacterPosition implements Interfaces.IPosition {
  * @class
  * @static
  */
-export class ManhattanDistance implements StaticInterfaces.IDistanceFunction {
+class ManhattanDistance implements StaticInterfaces.IDistanceFunction {
   static calculate(a: Interfaces.IPosition, b: Interfaces.IPosition): number {
     return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
   }
@@ -99,7 +99,7 @@ export class ManhattanDistance implements StaticInterfaces.IDistanceFunction {
  * @class
  * @static
  */
-export class DefaultDamage implements StaticInterfaces.IDamageFunction {
+class DefaultDamage implements StaticInterfaces.IDamageFunction {
   static calculate(
     originalDamage: number,
     defense: number,
@@ -121,7 +121,7 @@ export class DefaultDamage implements StaticInterfaces.IDamageFunction {
  * @class
  * @see ICharacter
  */
-export class CharacterClass implements Interfaces.ICharacterClass {
+class CharacterClass implements Interfaces.ICharacterClass {
   className: string;
   initialAttributes: CharacterAttributes;
   defaultCharacterNames: string[];
@@ -143,7 +143,7 @@ export class CharacterClass implements Interfaces.ICharacterClass {
  * @class
  * @see ICharacterClass
  */
-export class Character implements Interfaces.ICharacter {
+class Character implements Interfaces.ICharacter {
   characterName: string;
   characterClass: CharacterClass;
   inGameAttributes: CharacterAttributes;
@@ -167,7 +167,7 @@ export class Character implements Interfaces.ICharacter {
  * Stores attributes of a character.
  * @class
  */
-export class CharacterAttributes implements Interfaces.IAttributes {
+class CharacterAttributes implements Interfaces.IAttributes {
   hp: number = 1;
   mp: number = 1;
   attack: number = 1;
@@ -194,7 +194,7 @@ export class CharacterAttributes implements Interfaces.IAttributes {
  * @see AttributeFriendlyNamesObject
  * @see AttributeDisplayObject
  */
-export class AttributesDisplay {
+class AttributesDisplay {
   /**
    * Friendly names of attributes, to display.
    * @static
@@ -234,3 +234,16 @@ export class AttributesDisplay {
     return result;
   }
 }
+
+export {
+  AttributesDisplay,
+  Character,
+  CharacterAttributes,
+  CharacterClass,
+  CharacterPosition,
+  Common,
+  DefaultDamage,
+  GlobalConfig,
+  ManhattanDistance,
+  Static,
+};

@@ -1,3 +1,4 @@
+/* Commented-out, originally created from newly initialized ReactJS project
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,67 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+*/
+
+body, button, input, select, label, textarea {
+  font-family: Sans-Serif;
+  font-size: 90%;
+}
+
+[ng-cloak] {
+  display: none;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+fieldset {
+  margin: 1em .5em;
+  border-style: groove;
+  border-radius: .4em;
+}
+
+fieldset[disabled] {
+  opacity: .3;
+  pointer-events: none;
+}
+
+fieldset > legend {
+  font-weight: bold;
+  font-size: 120%;
+}
+
+fieldset.character-class-fieldset > legend {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 100%;
+}
+
+fieldset.character-fieldset > legend {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+fieldset.character-class-fieldset > table {
+  font-size: 90%;
+  border: 0px;
+  width: 100%;
+}
+
+fieldset.character-class-fieldset > table tr td:nth-child(1) {
+  text-align: left;
+}
+
+fieldset.character-class-fieldset > table tr td:nth-child(2) {
+  text-align: right;
+}
+
+fieldset.character-class-fieldset > table button {
+  font-size: 100%;
 }

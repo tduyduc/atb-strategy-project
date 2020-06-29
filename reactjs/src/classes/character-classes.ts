@@ -6,7 +6,7 @@ function prependPath(fileName: string): string {
   return PATH_PREFIX + fileName;
 }
 
-export const characterClasses: Classes.CharacterClass[] = [
+export const characterClasses: Readonly<Classes.CharacterClass[]> = [
   new Classes.CharacterClass({
     className: 'Fighter',
     spritePath: prependPath('cyan.gif'),
@@ -145,7 +145,7 @@ export const characterClasses: Classes.CharacterClass[] = [
   }),
 ];
 
-export const autoCharacterNames: string[] = characterClasses.reduce(
+export const autoCharacterNames: Readonly<string[]> = characterClasses.reduce(
   (
     result: string[],
     { defaultCharacterNames }: Classes.CharacterClass
@@ -153,7 +153,7 @@ export const autoCharacterNames: string[] = characterClasses.reduce(
   []
 );
 
-export const classAttributeDisplayObjects: IAttributeDisplayObject[][] = characterClasses.map(
+export const classAttributeDisplayObjects: Readonly<IAttributeDisplayObject[][]> = characterClasses.map(
   characterClass =>
     Classes.AttributesDisplay.generate(characterClass.initialAttributes)
 );
