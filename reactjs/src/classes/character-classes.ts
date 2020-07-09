@@ -1,7 +1,7 @@
 import { IAttributeDisplayObject } from './definitions/interfaces';
 import * as Classes from './classes';
 
-const PATH_PREFIX: string = '../res/';
+const PATH_PREFIX: string = './res/';
 function prependPath(fileName: string): string {
   return PATH_PREFIX + fileName;
 }

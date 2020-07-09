@@ -118,7 +118,7 @@ function mainControllerFunction($scope: ICustomScope): void {
     },
 
     isCompletedClassLineup(): boolean {
-      return $scope.allyCharacters.length >= $scope.globalConfig.teamSize;
+      return $scope.allyCharacters.length === $scope.globalConfig.teamSize;
     },
   };
 

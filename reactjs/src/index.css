@@ -47,31 +47,31 @@ fieldset > legend {
   font-size: 120%;
 }
 
-fieldset.character-class-fieldset > legend {
+.character-class-pane legend {
   font-weight: normal;
   font-style: italic;
   font-size: 100%;
 }
 
-fieldset.character-fieldset > legend {
+.character-pane legend {
   font-weight: normal;
   font-size: 100%;
 }
 
-fieldset.character-class-fieldset > table {
+.character-class-pane table {
   font-size: 90%;
   border: 0px;
   width: 100%;
 }
 
-fieldset.character-class-fieldset > table tr td:nth-child(1) {
+.character-class-pane table tr td:nth-child(1) {
   text-align: left;
 }
 
-fieldset.character-class-fieldset > table tr td:nth-child(2) {
+.character-class-pane table tr td:nth-child(2) {
   text-align: right;
 }
 
-fieldset.character-class-fieldset > table button {
+.character-class-pane table button {
   font-size: 100%;
 }
