@@ -23,7 +23,6 @@ export interface AppMethods {
   goToUnitDispatchWindow: () => void;
   goToBattleSceneWindow: () => void;
 
-  setAutoName: () => void;
   selectCharacterClass: (characterClass: CharacterClass) => void;
   removeLastCharacter: () => void;
   removeAllCharacters: () => void;

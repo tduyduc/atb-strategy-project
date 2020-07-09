@@ -18,12 +18,15 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
 
     const setInitialAppState = () => {
       if (PlayMode.PLAYER_VS_AI === this.state.globalConfig.playMode) {
-        this.state = this.assignState({ appState: AppState.CLASS_SELECT });
+        this.state = this.assignState(
+          { appState: AppState.CLASS_SELECT },
+          false
+        );
         return;
       }
 
       // TODO: Initialize computer characters in another function to be called here!
-      this.state = this.assignState({ appState: AppState.BATTLE_SCENE });
+      this.state = this.assignState({ appState: AppState.BATTLE_SCENE }, false);
     };
 
     this.state = {
@@ -51,48 +54,44 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
    * `Object.assign` wrapper with type constraints for `this.state`.
    * Returns a new state reference.
    */
-  assignState(source: Partial<AppGlobalState>): AppGlobalState {
-    return Object.assign<{}, AppGlobalState, Partial<AppGlobalState>>(
+  assignState(
+    source: Partial<AppGlobalState>,
+    willSetState: boolean = true
+  ): AppGlobalState {
+    const newState: AppGlobalState = Object.assign<
       {},
-      this.state,
-      source
-    );
+      AppGlobalState,
+      Partial<AppGlobalState>
+    >({}, this.state, source);
+    if (willSetState) this.setState(newState);
+    return newState;
   }
 
   goToClassSelectionWindow(): void {
-    this.setState(this.assignState({ appState: AppState.CLASS_SELECT }));
+    this.assignState({ appState: AppState.CLASS_SELECT });
   }
 
   goToUnitDispatchWindow(force: boolean | undefined = false): void {
     if (!force && !this.isCompletedClassLineup()) return;
-    this.setState(this.assignState({ appState: AppState.UNIT_DISPATCH }));
+    this.assignState({ appState: AppState.UNIT_DISPATCH });
   }
 
   goToBattleSceneWindow(): void {
-    this.setState(this.assignState({ appState: AppState.BATTLE_SCENE }));
-  }
-
-  setAutoName(): void {
-    // this.state.inputModel.classSelectNameInput =
-    // autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)];
+    this.assignState({ appState: AppState.BATTLE_SCENE });
   }
 
   selectCharacterClass(characterClass: CharacterClass): void {
-    this.setState(
-      this.assignState({
-        allyCharacters: this.state.allyCharacters.concat([
-          new Character({ characterName: '', characterClass }),
-        ]),
-      })
-    );
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.concat([
+        new Character({ characterName: '', characterClass }),
+      ]),
+    });
   }
 
   removeLastCharacter(): void {
-    this.setState(
-      this.assignState({
-        allyCharacters: this.state.allyCharacters.slice(0, -1),
-      })
-    );
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.slice(0, -1),
+    });
   }
 
   removeAllCharacters(): void {
@@ -100,13 +99,11 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   }
 
   removeCharacterByIndex(index: number): void {
-    this.setState(
-      this.assignState({
-        allyCharacters: this.state.allyCharacters.filter(
-          (_character, characterIndex) => index !== characterIndex
-        ),
-      })
-    );
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.filter(
+        (_character, characterIndex) => index !== characterIndex
+      ),
+    });
   }
 
   isCompletedClassLineup(): boolean {
@@ -118,9 +115,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   onCharacterNameInputChange: HTMLInputElementOnChangeCallback = (
     event: React.FormEvent<HTMLInputElement>
   ): void => {
-    this.setState(
-      this.assignState({ characterNameInput: event?.currentTarget?.value })
-    );
+    this.assignState({ characterNameInput: event?.currentTarget?.value });
   };
 
   render(): JSX.Element {
