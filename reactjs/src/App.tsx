@@ -50,6 +50,8 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     setInitialAppState();
   }
 
+  // start of prototype methods
+
   /**
    * `Object.assign` wrapper with type constraints for `this.state`.
    * Returns a new state reference.
@@ -63,6 +65,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       AppGlobalState,
       Partial<AppGlobalState>
     >({}, this.state, source);
+
     if (willSetState) this.setState(newState);
     return newState;
   }
@@ -80,43 +83,47 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     this.assignState({ appState: AppState.BATTLE_SCENE });
   }
 
-  selectCharacterClass(characterClass: CharacterClass): void {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.concat([
-        new Character({ characterName: '', characterClass }),
-      ]),
-    });
-  }
-
-  removeLastCharacter(): void {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.slice(0, -1),
-    });
-  }
-
-  removeAllCharacters(): void {
-    this.assignState({ allyCharacters: [] });
-  }
-
-  removeCharacterByIndex(index: number): void {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.filter(
-        (_character, characterIndex) => index !== characterIndex
-      ),
-    });
-  }
-
   isCompletedClassLineup(): boolean {
     return (
       this.state.allyCharacters.length === this.state.globalConfig.teamSize
     );
   }
 
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback = (
+  // start of instance methods
+
+  updateCharacterNameInput: HTMLInputElementOnChangeCallback = (
     event: React.FormEvent<HTMLInputElement>
   ): void => {
     this.assignState({ characterNameInput: event?.currentTarget?.value });
   };
+
+  selectCharacterClass = (characterClass: CharacterClass): void => {
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.concat([
+        new Character({ characterName: '', characterClass }),
+      ]),
+    });
+  };
+
+  removeLastCharacter = (): void => {
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.slice(0, -1),
+    });
+  };
+
+  removeAllCharacters = (): void => {
+    this.assignState({ allyCharacters: [] });
+  };
+
+  removeCharacter = (character: Character): void => {
+    this.assignState({
+      allyCharacters: this.state.allyCharacters.filter(
+        current => character !== current
+      ),
+    });
+  };
+
+  // start of rendering methods
 
   render(): JSX.Element {
     switch (this.state.appState) {
@@ -140,7 +147,11 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
-          onCharacterNameInputChange={this.onCharacterNameInputChange}
+          onCharacterNameInputChange={this.updateCharacterNameInput}
+          onCharacterClassSelection={this.selectCharacterClass}
+          onCharacterBackspace={this.removeLastCharacter}
+          onCharacterResetAll={this.removeAllCharacters}
+          onCharacterRemoval={this.removeCharacter}
         />
       </div>
     );
@@ -148,19 +159,17 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
 
   renderUnitDispatchWindow(): JSX.Element {
     return (
-      <WindowPane
-        id="unit-dispatch-window"
-        paneTitle="Unit Dispatch"
-      ></WindowPane>
+      <div id="unit-dispatch-window">
+        <WindowPane paneTitle="Unit Dispatch"></WindowPane>
+      </div>
     );
   }
 
   renderBattleSceneWindow(): JSX.Element {
     return (
-      <WindowPane
-        id="battle-scene-window"
-        paneTitle="Battle Scene"
-      ></WindowPane>
+      <div id="battle-scene-window">
+        <WindowPane paneTitle="Battle Scene"></WindowPane>
+      </div>
     );
   }
 }

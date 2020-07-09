@@ -25,12 +25,14 @@ function CharacterRemovalButtons(
     <span>
       <button
         disabled={props.isHavingNoCharacters}
+        onClick={props.onCharacterBackspace}
         title="Change class selection of the previous character."
       >
         Back
       </button>{' '}
       <button
         disabled={props.isHavingNoCharacters}
+        onClick={props.onCharacterResetAll}
         title="Discard all class selections and choose character classes from scratch."
       >
         Reset All
@@ -95,7 +97,11 @@ function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
           onCharacterNameInputChange={props.onCharacterNameInputChange}
         />
       )}{' '}
-      <CharacterRemovalButtons isHavingNoCharacters={isHavingNoCharacters} />
+      <CharacterRemovalButtons
+        isHavingNoCharacters={isHavingNoCharacters}
+        onCharacterBackspace={props.onCharacterBackspace}
+        onCharacterResetAll={props.onCharacterResetAll}
+      />
     </div>
   );
 }

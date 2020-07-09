@@ -2,35 +2,54 @@ import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
 import { Character, CharacterClass } from '../../classes/classes';
 import { IAttributeDisplayObject } from '../../classes/definitions/interfaces';
 
-export interface CharacterClassSelectProps {
+interface CharacterNameInputChangeHandler {
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
+}
+
+interface CharacterClassSelectionHandler {
+  onCharacterClassSelection: (characterClass: CharacterClass) => void;
+}
+
+interface TopStatusBarCharacterRemovalHandler {
+  onCharacterBackspace: () => void;
+  onCharacterResetAll: () => void;
+}
+
+interface AddedCharactersGalleryCharacterRemovalHandler {
+  onCharacterRemoval: (character: Character) => void;
+}
+
+interface TeamInfo {
   allyCharacters: Character[];
   teamSize: number;
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
 }
 
-export interface CharacterRemovalButtonsProps {
+export type CharacterClassSelectProps = TeamInfo &
+  CharacterClassSelectionHandler &
+  CharacterNameInputChangeHandler &
+  TopStatusBarCharacterRemovalHandler &
+  AddedCharactersGalleryCharacterRemovalHandler;
+
+export type CharacterRemovalButtonsProps = {
   isHavingNoCharacters: boolean;
-}
+} & TopStatusBarCharacterRemovalHandler;
 
-export interface CharacterNameInputProps {
+export type CharacterNameInputProps = {
   characterNameInput?: string;
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
-}
+} & CharacterNameInputChangeHandler;
 
 export interface CharacterNameInputState {
   characterNameInput: string;
 }
 
-export interface CharacterClassesGalleryProps {
-  allyCharacters: Character[];
-  teamSize: number;
-}
+export type CharacterClassesGalleryProps = TeamInfo &
+  CharacterClassSelectionHandler;
 
-export interface CharacterClassPaneProps {
+export type CharacterClassPaneProps = {
   characterClass: CharacterClass;
   attributeDisplayObject: IAttributeDisplayObject[];
-}
+} & CharacterClassSelectionHandler;
 
-export interface CharacterPaneProps {
+export type  CharacterPaneProps = {
   character: Character;
-}
+} & AddedCharactersGalleryCharacterRemovalHandler;

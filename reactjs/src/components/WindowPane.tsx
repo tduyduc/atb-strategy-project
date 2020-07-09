@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface WindowPaneProps {
-  id?: string;
   paneTitle: string;
 }
 
@@ -9,7 +8,7 @@ function WindowPane(
   props: React.PropsWithChildren<WindowPaneProps>
 ): JSX.Element {
   return (
-    <fieldset id={props.id}>
+    <fieldset>
       <legend>{props.paneTitle}</legend>
       {props.children}
     </fieldset>

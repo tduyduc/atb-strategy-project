@@ -7,29 +7,29 @@ import {
   CharacterPaneProps,
 } from './CharacterClassesSelectInterfaces';
 
-class AddedCharactersGallery extends React.PureComponent<
-  CharacterClassSelectProps
-> {
-  render(): JSX.Element {
-    return (
-      <WindowPane paneTitle="Added Characters">
-        {this.renderCharactersGallery()}
-      </WindowPane>
-    );
-  }
+function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
+  return (
+    <WindowPane paneTitle="Added Characters">
+      {renderCharactersGallery()}
+    </WindowPane>
+  );
 
-  renderCharactersGallery() {
-    if (this.props.allyCharacters.length) {
+  function renderCharactersGallery(): JSX.Element {
+    if (props.allyCharacters.length) {
       const divClassName = Common.isCompletedClassLineup(
-        this.props.allyCharacters,
-        this.props.teamSize
+        props.allyCharacters,
+        props.teamSize
       )
         ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12'
         : 'col-xl-6';
       return (
         <div className={divClassName}>
-          {this.props.allyCharacters.map((character, index) => (
-            <CharacterPane key={index} character={character} />
+          {props.allyCharacters.map((character, index) => (
+            <CharacterPane
+              key={index}
+              character={character}
+              onCharacterRemoval={props.onCharacterRemoval}
+            />
           ))}
         </div>
       );
@@ -48,12 +48,16 @@ function CharacterPane(props: CharacterPaneProps): JSX.Element {
             src={props.character.characterClass.spritePath}
             alt={props.character.characterClass.className}
           />
-          <p>{props.character.characterName}</p>
-          <button>Remove</button>
+          <p>{props.character.characterClass.className}</p>
+          <button onClick={onCharacterRemoval}>Remove</button>
         </div>
       </WindowPane>
     </div>
   );
+
+  function onCharacterRemoval() {
+    props.onCharacterRemoval(props.character);
+  }
 }
 
 export default AddedCharactersGallery;

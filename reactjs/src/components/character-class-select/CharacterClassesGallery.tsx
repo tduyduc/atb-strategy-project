@@ -28,6 +28,7 @@ class CharacterClassesGallery extends React.PureComponent<
               key={index}
               characterClass={characterClass}
               attributeDisplayObject={classAttributeDisplayObjects[index]}
+              onCharacterClassSelection={this.props.onCharacterClassSelection}
             />
           ))}
         </div>
@@ -50,7 +51,7 @@ function CharacterClassPane(props: CharacterClassPaneProps): JSX.Element {
             ))}
             <tr>
               <td>
-                <button>Select</button>
+                <button onClick={onCharacterClassSelection}>Select</button>
               </td>
               <td>
                 <img
@@ -64,6 +65,10 @@ function CharacterClassPane(props: CharacterClassPaneProps): JSX.Element {
       </WindowPane>
     </div>
   );
+
+  function onCharacterClassSelection() {
+    props.onCharacterClassSelection(props.characterClass);
+  }
 }
 
 export default CharacterClassesGallery;

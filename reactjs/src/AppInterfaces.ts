@@ -17,7 +17,7 @@ export interface AppGlobalState {
 }
 
 export interface AppMethods {
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
+  updateCharacterNameInput: HTMLInputElementOnChangeCallback;
 
   goToClassSelectionWindow: () => void;
   goToUnitDispatchWindow: () => void;
@@ -26,7 +26,7 @@ export interface AppMethods {
   selectCharacterClass: (characterClass: CharacterClass) => void;
   removeLastCharacter: () => void;
   removeAllCharacters: () => void;
-  removeCharacterByIndex: (index: number) => void;
+  removeCharacter: (character: Character) => void;
   isCompletedClassLineup: () => boolean;
 }
 
