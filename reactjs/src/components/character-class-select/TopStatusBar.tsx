@@ -22,7 +22,7 @@ function CharacterRemovalButtons(
   props: CharacterRemovalButtonsProps
 ): JSX.Element {
   return (
-    <>
+    <span>
       <button
         disabled={props.isHavingNoCharacters}
         title="Change class selection of the previous character."
@@ -35,7 +35,7 @@ function CharacterRemovalButtons(
       >
         Reset All
       </button>
-    </>
+    </span>
   );
 }
 
@@ -63,7 +63,7 @@ class CharacterNameInput extends React.PureComponent<
 
   render(): JSX.Element {
     return (
-      <>
+      <span>
         <input
           type="text"
           placeholder="Character name"
@@ -77,7 +77,7 @@ class CharacterNameInput extends React.PureComponent<
         >
           Auto-Name
         </button>
-      </>
+      </span>
     );
   }
 }
