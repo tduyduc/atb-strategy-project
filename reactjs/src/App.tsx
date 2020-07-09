@@ -1,11 +1,6 @@
 import React from 'react';
 import { AppState, PlayMode, AIMode } from './classes/enums';
-import { Common, CharacterClass, Character } from './classes/classes';
-import {
-  characterClasses,
-  autoCharacterNames,
-  classAttributeDisplayObjects,
-} from './classes/character-classes';
+import { CharacterClass, Character } from './classes/classes';
 import { AppGlobalState, AppMethods } from './AppInterfaces';
 import WindowPane from './components/WindowPane';
 import CharacterClassSelectWindow from './components/character-class-select/CharacterClassSelectWindow';
@@ -40,10 +35,10 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
         inactiveTurnLimit: 30,
       },
       appName: 'atb-strategy-project',
-      inputModel: { classSelectNameInput: '' },
       allyCharacters: [],
       enemyCharacters: [],
       appState: AppState.CLASS_SELECT,
+      characterNameInput: '',
     };
     setInitialAppState();
   }

@@ -1,6 +1,6 @@
 import * as Interfaces from './definitions/interfaces';
 import * as StaticInterfaces from './definitions/static-interfaces';
-import { PlayMode, AIMode, AppState } from './enums';
+import { PlayMode, AIMode } from './enums';
 
 /**
  * Contains common utility functions.

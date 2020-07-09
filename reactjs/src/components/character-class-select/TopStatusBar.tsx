@@ -69,7 +69,7 @@ class CharacterNameInput extends React.PureComponent<
           type="text"
           placeholder="Character name"
           title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
-          value={this.state.characterNameInput}
+          defaultValue={this.state.characterNameInput}
         />{' '}
         <button
           onClick={this.setAutoName}
@@ -83,13 +83,14 @@ class CharacterNameInput extends React.PureComponent<
 }
 
 function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
-  const isHavingNoCharacters = !Common.isCompletedClassLineup(
+  const isCompletedClassLineup = Common.isCompletedClassLineup(
     props.allyCharacters,
     props.teamSize
   );
+  const isHavingNoCharacters = !props.allyCharacters.length;
   return (
     <div className="col-lg-6 align-right">
-      {!isHavingNoCharacters && <CharacterNameInput />}{' '}
+      {!isCompletedClassLineup && <CharacterNameInput />}{' '}
       <CharacterRemovalButtons isHavingNoCharacters={isHavingNoCharacters} />
     </div>
   );
