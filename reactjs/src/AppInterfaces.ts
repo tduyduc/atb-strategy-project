@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppState } from './classes/enums';
 import { IAttributeDisplayObject } from './classes/definitions/interfaces';
 import { GlobalConfig, Character, CharacterClass } from './classes/classes';
@@ -16,7 +17,8 @@ export interface AppGlobalState {
 }
 
 export interface AppMethods {
-  setInitialAppState: () => void;
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
+
   goToClassSelectionWindow: () => void;
   goToUnitDispatchWindow: () => void;
   goToBattleSceneWindow: () => void;
@@ -28,3 +30,7 @@ export interface AppMethods {
   removeCharacterByIndex: (index: number) => void;
   isCompletedClassLineup: () => boolean;
 }
+
+export type HTMLInputElementOnChangeCallback = (
+  event: React.FormEvent<HTMLInputElement>
+) => void;

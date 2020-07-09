@@ -1,13 +1,11 @@
-import React from 'react';
+import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
 import { Character, CharacterClass } from '../../classes/classes';
 import { IAttributeDisplayObject } from '../../classes/definitions/interfaces';
 
 export interface CharacterClassSelectProps {
   allyCharacters: Character[];
   teamSize: number;
-  onCharacterNameInputChange: (
-    event: React.FormEvent<HTMLInputElement>
-  ) => void;
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
 }
 
 export interface CharacterRemovalButtonsProps {
@@ -16,9 +14,7 @@ export interface CharacterRemovalButtonsProps {
 
 export interface CharacterNameInputProps {
   characterNameInput?: string;
-  onCharacterNameInputChange: (
-    event: React.FormEvent<HTMLInputElement>
-  ) => void;
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
 }
 
 export interface CharacterNameInputState {

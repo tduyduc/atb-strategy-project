@@ -1,7 +1,11 @@
 import React from 'react';
 import { AppState, PlayMode, AIMode } from './classes/enums';
 import { CharacterClass, Character } from './classes/classes';
-import { AppGlobalState, AppMethods } from './AppInterfaces';
+import {
+  AppGlobalState,
+  AppMethods,
+  HTMLInputElementOnChangeCallback,
+} from './AppInterfaces';
 import WindowPane from './components/WindowPane';
 import CharacterClassSelectWindow from './components/character-class-select/CharacterClassSelectWindow';
 import './index.css';
@@ -54,8 +58,6 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       source
     );
   }
-
-  setInitialAppState(): void {}
 
   goToClassSelectionWindow(): void {
     this.setState(this.assignState({ appState: AppState.CLASS_SELECT }));
@@ -113,7 +115,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     );
   }
 
-  onCharacterNameInputChange = (
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback = (
     event: React.FormEvent<HTMLInputElement>
   ): void => {
     this.setState(
