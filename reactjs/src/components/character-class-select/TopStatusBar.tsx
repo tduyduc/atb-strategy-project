@@ -6,7 +6,6 @@ import {
   CharacterRemovalButtonsProps,
   CharacterNameInputProps,
   CharacterNameInputState,
-  CharacterClassSelectStatusState,
 } from './CharacterClassesSelectInterfaces';
 
 function HelpText(props: CharacterClassSelectProps): JSX.Element {
@@ -70,6 +69,7 @@ class CharacterNameInput extends React.PureComponent<
           placeholder="Character name"
           title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
           defaultValue={this.state.characterNameInput}
+          onChange={this.props.onCharacterNameInputChange}
         />{' '}
         <button
           onClick={this.setAutoName}
@@ -90,29 +90,23 @@ function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
   const isHavingNoCharacters = !props.allyCharacters.length;
   return (
     <div className="col-lg-6 align-right">
-      {!isCompletedClassLineup && <CharacterNameInput />}{' '}
+      {!isCompletedClassLineup && (
+        <CharacterNameInput
+          onCharacterNameInputChange={props.onCharacterNameInputChange}
+        />
+      )}{' '}
       <CharacterRemovalButtons isHavingNoCharacters={isHavingNoCharacters} />
     </div>
   );
 }
 
-class TopStatusBar extends React.PureComponent<
-  CharacterClassSelectProps,
-  CharacterClassSelectStatusState
-> {
-  constructor(props: CharacterClassSelectProps) {
-    super(props);
-    this.state = { characterNameInput: '' };
-  }
-
-  render(): JSX.Element {
-    return (
-      <div className="row">
-        <HelpText {...this.props} />
-        <ControlsToolbar {...this.props} />
-      </div>
-    );
-  }
+function TopStatusBar(props: CharacterClassSelectProps): JSX.Element {
+  return (
+    <div className="row">
+      <HelpText {...props} />
+      <ControlsToolbar {...props} />
+    </div>
+  );
 }
 
 export default TopStatusBar;

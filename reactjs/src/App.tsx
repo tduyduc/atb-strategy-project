@@ -10,6 +10,8 @@ import './index.css';
 
 class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   constructor(props: {}) {
+    super(props);
+
     const setInitialAppState = () => {
       if (PlayMode.PLAYER_VS_AI === this.state.globalConfig.playMode) {
         this.state = this.assignState({ appState: AppState.CLASS_SELECT });
@@ -19,8 +21,6 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       // TODO: Initialize computer characters in another function to be called here!
       this.state = this.assignState({ appState: AppState.BATTLE_SCENE });
     };
-
-    super(props);
 
     this.state = {
       globalConfig: {
@@ -113,6 +113,14 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     );
   }
 
+  onCharacterNameInputChange = (
+    event: React.FormEvent<HTMLInputElement>
+  ): void => {
+    this.setState(
+      this.assignState({ characterNameInput: event?.currentTarget?.value })
+    );
+  };
+
   render(): JSX.Element {
     switch (this.state.appState) {
       case AppState.CLASS_SELECT:
@@ -135,6 +143,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
+          onCharacterNameInputChange={this.onCharacterNameInputChange}
         />
       </div>
     );

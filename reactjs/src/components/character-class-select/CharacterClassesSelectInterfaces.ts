@@ -1,13 +1,13 @@
+import React from 'react';
 import { Character, CharacterClass } from '../../classes/classes';
 import { IAttributeDisplayObject } from '../../classes/definitions/interfaces';
 
 export interface CharacterClassSelectProps {
   allyCharacters: Character[];
   teamSize: number;
-}
-
-export interface CharacterClassSelectStatusState {
-  characterNameInput: string;
+  onCharacterNameInputChange: (
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
 }
 
 export interface CharacterRemovalButtonsProps {
@@ -16,6 +16,9 @@ export interface CharacterRemovalButtonsProps {
 
 export interface CharacterNameInputProps {
   characterNameInput?: string;
+  onCharacterNameInputChange: (
+    event: React.FormEvent<HTMLInputElement>
+  ) => void;
 }
 
 export interface CharacterNameInputState {
