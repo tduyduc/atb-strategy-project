@@ -70,19 +70,6 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     return newState;
   }
 
-  goToClassSelectionWindow(): void {
-    this.assignState({ appState: AppState.CLASS_SELECT });
-  }
-
-  goToUnitDispatchWindow(force: boolean | undefined = false): void {
-    if (!force && !this.isCompletedClassLineup()) return;
-    this.assignState({ appState: AppState.UNIT_DISPATCH });
-  }
-
-  goToBattleSceneWindow(): void {
-    this.assignState({ appState: AppState.BATTLE_SCENE });
-  }
-
   isCompletedClassLineup(): boolean {
     return (
       this.state.allyCharacters.length === this.state.globalConfig.teamSize
@@ -90,6 +77,19 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   }
 
   // start of instance methods
+
+  goToClassSelectionWindow = (): void => {
+    this.assignState({ appState: AppState.CLASS_SELECT });
+  };
+
+  goToUnitDispatchWindow = (force: boolean | undefined = false): void => {
+    if (!force && !this.isCompletedClassLineup()) return;
+    this.assignState({ appState: AppState.UNIT_DISPATCH });
+  };
+
+  goToBattleSceneWindow = (): void => {
+    this.assignState({ appState: AppState.BATTLE_SCENE });
+  };
 
   updateCharacterNameInput: HTMLInputElementOnChangeCallback = (
     event: React.FormEvent<HTMLInputElement>
@@ -147,11 +147,13 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
+          isCompletedClassLineup={this.isCompletedClassLineup()}
           onCharacterNameInputChange={this.updateCharacterNameInput}
           onCharacterClassSelection={this.selectCharacterClass}
           onCharacterBackspace={this.removeLastCharacter}
           onCharacterResetAll={this.removeAllCharacters}
           onCharacterRemoval={this.removeCharacter}
+          onContinuationToUnitDispatch={this.goToUnitDispatchWindow}
         />
       </div>
     );

@@ -19,16 +19,22 @@ interface AddedCharactersGalleryCharacterRemovalHandler {
   onCharacterRemoval: (character: Character) => void;
 }
 
+interface ContinuationToUnitDispatchHandler {
+  onContinuationToUnitDispatch: () => void;
+}
+
 interface TeamInfo {
   allyCharacters: Character[];
   teamSize: number;
+  isCompletedClassLineup: boolean;
 }
 
 export type CharacterClassSelectProps = TeamInfo &
   CharacterClassSelectionHandler &
   CharacterNameInputChangeHandler &
   TopStatusBarCharacterRemovalHandler &
-  AddedCharactersGalleryCharacterRemovalHandler;
+  AddedCharactersGalleryCharacterRemovalHandler &
+  ContinuationToUnitDispatchHandler;
 
 export type CharacterRemovalButtonsProps = {
   isHavingNoCharacters: boolean;
@@ -50,6 +56,9 @@ export type CharacterClassPaneProps = {
   attributeDisplayObject: IAttributeDisplayObject[];
 } & CharacterClassSelectionHandler;
 
-export type  CharacterPaneProps = {
+export type CharacterPaneProps = {
   character: Character;
+  isCompletedClassLineup: boolean;
 } & AddedCharactersGalleryCharacterRemovalHandler;
+
+export type CharacterLineupConfirmationPaneProps = ContinuationToUnitDispatchHandler;

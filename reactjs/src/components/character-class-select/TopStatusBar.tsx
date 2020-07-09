@@ -11,7 +11,7 @@ import {
 function HelpText(props: CharacterClassSelectProps): JSX.Element {
   return (
     <div className="col-lg-6">
-      {Common.isCompletedClassLineup(props.allyCharacters, props.teamSize)
+      {props.isCompletedClassLineup
         ? 'Character class lineup completed.'
         : 'Select classes for your characters.'}
     </div>
@@ -85,14 +85,10 @@ class CharacterNameInput extends React.PureComponent<
 }
 
 function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
-  const isCompletedClassLineup = Common.isCompletedClassLineup(
-    props.allyCharacters,
-    props.teamSize
-  );
   const isHavingNoCharacters = !props.allyCharacters.length;
   return (
     <div className="col-lg-6 align-right">
-      {!isCompletedClassLineup && (
+      {!props.isCompletedClassLineup && (
         <CharacterNameInput
           onCharacterNameInputChange={props.onCharacterNameInputChange}
         />

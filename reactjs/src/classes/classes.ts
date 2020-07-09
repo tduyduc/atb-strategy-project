@@ -28,23 +28,6 @@ class Common {
   static randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min;
   }
-
-  /**
-   * Checks if the current number of characters is equal to team size so that the user can proceed.
-   *
-   * @method
-   * @static
-   */
-  static isCompletedClassLineup(
-    characterArray: Character[],
-    teamSize: number
-  ): boolean {
-    return characterArray.length === teamSize;
-  }
-
-  static isHavingNoCharacters(characterArray: Character[]): boolean {
-    return 0 === characterArray.length;
-  }
 }
 
 /**

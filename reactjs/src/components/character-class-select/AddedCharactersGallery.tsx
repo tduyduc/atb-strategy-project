@@ -1,6 +1,5 @@
 import React from 'react';
 import WindowPane from '../WindowPane';
-import { Common } from '../../classes/classes';
 
 import {
   CharacterClassSelectProps,
@@ -16,19 +15,14 @@ function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
 
   function renderCharactersGallery(): JSX.Element {
     if (props.allyCharacters.length) {
-      const divClassName = Common.isCompletedClassLineup(
-        props.allyCharacters,
-        props.teamSize
-      )
-        ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12'
-        : 'col-xl-6';
       return (
-        <div className={divClassName}>
+        <div>
           {props.allyCharacters.map((character, index) => (
             <CharacterPane
               key={index}
               character={character}
               onCharacterRemoval={props.onCharacterRemoval}
+              isCompletedClassLineup={props.isCompletedClassLineup}
             />
           ))}
         </div>
@@ -40,8 +34,12 @@ function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
 }
 
 function CharacterPane(props: CharacterPaneProps): JSX.Element {
+  const divClassName = props.isCompletedClassLineup
+    ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12'
+    : 'col-xl-6';
+
   return (
-    <div className="character-pane">
+    <div className={divClassName.concat(' character-pane')}>
       <WindowPane paneTitle={props.character.characterName}>
         <div className="align-center">
           <img

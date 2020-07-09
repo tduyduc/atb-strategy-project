@@ -17,6 +17,8 @@ export interface AppGlobalState {
 }
 
 export interface AppMethods {
+  isCompletedClassLineup: () => boolean;
+
   updateCharacterNameInput: HTMLInputElementOnChangeCallback;
 
   goToClassSelectionWindow: () => void;
@@ -27,7 +29,6 @@ export interface AppMethods {
   removeLastCharacter: () => void;
   removeAllCharacters: () => void;
   removeCharacter: (character: Character) => void;
-  isCompletedClassLineup: () => boolean;
 }
 
 export type HTMLInputElementOnChangeCallback = (

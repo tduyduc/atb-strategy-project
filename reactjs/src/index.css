@@ -47,6 +47,10 @@ fieldset > legend {
   font-size: 120%;
 }
 
+.character-pane {
+  display: inline-block;
+}
+
 .character-class-pane legend {
   font-weight: normal;
   font-style: italic;
