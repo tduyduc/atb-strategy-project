@@ -1,21 +1,13 @@
 import React from 'react';
 import WindowPane from '../WindowPane';
-import { IAttributeDisplayObject } from '../../classes/definitions/interfaces';
-import { Common, Character, CharacterClass } from '../../classes/classes';
 import {
   characterClasses,
   classAttributeDisplayObjects,
 } from '../../classes/character-classes';
-
-interface CharacterClassesGalleryProps {
-  allyCharacters: Character[];
-  teamSize: number;
-}
-
-interface CharacterClassPaneProps {
-  characterClass: CharacterClass;
-  attributeDisplayObject: IAttributeDisplayObject[];
-}
+import {
+  CharacterClassesGalleryProps,
+  CharacterClassPaneProps,
+} from './CharacterClassesSelectInterfaces';
 
 class CharacterClassesGallery extends React.PureComponent<
   CharacterClassesGalleryProps
@@ -27,24 +19,19 @@ class CharacterClassesGallery extends React.PureComponent<
       ' / ',
       String(this.props.teamSize)
     );
-    const isCompletedClassLineup = Common.isCompletedClassLineup(
-      this.props.allyCharacters,
-      this.props.teamSize
-    );
+
     return (
-      <div className={isCompletedClassLineup ? 'col-lg-4' : 'col-lg-8'}>
-        <WindowPane paneTitle={paneTitle}>
-          <div className="row">
-            {characterClasses.map((characterClass, index) => (
-              <CharacterClassPane
-                key={index}
-                characterClass={characterClass}
-                attributeDisplayObject={classAttributeDisplayObjects[index]}
-              />
-            ))}
-          </div>
-        </WindowPane>
-      </div>
+      <WindowPane paneTitle={paneTitle}>
+        <div className="row">
+          {characterClasses.map((characterClass, index) => (
+            <CharacterClassPane
+              key={index}
+              characterClass={characterClass}
+              attributeDisplayObject={classAttributeDisplayObjects[index]}
+            />
+          ))}
+        </div>
+      </WindowPane>
     );
   }
 }
