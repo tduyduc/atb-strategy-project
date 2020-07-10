@@ -110,10 +110,10 @@ class DefaultDamage implements StaticInterfaces.IDamageFunction {
  * @see ICharacter
  */
 class CharacterClass implements Interfaces.ICharacterClass {
-  className: string;
-  initialAttributes: CharacterAttributes;
-  defaultCharacterNames: string[];
-  spritePath: Interfaces.FilePath;
+  readonly className: string;
+  readonly initialAttributes: CharacterAttributes;
+  readonly defaultCharacterNames: string[];
+  readonly spritePath: Interfaces.FilePath;
 
   constructor(arg: Interfaces.ICharacterClass) {
     this.className = arg.className;
