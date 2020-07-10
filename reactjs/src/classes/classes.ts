@@ -37,29 +37,20 @@ class Common {
   }
 
   /**
-   * `Object.assign` wrapper with type constraints for `this.state`.
+   * `setState` and `Object.assign` wrapper with type constraints for `this.state`.
    * Returns a new state reference.
+   *
+   * @method
+   * @static
    */
-  static assignStateBind(
-    thisArg: React.Component | React.PureComponent
-  ): (
-    source: Partial<typeof thisArg.state>,
-    willSetState?: boolean
-  ) => typeof thisArg.state {
-    type State = typeof thisArg.state;
-
-    return function assignState(
-      source: Partial<State>,
-      willSetState: boolean = true
-    ): State {
-      const newState: State = Object.assign<{}, State, Partial<State>>(
-        {},
-        thisArg.state,
-        source
+  static assignStateBind<State>(
+    thisArg: React.Component<unknown, State, unknown>
+  ): (source: Partial<State>) => void {
+    return function assignState(source: Partial<State>): void {
+      thisArg.setState(
+        (prevState: State): State =>
+          Object.assign<{}, State, Partial<State>>({}, prevState, source)
       );
-
-      if (willSetState) thisArg.setState(newState);
-      return newState;
     };
   }
 }

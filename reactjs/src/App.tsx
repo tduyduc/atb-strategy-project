@@ -28,15 +28,16 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     // must be an arrow function to prevent `this` shadowing! :(
     const setInitialAppState = () => {
       if (PlayMode.PLAYER_VS_AI === this.state.globalConfig.playMode) {
-        this.state = this.assignState(
-          { appState: AppState.CLASS_SELECT },
-          false
-        );
+        this.state = Object.assign({}, this.state, {
+          appState: AppState.CLASS_SELECT,
+        });
         return;
       }
 
       // TODO: Initialize computer characters in another function to be called here!
-      this.state = this.assignState({ appState: AppState.BATTLE_SCENE }, false);
+      this.state = Object.assign({}, this.state, {
+        appState: AppState.BATTLE_SCENE,
+      });
     };
 
     this.state = {
@@ -51,27 +52,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     setInitialAppState();
   }
 
-  // start of prototype methods
-
-  /**
-   * `Object.assign` wrapper with type constraints for `this.state`.
-   * Returns a new state reference.
-   */
-  assignState(
-    source: Partial<AppGlobalState>,
-    willSetState: boolean = true
-  ): AppGlobalState {
-    const newState: AppGlobalState = Object.assign<
-      {},
-      AppGlobalState,
-      Partial<AppGlobalState>
-    >({}, this.state, source);
-
-    if (willSetState) this.setState(newState);
-    return newState;
-  }
-
-  // start of instance methods
+  assignState = Common.assignStateBind(this);
 
   setBoardBackgroundImage = (): void => {
     this.assignState({
