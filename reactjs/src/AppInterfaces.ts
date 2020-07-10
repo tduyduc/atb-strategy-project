@@ -1,6 +1,5 @@
 import React from 'react';
 import { AppState } from './classes/enums';
-import { IAttributeDisplayObject } from './classes/definitions/interfaces';
 import { GlobalConfig, Character, CharacterClass } from './classes/classes';
 
 export interface AppGlobalState {
@@ -11,9 +10,6 @@ export interface AppGlobalState {
 
   allyCharacters: Character[];
   enemyCharacters: Character[];
-  // characterClasses: CharacterClass[];
-  // autoCharacterNames: string[];
-  // classAttributeDisplayObjects: IAttributeDisplayObject[][];
 }
 
 export interface AppMethods {
