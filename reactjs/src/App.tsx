@@ -25,34 +25,38 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   constructor(props: {}) {
     super(props);
 
-    // must be an arrow function to prevent `this` shadowing! :(
-    const setInitialAppState = () => {
-      if (PlayMode.PLAYER_VS_AI === this.state.globalConfig.playMode) {
-        this.state = Object.assign({}, this.state, {
-          appState: AppState.CLASS_SELECT,
-        });
-        return;
-      }
-
-      // TODO: Initialize computer characters in another function to be called here!
-      this.state = Object.assign({}, this.state, {
-        appState: AppState.BATTLE_SCENE,
-      });
-    };
-
-    this.state = {
-      globalConfig,
-      appName: 'atb-strategy-project',
-      allyCharacters: [],
-      enemyCharacters: [],
-      appState: AppState.CLASS_SELECT,
-      boardBackgroundImage:
-        boardBackgroundPaths[Common.randomInt(0, boardBackgroundPaths.length)],
-    };
-    setInitialAppState();
+    this.state = Object.assign(
+      {
+        globalConfig,
+        appName: 'atb-strategy-project',
+        allyCharacters: [],
+        enemyCharacters: [],
+        appState: AppState.CLASS_SELECT,
+        boardBackgroundImage:
+          boardBackgroundPaths[
+            Common.randomInt(0, boardBackgroundPaths.length)
+          ],
+      } as AppGlobalState,
+      this.setInitialAppState(globalConfig)
+    );
   }
 
   assignState = Common.assignStateBind(this);
+
+  setInitialAppState = (
+    globalConfig: GlobalConfig
+  ): Partial<AppGlobalState> => {
+    if (PlayMode.PLAYER_VS_AI === globalConfig.playMode) {
+      return {
+        appState: AppState.CLASS_SELECT,
+      };
+    }
+
+    // TODO: Initialize computer characters in another function to be called here!
+    return {
+      appState: AppState.BATTLE_SCENE,
+    };
+  };
 
   setBoardBackgroundImage = (): void => {
     this.assignState({
