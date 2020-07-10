@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppState, PlayMode, AIMode } from './classes/enums';
-import { CharacterClass, Character } from './classes/classes';
+import { CharacterClass, Character, GlobalConfig } from './classes/classes';
 import {
   AppGlobalState,
   AppMethods,
@@ -11,6 +11,18 @@ import CharacterClassSelectWindow from './components/character-class-select/Char
 import './index.css';
 // import logo from './logo.svg';
 // import './App.css';
+
+const globalConfig: GlobalConfig = {
+  // this object is customizable!
+  battleSpeed: 2,
+  playMode: PlayMode.PLAYER_VS_AI,
+  allyAIMode: AIMode.OFFENSIVE,
+  enemyAIMode: AIMode.MONTE_CARLO,
+  teamSize: 3,
+  cellSize: 32,
+  mapSize: 6,
+  inactiveTurnLimit: 30,
+};
 
 class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   constructor(props: {}) {
@@ -30,17 +42,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     };
 
     this.state = {
-      globalConfig: {
-        // this object is customizable!
-        battleSpeed: 2,
-        playMode: PlayMode.PLAYER_VS_AI,
-        allyAIMode: AIMode.OFFENSIVE,
-        enemyAIMode: AIMode.MONTE_CARLO,
-        teamSize: 3,
-        cellSize: 32,
-        mapSize: 6,
-        inactiveTurnLimit: 30,
-      },
+      globalConfig,
       appName: 'atb-strategy-project',
       allyCharacters: [],
       enemyCharacters: [],
