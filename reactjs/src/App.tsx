@@ -85,6 +85,8 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   };
 
   goToUnitDispatchWindow = (allyCharacters: Character[]): void => {
+    // this also saves ally characters selected from CharacterClassSelectWindow,
+    // explained in the rather long prop name, onSavingCharactersAndContinuationToUnitDispatch
     this.assignState({ appState: AppState.UNIT_DISPATCH, allyCharacters });
   };
 
