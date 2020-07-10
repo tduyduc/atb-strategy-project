@@ -31,15 +31,10 @@ export interface IGlobalConfig {
    */
   teamSize: number;
 
-  /** Displayed width and height of an in-game square, in pixels.
-   * @member {number}
-   */
-  cellSize: number;
-
   /** Number of squares per dimension in the game board.
    * @member {number}
    */
-  mapSize: number;
+  boardSize: number;
 
   /** Number of consecutive inactive turns before the game is forcefully ended.
    * @member {number}

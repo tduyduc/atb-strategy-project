@@ -26,8 +26,7 @@ const globalConfig: GlobalConfig = {
   allyAIMode: AIMode.OFFENSIVE,
   enemyAIMode: AIMode.MONTE_CARLO,
   teamSize: 3,
-  cellSize: 32,
-  mapSize: 6,
+  boardSize: 6,
   inactiveTurnLimit: 30,
 };
 
@@ -183,8 +182,8 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       <div id="unit-dispatch-window">
         <UnitDispatchWindow
           characters={this.state.allyCharacters}
-          width={this.state.globalConfig.mapSize}
-          height={this.state.globalConfig.mapSize}
+          width={this.state.globalConfig.boardSize}
+          height={this.state.globalConfig.boardSize}
           shadingFn={() => true}
           backgroundImage={this.state.boardBackgroundImage}
         />

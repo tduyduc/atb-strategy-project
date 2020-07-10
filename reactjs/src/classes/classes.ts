@@ -48,8 +48,7 @@ class GlobalConfig implements Interfaces.IGlobalConfig {
   allyAIMode: AIMode = AIMode.OFFENSIVE;
   enemyAIMode: AIMode = AIMode.MONTE_CARLO;
   teamSize: number = 3;
-  cellSize: number = 32;
-  mapSize: number = 6;
+  boardSize: number = 6;
   inactiveTurnLimit: number = 30;
 
   constructor(arg?: Interfaces.IGlobalConfig) {
