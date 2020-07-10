@@ -2,12 +2,12 @@ import React from 'react';
 import WindowPane from '../WindowPane';
 
 import {
-  CharacterClassSelectProps,
   CharacterPaneProps,
+  BottomCharacterPanesProps,
 } from './CharacterClassesSelectInterfaces';
 import CharacterSprite from '../CharacterSprite';
 
-function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
+function AddedCharactersGallery(props: BottomCharacterPanesProps): JSX.Element {
   return (
     <WindowPane paneTitle="Added Characters">
       {renderCharactersGallery()}

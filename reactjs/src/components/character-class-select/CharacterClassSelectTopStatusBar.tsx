@@ -2,13 +2,14 @@ import React from 'react';
 import { Common } from '../../classes/classes';
 import { autoCharacterNames } from '../../classes/character-classes';
 import {
-  CharacterClassSelectProps,
   CharacterRemovalButtonsProps,
   CharacterNameInputProps,
   CharacterNameInputState,
+  CharacterClassSelectTopStatusBarProps,
 } from './CharacterClassesSelectInterfaces';
+import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
 
-function HelpText(props: CharacterClassSelectProps): JSX.Element {
+function HelpText(props: CharacterClassSelectTopStatusBarProps): JSX.Element {
   return (
     <div className="col-lg-6">
       {props.isCompletedClassLineup
@@ -50,18 +51,20 @@ class CharacterNameInput extends React.PureComponent<
     this.state = { characterNameInput: props.characterNameInput ?? '' };
   }
 
-  setAutoName = (): void => {
-    this.setState(prevState =>
-      Object.assign<
-        {},
-        Readonly<CharacterNameInputState>,
-        Partial<CharacterNameInputState>
-      >({}, prevState, {
-        characterNameInput:
-          autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)],
-      })
-    );
+  assignState = Common.assignStateBind(this);
+
+  setName = (input: string): void => {
+    this.props.onCharacterNameInputChange(input);
+    this.assignState({ characterNameInput: input });
   };
+
+  onCharacterNameInputChange: HTMLInputElementOnChangeCallback = event =>
+    this.setName(event?.currentTarget?.value ?? '');
+
+  setAutoName = (): void =>
+    this.setName(
+      autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)]
+    );
 
   render(): JSX.Element {
     return (
@@ -70,8 +73,8 @@ class CharacterNameInput extends React.PureComponent<
           type="text"
           placeholder="Character name"
           title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
-          defaultValue={this.state.characterNameInput}
-          onChange={this.props.onCharacterNameInputChange}
+          value={this.state.characterNameInput}
+          onChange={this.onCharacterNameInputChange}
         />{' '}
         <button
           onClick={this.setAutoName}
@@ -84,7 +87,9 @@ class CharacterNameInput extends React.PureComponent<
   }
 }
 
-function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
+function ControlsToolbar(
+  props: CharacterClassSelectTopStatusBarProps
+): JSX.Element {
   const isHavingNoCharacters = !props.allyCharacters.length;
   return (
     <div className="col-lg-6 align-right">
@@ -103,7 +108,7 @@ function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
 }
 
 function CharacterClassSelectTopStatusBar(
-  props: CharacterClassSelectProps
+  props: CharacterClassSelectTopStatusBarProps
 ): JSX.Element {
   return (
     <div className="row">

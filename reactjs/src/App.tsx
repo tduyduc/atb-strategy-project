@@ -1,16 +1,7 @@
 import React from 'react';
 import { AppState, PlayMode, AIMode } from './classes/enums';
-import {
-  CharacterClass,
-  Character,
-  GlobalConfig,
-  Common,
-} from './classes/classes';
-import {
-  AppGlobalState,
-  AppMethods,
-  HTMLInputElementOnChangeCallback,
-} from './AppInterfaces';
+import { GlobalConfig, Common, Character } from './classes/classes';
+import { AppGlobalState, AppMethods } from './AppInterfaces';
 import WindowPane from './components/WindowPane';
 import CharacterClassSelectWindow from './components/character-class-select/CharacterClassSelectWindow';
 import './index.css';
@@ -54,7 +45,6 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       allyCharacters: [],
       enemyCharacters: [],
       appState: AppState.CLASS_SELECT,
-      characterNameInput: '',
       boardBackgroundImage:
         boardBackgroundPaths[Common.randomInt(0, boardBackgroundPaths.length)],
     };
@@ -81,12 +71,6 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     return newState;
   }
 
-  isCompletedClassLineup(): boolean {
-    return (
-      this.state.allyCharacters.length === this.state.globalConfig.teamSize
-    );
-  }
-
   // start of instance methods
 
   setBoardBackgroundImage = (): void => {
@@ -100,45 +84,12 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     this.assignState({ appState: AppState.CLASS_SELECT });
   };
 
-  goToUnitDispatchWindow = (force: boolean | undefined = false): void => {
-    if (!force && !this.isCompletedClassLineup()) return;
-    this.assignState({ appState: AppState.UNIT_DISPATCH });
+  goToUnitDispatchWindow = (allyCharacters: Character[]): void => {
+    this.assignState({ appState: AppState.UNIT_DISPATCH, allyCharacters });
   };
 
   goToBattleSceneWindow = (): void => {
     this.assignState({ appState: AppState.BATTLE_SCENE });
-  };
-
-  updateCharacterNameInput: HTMLInputElementOnChangeCallback = (
-    event: React.FormEvent<HTMLInputElement>
-  ): void => {
-    this.assignState({ characterNameInput: event?.currentTarget?.value });
-  };
-
-  selectCharacterClass = (characterClass: CharacterClass): void => {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.concat([
-        new Character({ characterName: '', characterClass }),
-      ]),
-    });
-  };
-
-  removeLastCharacter = (): void => {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.slice(0, -1),
-    });
-  };
-
-  removeAllCharacters = (): void => {
-    this.assignState({ allyCharacters: [] });
-  };
-
-  removeCharacter = (character: Character): void => {
-    this.assignState({
-      allyCharacters: this.state.allyCharacters.filter(
-        current => character !== current
-      ),
-    });
   };
 
   // start of rendering methods
@@ -165,13 +116,9 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
-          isCompletedClassLineup={this.isCompletedClassLineup()}
-          onCharacterNameInputChange={this.updateCharacterNameInput}
-          onCharacterClassSelection={this.selectCharacterClass}
-          onCharacterBackspace={this.removeLastCharacter}
-          onCharacterResetAll={this.removeAllCharacters}
-          onCharacterRemoval={this.removeCharacter}
-          onContinuationToUnitDispatch={this.goToUnitDispatchWindow}
+          onSavingCharactersAndContinuationToUnitDispatch={
+            this.goToUnitDispatchWindow
+          }
         />
       </div>
     );

@@ -35,6 +35,33 @@ class Common {
     const PATH_PREFIX: Interfaces.FilePath = './res/';
     return PATH_PREFIX + fileName;
   }
+
+  /**
+   * `Object.assign` wrapper with type constraints for `this.state`.
+   * Returns a new state reference.
+   */
+  static assignStateBind(
+    thisArg: React.Component | React.PureComponent
+  ): (
+    source: Partial<typeof thisArg.state>,
+    willSetState?: boolean
+  ) => typeof thisArg.state {
+    type State = typeof thisArg.state;
+
+    return function assignState(
+      source: Partial<State>,
+      willSetState: boolean = true
+    ): State {
+      const newState: State = Object.assign<{}, State, Partial<State>>(
+        {},
+        thisArg.state,
+        source
+      );
+
+      if (willSetState) thisArg.setState(newState);
+      return newState;
+    };
+  }
 }
 
 /**

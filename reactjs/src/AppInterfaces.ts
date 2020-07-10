@@ -7,7 +7,6 @@ export interface AppGlobalState {
   appName: string;
   globalConfig: GlobalConfig;
   appState: AppState;
-  characterNameInput: string;
   boardBackgroundImage: FilePath;
 
   allyCharacters: Character[];
@@ -15,18 +14,9 @@ export interface AppGlobalState {
 }
 
 export interface AppMethods {
-  isCompletedClassLineup: () => boolean;
-
-  updateCharacterNameInput: HTMLInputElementOnChangeCallback;
-
   goToClassSelectionWindow: () => void;
-  goToUnitDispatchWindow: () => void;
+  goToUnitDispatchWindow: (allyCharacters: Character[]) => void;
   goToBattleSceneWindow: () => void;
-
-  selectCharacterClass: (characterClass: CharacterClass) => void;
-  removeLastCharacter: () => void;
-  removeAllCharacters: () => void;
-  removeCharacter: (character: Character) => void;
 }
 
 export type HTMLInputElementOnChangeCallback = (

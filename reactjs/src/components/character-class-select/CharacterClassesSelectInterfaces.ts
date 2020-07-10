@@ -1,9 +1,10 @@
-import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
 import { Character, CharacterClass } from '../../classes/classes';
 import { IAttributeDisplayObject } from '../../classes/definitions/interfaces';
 
+type TextInputHandler = (input: string) => void;
+
 interface CharacterNameInputChangeHandler {
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback;
+  onCharacterNameInputChange: TextInputHandler;
 }
 
 interface CharacterClassSelectionHandler {
@@ -26,15 +27,37 @@ interface ContinuationToUnitDispatchHandler {
 interface TeamInfo {
   allyCharacters: Character[];
   teamSize: number;
+}
+
+interface TeamAdequatenessInfo {
   isCompletedClassLineup: boolean;
 }
 
-export type CharacterClassSelectProps = TeamInfo &
-  CharacterClassSelectionHandler &
+export type CharacterClassSelectProps = {
+  onSavingCharactersAndContinuationToUnitDispatch: (
+    allyCharacters: Character[]
+  ) => void;
+} & TeamInfo;
+
+export interface CharacterClassSelectState {
+  characterNameInput: string;
+  allyCharacters: Character[];
+}
+
+export interface CharacterClassSelectMethods {
+  updateCharacterNameInput: TextInputHandler;
+  isCompletedClassLineup: () => boolean;
+  selectCharacterClass: (characterClass: CharacterClass) => void;
+  removeLastCharacter: () => void;
+  removeAllCharacters: () => void;
+  removeCharacter: (character: Character) => void;
+  continueToUnitDispatch: () => void;
+}
+
+export type CharacterClassSelectTopStatusBarProps = TeamInfo &
+  TeamAdequatenessInfo &
   CharacterNameInputChangeHandler &
-  TopStatusBarCharacterRemovalHandler &
-  AddedCharactersGalleryCharacterRemovalHandler &
-  ContinuationToUnitDispatchHandler;
+  TopStatusBarCharacterRemovalHandler;
 
 export type CharacterRemovalButtonsProps = {
   isHavingNoCharacters: boolean;
@@ -48,7 +71,14 @@ export interface CharacterNameInputState {
   characterNameInput: string;
 }
 
+export type BottomCharacterPanesProps = TeamInfo &
+  TeamAdequatenessInfo &
+  CharacterClassSelectionHandler &
+  AddedCharactersGalleryCharacterRemovalHandler &
+  ContinuationToUnitDispatchHandler;
+
 export type CharacterClassesGalleryProps = TeamInfo &
+  TeamAdequatenessInfo &
   CharacterClassSelectionHandler;
 
 export type CharacterClassPaneProps = {

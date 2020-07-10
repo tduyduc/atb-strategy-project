@@ -2,10 +2,10 @@ import React from 'react';
 import CharacterClassesGallery from './CharacterClassesGallery';
 import AddedCharactersGallery from './AddedCharactersGallery';
 import CharacterLineupConfirmationPane from './CharacterLineupConfirmationPane';
-import { CharacterClassSelectProps } from './CharacterClassesSelectInterfaces';
+import { BottomCharacterPanesProps } from './CharacterClassesSelectInterfaces';
 
 class BottomCharacterPanes extends React.PureComponent<
-  CharacterClassSelectProps
+  BottomCharacterPanesProps
 > {
   render(): JSX.Element {
     return this.props.isCompletedClassLineup ? (
