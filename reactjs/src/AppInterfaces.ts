@@ -1,12 +1,14 @@
 import React from 'react';
 import { AppState } from './classes/enums';
 import { GlobalConfig, Character, CharacterClass } from './classes/classes';
+import { FilePath } from './classes/definitions/interfaces';
 
 export interface AppGlobalState {
   appName: string;
   globalConfig: GlobalConfig;
   appState: AppState;
   characterNameInput: string;
+  boardBackgroundImage: FilePath;
 
   allyCharacters: Character[];
   enemyCharacters: Character[];

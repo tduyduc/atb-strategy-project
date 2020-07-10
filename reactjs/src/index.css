@@ -19,6 +19,11 @@ body, button, input, select, label, textarea {
   font-size: 90%;
 }
 
+:root {
+  --square-size: 4em;
+  --square-border-size: .1em;
+}
+
 [ng-cloak] {
   display: none;
 }
@@ -62,20 +67,49 @@ fieldset > legend {
   font-size: 100%;
 }
 
-.character-class-pane table {
+table.character-attributes-table {
   font-size: 90%;
   border: 0px;
   width: 100%;
 }
 
-.character-class-pane table tr td:nth-child(1) {
+table.character-attributes-table tr td:nth-child(1) {
   text-align: left;
 }
 
-.character-class-pane table tr td:nth-child(2) {
+table.character-attributes-table tr td:nth-child(2) {
   text-align: right;
 }
 
-.character-class-pane table button {
+table.character-attributes-table button {
   font-size: 100%;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.square {
+  background-color: transparent;
+  width: calc(var(--square-size) - var(--square-border-size) * 2);
+  height: calc(var(--square-size) - var(--square-border-size) * 2);
+  border: var(--square-border-size) solid #fff8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.square.shaded {
+  background: #fffc;
+}
+
+.board-row {
+  display: flex;
+  white-space: nowrap;
+  max-height: var(--square-size);
+}
+
+.board {
+  background-size: cover;
 }

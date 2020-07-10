@@ -1,19 +1,15 @@
-import { IAttributeDisplayObject, FilePath } from './definitions/interfaces';
+import { IAttributeDisplayObject } from './definitions/interfaces';
 import {
+  Common,
   CharacterClass,
   CharacterAttributes,
   AttributesDisplay,
 } from './classes';
 
-const PATH_PREFIX: FilePath = './res/';
-function prependPath(fileName: FilePath): FilePath {
-  return PATH_PREFIX + fileName;
-}
-
 export const characterClasses: Readonly<CharacterClass[]> = [
   new CharacterClass({
     className: 'Fighter',
-    spritePath: prependPath('cyan.gif'),
+    spritePath: Common.prependResourcePath('cyan.gif'),
     defaultCharacterNames: ['Cyan', 'Firion', 'Cecil'],
     initialAttributes: new CharacterAttributes({
       hp: 500,
@@ -30,7 +26,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Black Belt',
-    spritePath: prependPath('sabin.gif'),
+    spritePath: Common.prependResourcePath('sabin.gif'),
     defaultCharacterNames: ['Sabin', 'Yang', 'Galuf'],
     initialAttributes: new CharacterAttributes({
       hp: 400,
@@ -47,7 +43,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Archer',
-    spritePath: prependPath('edgar.gif'),
+    spritePath: Common.prependResourcePath('edgar.gif'),
     defaultCharacterNames: ['Edgar', 'Ceodore', 'Edward'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -64,7 +60,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Assassin',
-    spritePath: prependPath('shadow.gif'),
+    spritePath: Common.prependResourcePath('shadow.gif'),
     defaultCharacterNames: ['Shadow', 'Edge', 'Jinnai'],
     initialAttributes: new CharacterAttributes({
       hp: 250,
@@ -81,7 +77,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Bomber',
-    spritePath: prependPath('relm.gif'),
+    spritePath: Common.prependResourcePath('relm.gif'),
     defaultCharacterNames: ['Relm', 'Krile', 'Matoya'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -98,7 +94,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'White Mage',
-    spritePath: prependPath('terra.gif'),
+    spritePath: Common.prependResourcePath('terra.gif'),
     defaultCharacterNames: ['Terra', 'Rosa', 'Refia'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -115,7 +111,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Black Mage',
-    spritePath: prependPath('celes.gif'),
+    spritePath: Common.prependResourcePath('celes.gif'),
     defaultCharacterNames: ['Celes', 'Rydia', 'Alba'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -132,7 +128,7 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
   new CharacterClass({
     className: 'Time Mage',
-    spritePath: prependPath('strago.gif'),
+    spritePath: Common.prependResourcePath('strago.gif'),
     defaultCharacterNames: ['Strago', 'Leon', 'Palom'],
     initialAttributes: new CharacterAttributes({
       hp: 300,

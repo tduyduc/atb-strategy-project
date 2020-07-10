@@ -28,6 +28,13 @@ class Common {
   static randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+
+  static prependResourcePath(
+    fileName: Interfaces.FilePath
+  ): Interfaces.FilePath {
+    const PATH_PREFIX: Interfaces.FilePath = './res/';
+    return PATH_PREFIX + fileName;
+  }
 }
 
 /**
@@ -56,16 +63,27 @@ class GlobalConfig implements Interfaces.IGlobalConfig {
  * @class
  */
 class CharacterPosition implements Interfaces.IPosition {
-  x: number = 0;
-  y: number = 0;
+  x: number;
+  y: number;
 
-  constructor(x: number | CharacterPosition = 0, y: number = 0) {
-    if (x instanceof CharacterPosition) {
-      Object.assign(this, x);
+  constructor(x: number | Interfaces.IPosition = -1, y: number = -1) {
+    if (typeof x === 'object') {
+      this.x = x.x;
+      this.y = x.y;
     } else {
       this.x = x;
       this.y = y;
     }
+  }
+
+  equals(that: Interfaces.IPosition): boolean {
+    return this.x === that.x && this.y === that.y;
+  }
+
+  isOccupied(characters: Character[]): boolean {
+    return characters.some(character =>
+      this.equals(character.inGameAttributes.position)
+    );
   }
 }
 
@@ -132,7 +150,7 @@ class CharacterClass implements Interfaces.ICharacterClass {
  * @see ICharacterClass
  */
 class Character implements Interfaces.ICharacter {
-  id: number;
+  readonly id: number;
   characterName: string;
   characterClass: CharacterClass;
   inGameAttributes: CharacterAttributes;
@@ -190,7 +208,7 @@ class AttributesDisplay {
    * @static
    * @member {AttributeFriendlyNamesObject}
    */
-  static friendlyNames: Interfaces.AttributeFriendlyNamesObject = {
+  static friendlyNames: Readonly<Interfaces.AttributeFriendlyNamesObject> = {
     hp: 'HP',
     mp: 'MP',
     attack: 'Attack',

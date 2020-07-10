@@ -1,6 +1,11 @@
 import React from 'react';
 import { AppState, PlayMode, AIMode } from './classes/enums';
-import { CharacterClass, Character, GlobalConfig } from './classes/classes';
+import {
+  CharacterClass,
+  Character,
+  GlobalConfig,
+  Common,
+} from './classes/classes';
 import {
   AppGlobalState,
   AppMethods,
@@ -9,6 +14,8 @@ import {
 import WindowPane from './components/WindowPane';
 import CharacterClassSelectWindow from './components/character-class-select/CharacterClassSelectWindow';
 import './index.css';
+import UnitDispatchWindow from './components/unit-dispatch/UnitDispatchWindow';
+import { boardBackgroundPaths } from './classes/board-backgrounds';
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -28,6 +35,7 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   constructor(props: {}) {
     super(props);
 
+    // must be an arrow function to prevent `this` shadowing! :(
     const setInitialAppState = () => {
       if (PlayMode.PLAYER_VS_AI === this.state.globalConfig.playMode) {
         this.state = this.assignState(
@@ -48,6 +56,8 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
       enemyCharacters: [],
       appState: AppState.CLASS_SELECT,
       characterNameInput: '',
+      boardBackgroundImage:
+        boardBackgroundPaths[Common.randomInt(0, boardBackgroundPaths.length)],
     };
     setInitialAppState();
   }
@@ -79,6 +89,13 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   }
 
   // start of instance methods
+
+  setBoardBackgroundImage = (): void => {
+    this.assignState({
+      boardBackgroundImage:
+        boardBackgroundPaths[Common.randomInt(0, boardBackgroundPaths.length)],
+    });
+  };
 
   goToClassSelectionWindow = (): void => {
     this.assignState({ appState: AppState.CLASS_SELECT });
@@ -164,7 +181,13 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   renderUnitDispatchWindow(): JSX.Element {
     return (
       <div id="unit-dispatch-window">
-        <WindowPane paneTitle="Unit Dispatch"></WindowPane>
+        <UnitDispatchWindow
+          characters={this.state.allyCharacters}
+          width={this.state.globalConfig.mapSize}
+          height={this.state.globalConfig.mapSize}
+          shadingFn={() => true}
+          backgroundImage={this.state.boardBackgroundImage}
+        />
       </div>
     );
   }

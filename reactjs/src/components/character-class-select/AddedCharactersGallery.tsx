@@ -5,6 +5,7 @@ import {
   CharacterClassSelectProps,
   CharacterPaneProps,
 } from './CharacterClassesSelectInterfaces';
+import CharacterSprite from '../CharacterSprite';
 
 function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
   return (
@@ -42,10 +43,7 @@ function CharacterPane(props: CharacterPaneProps): JSX.Element {
     <div className={divClassName.concat(' character-pane')}>
       <WindowPane paneTitle={props.character.characterName}>
         <div className="align-center">
-          <img
-            src={props.character.characterClass.spritePath}
-            alt={props.character.characterClass.className}
-          />
+          <CharacterSprite characterClass={props.character.characterClass} />
           <p>{props.character.characterClass.className}</p>
           <button onClick={onCharacterRemoval}>Remove</button>
         </div>

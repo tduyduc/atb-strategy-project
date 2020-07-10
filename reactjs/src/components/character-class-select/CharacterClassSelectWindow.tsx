@@ -1,7 +1,7 @@
 import React from 'react';
 import WindowPane from '../WindowPane';
 import { CharacterClassSelectProps } from './CharacterClassesSelectInterfaces';
-import TopStatusBar from './TopStatusBar';
+import CharacterClassSelectTopStatusBar from './CharacterClassSelectTopStatusBar';
 import BottomCharacterPanes from './BottomCharacterPanes';
 
 class CharacterClassSelectWindow extends React.PureComponent<
@@ -10,7 +10,7 @@ class CharacterClassSelectWindow extends React.PureComponent<
   render(): JSX.Element {
     return (
       <WindowPane paneTitle="Character Class Select">
-        <TopStatusBar {...this.props} />
+        <CharacterClassSelectTopStatusBar {...this.props} />
         <BottomCharacterPanes {...this.props} />
       </WindowPane>
     );

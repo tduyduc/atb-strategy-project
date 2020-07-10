@@ -8,6 +8,8 @@ import {
   CharacterClassesGalleryProps,
   CharacterClassPaneProps,
 } from './CharacterClassesSelectInterfaces';
+import CharacterSprite from '../CharacterSprite';
+import CharacterAttributesTable from '../CharacterAttributesTable';
 
 class CharacterClassesGallery extends React.PureComponent<
   CharacterClassesGalleryProps
@@ -41,27 +43,18 @@ function CharacterClassPane(props: CharacterClassPaneProps): JSX.Element {
   return (
     <div className="character-class-pane col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
       <WindowPane paneTitle={props.characterClass.className}>
-        <table>
-          <tbody>
-            {props.attributeDisplayObject.map((attribute, index) => (
-              <tr key={index}>
-                <td>{attribute.name}</td>
-                <td>{attribute.value}</td>
-              </tr>
-            ))}
-            <tr>
-              <td>
-                <button onClick={onCharacterClassSelection}>Select</button>
-              </td>
-              <td>
-                <img
-                  src={props.characterClass.spritePath}
-                  alt={props.characterClass.className}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <CharacterAttributesTable
+          attributeDisplayObject={props.attributeDisplayObject}
+        >
+          <tr>
+            <td>
+              <button onClick={onCharacterClassSelection}>Select</button>
+            </td>
+            <td>
+              <CharacterSprite characterClass={props.characterClass} />
+            </td>
+          </tr>
+        </CharacterAttributesTable>
       </WindowPane>
     </div>
   );

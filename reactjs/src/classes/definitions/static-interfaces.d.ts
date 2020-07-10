@@ -8,7 +8,7 @@ import * as Interfaces from './interfaces';
  * @interface
  * @static
  */
-export class IDistanceFunction {
+export abstract class IDistanceFunction {
   /** Performs calculation using the implemented function.
    * @method number
    * @static
@@ -25,7 +25,7 @@ export class IDistanceFunction {
  * @interface
  * @static
  */
-export class IDamageFunction {
+export abstract class IDamageFunction {
   /** Performs calculation using the implemented function.
    * @method number
    * @static

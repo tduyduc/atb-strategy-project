@@ -102,7 +102,9 @@ function ControlsToolbar(props: CharacterClassSelectProps): JSX.Element {
   );
 }
 
-function TopStatusBar(props: CharacterClassSelectProps): JSX.Element {
+function CharacterClassSelectTopStatusBar(
+  props: CharacterClassSelectProps
+): JSX.Element {
   return (
     <div className="row">
       <HelpText {...props} />
@@ -111,4 +113,4 @@ function TopStatusBar(props: CharacterClassSelectProps): JSX.Element {
   );
 }
 
-export default TopStatusBar;
+export default CharacterClassSelectTopStatusBar;
