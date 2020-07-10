@@ -132,11 +132,13 @@ class CharacterClass implements Interfaces.ICharacterClass {
  * @see ICharacterClass
  */
 class Character implements Interfaces.ICharacter {
+  id: number;
   characterName: string;
   characterClass: CharacterClass;
   inGameAttributes: CharacterAttributes;
 
   constructor(arg: Interfaces.ICharacter) {
+    this.id = Date.now();
     this.characterClass = new CharacterClass(arg.characterClass);
 
     this.characterName =

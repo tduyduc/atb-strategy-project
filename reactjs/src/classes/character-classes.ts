@@ -1,17 +1,21 @@
-import { IAttributeDisplayObject } from './definitions/interfaces';
-import * as Classes from './classes';
+import { IAttributeDisplayObject, FilePath } from './definitions/interfaces';
+import {
+  CharacterClass,
+  CharacterAttributes,
+  AttributesDisplay,
+} from './classes';
 
-const PATH_PREFIX: string = './res/';
-function prependPath(fileName: string): string {
+const PATH_PREFIX: FilePath = './res/';
+function prependPath(fileName: FilePath): FilePath {
   return PATH_PREFIX + fileName;
 }
 
-export const characterClasses: Readonly<Classes.CharacterClass[]> = [
-  new Classes.CharacterClass({
+export const characterClasses: Readonly<CharacterClass[]> = [
+  new CharacterClass({
     className: 'Fighter',
     spritePath: prependPath('cyan.gif'),
     defaultCharacterNames: ['Cyan', 'Firion', 'Cecil'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 500,
       mp: 20,
       attack: 30,
@@ -24,11 +28,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Black Belt',
     spritePath: prependPath('sabin.gif'),
     defaultCharacterNames: ['Sabin', 'Yang', 'Galuf'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 400,
       mp: 25,
       attack: 70,
@@ -41,11 +45,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Archer',
     spritePath: prependPath('edgar.gif'),
     defaultCharacterNames: ['Edgar', 'Ceodore', 'Edward'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 300,
       attack: 30,
@@ -58,11 +62,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Assassin',
     spritePath: prependPath('shadow.gif'),
     defaultCharacterNames: ['Shadow', 'Edge', 'Jinnai'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 250,
       mp: 20,
       attack: 45,
@@ -75,11 +79,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 3,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Bomber',
     spritePath: prependPath('relm.gif'),
     defaultCharacterNames: ['Relm', 'Krile', 'Matoya'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 35,
       attack: 30,
@@ -92,11 +96,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'White Mage',
     spritePath: prependPath('terra.gif'),
     defaultCharacterNames: ['Terra', 'Rosa', 'Refia'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 100,
       attack: 20,
@@ -109,11 +113,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 1,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Black Mage',
     spritePath: prependPath('celes.gif'),
     defaultCharacterNames: ['Celes', 'Rydia', 'Alba'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 200,
       attack: 20,
@@ -126,11 +130,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
       movementRange: 1,
     }),
   }),
-  new Classes.CharacterClass({
+  new CharacterClass({
     className: 'Time Mage',
     spritePath: prependPath('strago.gif'),
     defaultCharacterNames: ['Strago', 'Leon', 'Palom'],
-    initialAttributes: new Classes.CharacterAttributes({
+    initialAttributes: new CharacterAttributes({
       hp: 300,
       mp: 40,
       attack: 20,
@@ -146,14 +150,11 @@ export const characterClasses: Readonly<Classes.CharacterClass[]> = [
 ];
 
 export const autoCharacterNames: Readonly<string[]> = characterClasses.reduce(
-  (
-    result: string[],
-    { defaultCharacterNames }: Classes.CharacterClass
-  ): string[] => result.concat(defaultCharacterNames),
+  (result: string[], { defaultCharacterNames }: CharacterClass): string[] =>
+    result.concat(defaultCharacterNames),
   []
 );
 
 export const classAttributeDisplayObjects: Readonly<IAttributeDisplayObject[][]> = characterClasses.map(
-  characterClass =>
-    Classes.AttributesDisplay.generate(characterClass.initialAttributes)
+  characterClass => AttributesDisplay.generate(characterClass.initialAttributes)
 );

@@ -17,9 +17,9 @@ function AddedCharactersGallery(props: CharacterClassSelectProps): JSX.Element {
     if (props.allyCharacters.length) {
       return (
         <div>
-          {props.allyCharacters.map((character, index) => (
+          {props.allyCharacters.map(character => (
             <CharacterPane
-              key={index}
+              key={character.id}
               character={character}
               onCharacterRemoval={props.onCharacterRemoval}
               isCompletedClassLineup={props.isCompletedClassLineup}
