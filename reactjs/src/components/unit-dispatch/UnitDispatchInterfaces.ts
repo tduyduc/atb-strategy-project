@@ -1,4 +1,9 @@
-import { Character, CharacterPosition } from '../../classes/classes';
-import { BoardProps } from '../board/BoardInterfaces';
+import { Character } from '../../classes/classes';
+import { FilePath } from '../../classes/definitions/interfaces';
 
-export type UnitDispatchWindowProps = {} & BoardProps;
+export interface UnitDispatchWindowProps {
+  boardWidth: number;
+  boardHeight: number;
+  allyCharacters: Character[];
+  boardBackgroundImage: FilePath;
+}

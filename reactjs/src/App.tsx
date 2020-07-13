@@ -111,11 +111,10 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     return (
       <div id="unit-dispatch-window">
         <UnitDispatchWindow
-          characters={this.state.allyCharacters}
-          width={this.state.globalConfig.boardSize}
-          height={this.state.globalConfig.boardSize}
-          shadingFn={() => true}
-          backgroundImage={this.state.boardBackgroundImage}
+          allyCharacters={this.state.allyCharacters}
+          boardWidth={this.state.globalConfig.boardSize}
+          boardHeight={this.state.globalConfig.boardSize}
+          boardBackgroundImage={this.state.boardBackgroundImage}
         />
       </div>
     );

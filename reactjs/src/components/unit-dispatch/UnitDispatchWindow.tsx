@@ -11,11 +11,11 @@ class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
         <UnitDispatchTopStatusBar />
         <div className="flex">
           <Board
-            characters={this.props.characters}
-            width={this.props.width}
-            height={this.props.height}
-            shadingFn={this.props.shadingFn}
-            backgroundImage={this.props.backgroundImage}
+            characters={this.props.allyCharacters}
+            width={this.props.boardWidth}
+            height={this.props.boardHeight}
+            shadingFn={() => true}
+            backgroundImage={this.props.boardBackgroundImage}
           />
         </div>
       </WindowPane>
