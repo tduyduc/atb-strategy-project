@@ -10,7 +10,7 @@ import { boardBackgroundPaths } from './classes/board-backgrounds';
 // import logo from './logo.svg';
 // import './App.css';
 
-const globalConfig: GlobalConfig = {
+const globalConfig: GlobalConfig = new GlobalConfig({
   // this object is customizable!
   battleSpeed: 2,
   playMode: PlayMode.PLAYER_VS_AI,
@@ -19,7 +19,7 @@ const globalConfig: GlobalConfig = {
   teamSize: 3,
   boardSize: 6,
   inactiveTurnLimit: 30,
-};
+});
 
 class App extends React.Component<{}, AppGlobalState> implements AppMethods {
   constructor(props: {}) {
@@ -47,15 +47,11 @@ class App extends React.Component<{}, AppGlobalState> implements AppMethods {
     globalConfig: GlobalConfig
   ): Partial<AppGlobalState> => {
     if (PlayMode.PLAYER_VS_AI === globalConfig.playMode) {
-      return {
-        appState: AppState.CLASS_SELECT,
-      };
+      return { appState: AppState.CLASS_SELECT };
     }
 
     // TODO: Initialize computer characters in another function to be called here!
-    return {
-      appState: AppState.BATTLE_SCENE,
-    };
+    return { appState: AppState.BATTLE_SCENE };
   };
 
   setBoardBackgroundImage = (): void => {
