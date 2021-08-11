@@ -8,28 +8,28 @@ export function AddedCharactersGallery(
 ): JSX.Element {
   return (
     <WindowPane paneTitle="Added Characters">
-      {renderCharactersGallery()}
+      <CharactersGallery {...props} />
     </WindowPane>
   );
+}
 
-  function renderCharactersGallery(): JSX.Element {
-    if (props.allyCharacters.length) {
-      return (
-        <div>
-          {props.allyCharacters.map(character => (
-            <CharacterPane
-              key={character.id}
-              character={character}
-              onCharacterRemoval={props.onCharacterRemoval}
-              isCompletedClassLineup={props.isCompletedClassLineup}
-            />
-          ))}
-        </div>
-      );
-    } else {
-      return <p>None added. Add characters by selecting a character class.</p>;
-    }
+function CharactersGallery(props: BottomCharacterPanesProps): JSX.Element {
+  if (props.allyCharacters.length > 0) {
+    return (
+      <div>
+        {props.allyCharacters.map(character => (
+          <CharacterPane
+            key={character.id}
+            character={character}
+            onCharacterRemoval={props.onCharacterRemoval}
+            isCompletedClassLineup={props.isCompletedClassLineup}
+          />
+        ))}
+      </div>
+    );
   }
+
+  return <p>None added. Add characters by selecting a character class.</p>;
 }
 
 function CharacterPane(props: CharacterPaneProps): JSX.Element {
@@ -40,12 +40,18 @@ function CharacterPane(props: CharacterPaneProps): JSX.Element {
   return (
     <div className={divClassName.concat(' character-pane')}>
       <WindowPane paneTitle={props.character.characterName}>
-        <div className="align-center">
-          <CharacterSprite characterClass={props.character.characterClass} />
-          <p>{props.character.characterClass.className}</p>
-          <button onClick={onCharacterRemoval}>Remove</button>
-        </div>
+        <CharacterPaneContent {...props} />
       </WindowPane>
+    </div>
+  );
+}
+
+function CharacterPaneContent(props: CharacterPaneProps) {
+  return (
+    <div className="align-center">
+      <CharacterSprite characterClass={props.character.characterClass} />
+      <p>{props.character.characterClass.className}</p>
+      <button onClick={onCharacterRemoval}>Remove</button>
     </div>
   );
 

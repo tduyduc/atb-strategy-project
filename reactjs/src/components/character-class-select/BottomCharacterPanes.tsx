@@ -6,7 +6,13 @@ import { CharacterLineupConfirmationPane } from './CharacterLineupConfirmationPa
 
 export class BottomCharacterPanes extends React.PureComponent<BottomCharacterPanesProps> {
   public render(): JSX.Element {
-    return this.props.isCompletedClassLineup ? (
+    return this.props.isCompletedClassLineup
+      ? this.renderCompleteClassLineupGallery()
+      : this.renderIncompleteClassLineup();
+  }
+
+  private renderCompleteClassLineupGallery(): JSX.Element {
+    return (
       <div className="row">
         <div className="col-lg-3">
           <CharacterLineupConfirmationPane
@@ -19,7 +25,11 @@ export class BottomCharacterPanes extends React.PureComponent<BottomCharacterPan
           <AddedCharactersGallery {...this.props} />
         </div>
       </div>
-    ) : (
+    );
+  }
+
+  private renderIncompleteClassLineup(): JSX.Element {
+    return (
       <div className="row">
         <div className="col-lg-8">
           <CharacterClassesGallery {...this.props} />

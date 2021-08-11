@@ -38,20 +38,26 @@ function CharacterClassPane(props: CharacterClassPaneProps): JSX.Element {
   return (
     <div className="character-class-pane col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
       <WindowPane paneTitle={props.characterClass.className}>
-        <CharacterAttributesTable
-          attributeDisplayObject={props.attributeDisplayObject}
-        >
-          <tr>
-            <td>
-              <button onClick={onCharacterClassSelection}>Select</button>
-            </td>
-            <td>
-              <CharacterSprite characterClass={props.characterClass} />
-            </td>
-          </tr>
-        </CharacterAttributesTable>
+        <CharacterAttributesTablePane {...props} />
       </WindowPane>
     </div>
+  );
+}
+
+function CharacterAttributesTablePane(props: CharacterClassPaneProps) {
+  return (
+    <CharacterAttributesTable
+      attributeDisplayObject={props.attributeDisplayObject}
+    >
+      <tr>
+        <td>
+          <button onClick={onCharacterClassSelection}>Select</button>
+        </td>
+        <td>
+          <CharacterSprite characterClass={props.characterClass} />
+        </td>
+      </tr>
+    </CharacterAttributesTable>
   );
 
   function onCharacterClassSelection() {
