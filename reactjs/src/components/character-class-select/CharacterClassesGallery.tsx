@@ -1,25 +1,23 @@
 import React from 'react';
-import WindowPane from '../WindowPane';
 import {
   characterClasses,
   classAttributeDisplayObjects,
 } from '../../classes/character-classes';
 import {
-  CharacterClassesGalleryProps,
   CharacterClassPaneProps,
-} from './CharacterClassesSelectInterfaces';
-import CharacterSprite from '../CharacterSprite';
-import CharacterAttributesTable from '../CharacterAttributesTable';
+  CharacterClassesGalleryProps,
+} from './interfaces';
+import { WindowPane } from '../WindowPane';
+import { CharacterSprite } from '../CharacterSprite';
+import { CharacterAttributesTable } from '../CharacterAttributesTable';
 
-class CharacterClassesGallery extends React.PureComponent<
-  CharacterClassesGalleryProps
-> {
+export class CharacterClassesGallery extends React.PureComponent<CharacterClassesGalleryProps> {
   render(): JSX.Element {
     const paneTitle = ''.concat(
       'Character ',
       String(this.props.allyCharacters.length + 1),
       ' / ',
-      String(this.props.teamSize)
+      String(this.props.teamSize),
     );
 
     return (
@@ -63,5 +61,3 @@ function CharacterClassPane(props: CharacterClassPaneProps): JSX.Element {
     props.onCharacterClassSelection(props.characterClass);
   }
 }
-
-export default CharacterClassesGallery;

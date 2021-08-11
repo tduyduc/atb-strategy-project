@@ -5,8 +5,8 @@ interface WindowPaneProps {
   disabled?: boolean;
 }
 
-function WindowPane(
-  props: React.PropsWithChildren<WindowPaneProps>
+export function WindowPane(
+  props: React.PropsWithChildren<WindowPaneProps>,
 ): JSX.Element {
   return (
     <fieldset disabled={props.disabled}>
@@ -15,5 +15,3 @@ function WindowPane(
     </fieldset>
   );
 }
-
-export default WindowPane;

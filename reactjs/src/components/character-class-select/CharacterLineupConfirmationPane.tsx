@@ -1,9 +1,9 @@
 import React from 'react';
-import { CharacterLineupConfirmationPaneProps } from './CharacterClassesSelectInterfaces';
-import WindowPane from '../WindowPane';
+import { WindowPane } from '../WindowPane';
+import { CharacterLineupConfirmationPaneProps } from './interfaces';
 
-function CharacterLineupConfirmationPane(
-  props: CharacterLineupConfirmationPaneProps
+export function CharacterLineupConfirmationPane(
+  props: CharacterLineupConfirmationPaneProps,
 ): JSX.Element {
   return (
     <WindowPane paneTitle="Confirmation">
@@ -17,5 +17,3 @@ function CharacterLineupConfirmationPane(
     </WindowPane>
   );
 }
-
-export default CharacterLineupConfirmationPane;

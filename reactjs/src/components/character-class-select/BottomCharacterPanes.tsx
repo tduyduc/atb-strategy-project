@@ -1,12 +1,10 @@
 import React from 'react';
-import CharacterClassesGallery from './CharacterClassesGallery';
-import AddedCharactersGallery from './AddedCharactersGallery';
-import CharacterLineupConfirmationPane from './CharacterLineupConfirmationPane';
-import { BottomCharacterPanesProps } from './CharacterClassesSelectInterfaces';
+import { BottomCharacterPanesProps } from './interfaces';
+import { AddedCharactersGallery } from './AddedCharactersGallery';
+import { CharacterClassesGallery } from './CharacterClassesGallery';
+import { CharacterLineupConfirmationPane } from './CharacterLineupConfirmationPane';
 
-class BottomCharacterPanes extends React.PureComponent<
-  BottomCharacterPanesProps
-> {
+export class BottomCharacterPanes extends React.PureComponent<BottomCharacterPanesProps> {
   render(): JSX.Element {
     return this.props.isCompletedClassLineup ? (
       <div className="row">
@@ -33,5 +31,3 @@ class BottomCharacterPanes extends React.PureComponent<
     );
   }
 }
-
-export default BottomCharacterPanes;

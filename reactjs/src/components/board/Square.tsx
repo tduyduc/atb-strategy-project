@@ -1,8 +1,8 @@
 import React from 'react';
-import CharacterSprite from '../CharacterSprite';
-import { SquareProps } from './BoardInterfaces';
+import { SquareProps } from './interfaces';
+import { CharacterSprite } from '../CharacterSprite';
 
-class Square extends React.PureComponent<SquareProps> {
+export class Square extends React.PureComponent<SquareProps> {
   render(): JSX.Element {
     return (
       <div
@@ -18,5 +18,3 @@ class Square extends React.PureComponent<SquareProps> {
     );
   }
 }
-
-export default Square;

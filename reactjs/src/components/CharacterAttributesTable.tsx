@@ -1,12 +1,12 @@
 import React from 'react';
-import { IAttributeDisplayObject } from '../classes/definitions/interfaces';
+import { AttributeDisplayObjectInterface } from '../classes/definitions/interfaces';
 
 interface CharacterAttributesTableProps {
-  attributeDisplayObject: IAttributeDisplayObject[];
+  attributeDisplayObject: AttributeDisplayObjectInterface[];
 }
 
-function CharacterAttributesTable(
-  props: React.PropsWithChildren<CharacterAttributesTableProps>
+export function CharacterAttributesTable(
+  props: React.PropsWithChildren<CharacterAttributesTableProps>,
 ): JSX.Element {
   return (
     <table className="character-attributes-table">
@@ -14,7 +14,7 @@ function CharacterAttributesTable(
         {props.attributeDisplayObject.map((attribute, index) => (
           <tr key={index}>
             <td>{attribute.name}</td>
-            <td>{attribute.value}</td>
+            <td>{String(attribute.value ?? '')}</td>
           </tr>
         ))}
         {props.children}
@@ -22,5 +22,3 @@ function CharacterAttributesTable(
     </table>
   );
 }
-
-export default CharacterAttributesTable;

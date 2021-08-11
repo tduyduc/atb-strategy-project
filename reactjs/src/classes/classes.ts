@@ -1,66 +1,24 @@
-import * as Interfaces from './definitions/interfaces';
-import * as StaticInterfaces from './definitions/static-interfaces';
 import { PlayMode, AIMode } from './enums';
-
-/**
- * Contains common utility functions.
- *
- * @class
- * @static
- */
-class Common {
-  /**
-   * Generates a random Boolean value.
-   *
-   * @method
-   * @static
-   */
-  static randomBool(): boolean {
-    return Boolean(Math.round(Math.random()));
-  }
-
-  /**
-   * Generates a random integer, from min inclusive to max exclusive.
-   *
-   * @method
-   * @static
-   */
-  static randomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  static prependResourcePath(
-    fileName: Interfaces.FilePath
-  ): Interfaces.FilePath {
-    const PATH_PREFIX: Interfaces.FilePath = './res/';
-    return PATH_PREFIX + fileName;
-  }
-
-  /**
-   * `setState` and `Object.assign` wrapper with type constraints for `this.state`.
-   * Returns a new state reference.
-   *
-   * @method
-   * @static
-   */
-  static assignStateBind<State>(
-    thisArg: React.Component<unknown, State, unknown>
-  ): (source: Partial<State>) => void {
-    return function assignState(source: Partial<State>): void {
-      thisArg.setState(
-        (prevState: State): State =>
-          Object.assign<{}, State, Partial<State>>({}, prevState, source)
-      );
-    };
-  }
-}
+import {
+  FilePath,
+  PositionInterface,
+  CharacterInterface,
+  GlobalConfigInterface,
+  CharacterClassInterface,
+  CharacterAttributesInterface,
+  AttributeDisplayObjectInterface,
+  AttributeFriendlyNamesInterface,
+} from './definitions/interfaces';
+import {
+  DamageCalculatorInterface,
+  DistanceCalculatorInterface,
+} from './definitions/static-interfaces';
+import { randomBool, randomInt } from './common-functions';
 
 /**
  * Stores global config of the entire application.
- *
- * @class
  */
-class GlobalConfig implements Interfaces.IGlobalConfig {
+export class GlobalConfig implements GlobalConfigInterface {
   battleSpeed: number = 2;
   playMode: PlayMode = PlayMode.PLAYER_VS_AI;
   allyAIMode: AIMode = AIMode.OFFENSIVE;
@@ -69,21 +27,19 @@ class GlobalConfig implements Interfaces.IGlobalConfig {
   boardSize: number = 6;
   inactiveTurnLimit: number = 30;
 
-  constructor(arg?: Interfaces.IGlobalConfig) {
-    Object.assign<this, Interfaces.IGlobalConfig | undefined>(this, arg);
+  constructor(arg?: GlobalConfigInterface) {
+    Object.assign<this, GlobalConfigInterface | undefined>(this, arg);
   }
 }
 
 /**
  * Represents in-game character position in 2D.
- *
- * @class
  */
-class CharacterPosition implements Interfaces.IPosition {
+export class CharacterPosition implements PositionInterface {
   x: number;
   y: number;
 
-  constructor(x: number | Interfaces.IPosition = -1, y: number = -1) {
+  constructor(x: number | PositionInterface = -1, y: number = -1) {
     if (typeof x === 'object') {
       this.x = x.x;
       this.y = x.y;
@@ -93,106 +49,22 @@ class CharacterPosition implements Interfaces.IPosition {
     }
   }
 
-  equals(that: Interfaces.IPosition): boolean {
+  equals(that: PositionInterface): boolean {
     return this.x === that.x && this.y === that.y;
   }
 
+  // eslint-disable-next-line no-use-before-define
   isOccupied(characters: Character[]): boolean {
     return characters.some(character =>
-      this.equals(character.inGameAttributes.position)
-    );
-  }
-}
-
-/**
- * Static class that uses Manhattan distance formula for calculating distance between two IPosition objects.
- *
- * @class
- * @static
- */
-class ManhattanDistance implements StaticInterfaces.IDistanceFunction {
-  static calculate(a: Interfaces.IPosition, b: Interfaces.IPosition): number {
-    return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
-  }
-}
-
-/**
- * Static class that uses damage calculation formula from League of Legends.
- *
- * @class
- * @static
- */
-class DefaultDamage implements StaticInterfaces.IDamageFunction {
-  static calculate(
-    originalDamage: number,
-    defense: number,
-    variation: number = 0
-  ): number {
-    const damageMultiplier =
-      defense >= 0 ? 100 / (100 + defense) : 2 - 100 / (100 - defense);
-    const variedDamage =
-      Math.random() * variation * (Common.randomBool() ? 1 : -1);
-    return Math.max(
-      Math.floor(originalDamage * damageMultiplier + variedDamage),
-      0
-    );
-  }
-}
-
-/**
- * Stores a concrete character class. A character extends a character class.
- * @class
- * @see ICharacter
- */
-class CharacterClass implements Interfaces.ICharacterClass {
-  readonly className: string;
-  readonly initialAttributes: CharacterAttributes;
-  readonly defaultCharacterNames: string[];
-  readonly spritePath: Interfaces.FilePath;
-
-  constructor(arg: Interfaces.ICharacterClass) {
-    this.className = arg.className;
-    this.spritePath = arg.spritePath;
-    this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
-    this.defaultCharacterNames =
-      arg.defaultCharacterNames instanceof Array
-        ? arg.defaultCharacterNames.slice()
-        : [''];
-  }
-}
-
-/**
- * Stores a concrete character. A character extends a character class.
- * @class
- * @see ICharacterClass
- */
-class Character implements Interfaces.ICharacter {
-  readonly id: number;
-  characterName: string;
-  characterClass: CharacterClass;
-  inGameAttributes: CharacterAttributes;
-
-  constructor(arg: Interfaces.ICharacter) {
-    this.id = Date.now();
-    this.characterClass = new CharacterClass(arg.characterClass);
-
-    this.characterName =
-      arg.characterName ||
-      this.characterClass.defaultCharacterNames[
-        Common.randomInt(0, this.characterClass.defaultCharacterNames.length)
-      ];
-
-    this.inGameAttributes = new CharacterAttributes(
-      arg.inGameAttributes ?? this.characterClass.initialAttributes
+      this.equals(character.inGameAttributes.position),
     );
   }
 }
 
 /**
  * Stores attributes of a character.
- * @class
  */
-class CharacterAttributes implements Interfaces.IAttributes {
+export class CharacterAttributes implements CharacterAttributesInterface {
   hp: number = 1;
   mp: number = 1;
   attack: number = 1;
@@ -206,26 +78,93 @@ class CharacterAttributes implements Interfaces.IAttributes {
   time: number = 0;
   position: CharacterPosition;
 
-  constructor(arg?: Interfaces.IAttributes) {
-    Object.assign<this, Interfaces.IAttributes | undefined>(this, arg);
+  constructor(arg?: CharacterAttributesInterface) {
+    Object.assign<this, CharacterAttributesInterface | undefined>(this, arg);
     this.position = new CharacterPosition(arg?.position ?? undefined);
   }
 }
 
 /**
- * Facilitates generating an object that shows character attributes in friendly names.
- * @class
- * @static
- * @see AttributeFriendlyNamesObject
- * @see AttributeDisplayObject
+ * Stores a concrete character class. A character extends a character class.
  */
-class AttributesDisplay {
+export class CharacterClass implements CharacterClassInterface {
+  readonly className: string;
+  readonly initialAttributes: CharacterAttributes;
+  readonly defaultCharacterNames: string[];
+  readonly spritePath: FilePath;
+
+  constructor(arg: CharacterClassInterface) {
+    this.className = arg.className;
+    this.spritePath = arg.spritePath;
+    this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
+    this.defaultCharacterNames = Array.isArray(arg.defaultCharacterNames)
+      ? arg.defaultCharacterNames.slice()
+      : [''];
+  }
+}
+
+/**
+ * Stores a concrete character. A character extends a character class.
+ */
+export class Character implements CharacterInterface {
+  readonly id: number;
+  characterName: string;
+  characterClass: CharacterClass;
+  inGameAttributes: CharacterAttributes;
+
+  constructor(arg: CharacterInterface) {
+    this.id = Date.now();
+    this.characterClass = new CharacterClass(arg.characterClass);
+
+    this.characterName =
+      arg.characterName ||
+      this.characterClass.defaultCharacterNames[
+        randomInt(0, this.characterClass.defaultCharacterNames.length)
+      ];
+
+    this.inGameAttributes = new CharacterAttributes(
+      arg.inGameAttributes ?? this.characterClass.initialAttributes,
+    );
+  }
+}
+
+/**
+ * Static class that uses Manhattan distance formula
+ * for calculating distance between two Position objects.
+ */
+export class ManhattanDistance implements DistanceCalculatorInterface {
+  static calculate(a: PositionInterface, b: PositionInterface): number {
+    return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
+  }
+}
+
+/**
+ * Static class that uses damage calculation formula from League of Legends.
+ */
+export class DefaultDamage implements DamageCalculatorInterface {
+  static calculate(
+    originalDamage: number,
+    defense: number,
+    variation: number = 0,
+  ): number {
+    const damageMultiplier =
+      defense >= 0 ? 100 / (100 + defense) : 2 - 100 / (100 - defense);
+    const variedDamage = Math.random() * variation * (randomBool() ? 1 : -1);
+    return Math.max(
+      Math.floor(originalDamage * damageMultiplier + variedDamage),
+      0,
+    );
+  }
+}
+
+/**
+ * Facilitates generating an object that shows character attributes in friendly names.
+ */
+export class AttributesDisplay {
   /**
    * Friendly names of attributes, to display.
-   * @static
-   * @member {AttributeFriendlyNamesObject}
    */
-  static friendlyNames: Readonly<Interfaces.AttributeFriendlyNamesObject> = {
+  static friendlyNames: Readonly<AttributeFriendlyNamesInterface> = {
     hp: 'HP',
     mp: 'MP',
     attack: 'Attack',
@@ -240,34 +179,21 @@ class AttributesDisplay {
 
   /**
    * Generate an array of attributes, with display names.
-   * @static
-   * @method IAttributeDisplayObject[]
    */
   static generate(
-    actualAttributes: Interfaces.IAttributes
-  ): Interfaces.IAttributeDisplayObject[] {
-    const result: Interfaces.IAttributeDisplayObject[] = [];
+    actualAttributes: CharacterAttributesInterface,
+  ): AttributeDisplayObjectInterface[] {
+    const result: AttributeDisplayObjectInterface[] = [];
     for (const field in this.friendlyNames) {
       if (!(field in actualAttributes)) continue;
+
       result.push({
         name: this.friendlyNames[
-          field as keyof Interfaces.IAttributes
-        ] as string,
-        value: actualAttributes[field as keyof Interfaces.IAttributes],
+          field as keyof AttributeFriendlyNamesInterface
+        ],
+        value: actualAttributes[field as keyof CharacterAttributesInterface],
       });
     }
     return result;
   }
 }
-
-export {
-  AttributesDisplay,
-  Character,
-  CharacterAttributes,
-  CharacterClass,
-  CharacterPosition,
-  Common,
-  DefaultDamage,
-  GlobalConfig,
-  ManhattanDistance,
-};

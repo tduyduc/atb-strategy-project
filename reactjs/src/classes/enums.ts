@@ -1,8 +1,5 @@
 /**
  * Enumeration for playing mode.
- *
- * @enum
- * @readonly
  */
 export enum PlayMode {
   PLAYER_VS_AI,
@@ -12,9 +9,6 @@ export enum PlayMode {
 
 /**
  * Enumeration for game AI mode.
- *
- * @enum
- * @readonly
  */
 export enum AIMode {
   RANDOM_MOVES,
@@ -27,9 +21,6 @@ export enum AIMode {
 
 /**
  * Enumeration for current screen in the application.
- *
- * @enum
- * @readonly
  */
 export enum AppState {
   CLASS_SELECT,

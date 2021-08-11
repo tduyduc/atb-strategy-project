@@ -1,20 +1,22 @@
-import React from 'react';
-import WindowPane from '../WindowPane';
 import {
   CharacterClassSelectProps,
   CharacterClassSelectState,
   CharacterClassSelectMethods,
-} from './CharacterClassesSelectInterfaces';
-import CharacterClassSelectTopStatusBar from './CharacterClassSelectTopStatusBar';
-import BottomCharacterPanes from './BottomCharacterPanes';
-import { Common, CharacterClass, Character } from '../../classes/classes';
+} from './interfaces';
+import React from 'react';
+import { WindowPane } from '../WindowPane';
+import { BottomCharacterPanes } from './BottomCharacterPanes';
+import { assignStateBind } from '../../classes/common-functions';
+import { CharacterClass, Character } from '../../classes/classes';
+import { CharacterClassSelectTopStatusBar } from './CharacterClassSelectTopStatusBar';
 
-class CharacterClassSelectWindow
+export class CharacterClassSelectWindow
   extends React.PureComponent<
     CharacterClassSelectProps,
     CharacterClassSelectState
   >
-  implements CharacterClassSelectMethods {
+  implements CharacterClassSelectMethods
+{
   constructor(props: CharacterClassSelectProps) {
     super(props);
     this.state = {
@@ -23,14 +25,12 @@ class CharacterClassSelectWindow
     };
   }
 
-  assignState = Common.assignStateBind(this);
+  assignState = assignStateBind(this);
 
   isCompletedClassLineup = (): boolean =>
     this.state.allyCharacters.length === this.props.teamSize;
 
-  updateCharacterNameInput = (
-    input: string
-  ): void => {
+  updateCharacterNameInput = (input: string): void => {
     this.assignState({ characterNameInput: input });
   };
 
@@ -58,14 +58,14 @@ class CharacterClassSelectWindow
   removeCharacter = (character: Character): void => {
     this.assignState({
       allyCharacters: this.state.allyCharacters.filter(
-        current => character !== current
+        current => character !== current,
       ),
     });
   };
 
   continueToUnitDispatch = (): void => {
     this.props.onSavingCharactersAndContinuationToUnitDispatch(
-      this.state.allyCharacters
+      this.state.allyCharacters,
     );
   };
 
@@ -92,5 +92,3 @@ class CharacterClassSelectWindow
     );
   }
 }
-
-export default CharacterClassSelectWindow;

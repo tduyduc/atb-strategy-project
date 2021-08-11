@@ -1,0 +1,28 @@
+{
+  "env": { "node": true },
+  "extends": ["plugin:@typescript-eslint/recommended", "react-app"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true,
+      "legacyDecorators": true
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-use-before-define": ["error", "nofunc"],
+    "@typescript-eslint/no-inferrable-types": ["off"],
+    "eol-last": ["error", "always"],
+    "max-lines-per-function": [
+      "warn",
+      {
+        "max": 100,
+        "skipBlankLines": true,
+        "skipComments": true,
+        "IIFEs": false
+      }
+    ],
+    "complexity": ["warn", 15],
+    "prefer-const": ["warn"]
+  }
+}

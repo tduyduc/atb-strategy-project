@@ -1,13 +1,13 @@
-import React from 'react';
-import { Common } from '../../classes/classes';
-import { autoCharacterNames } from '../../classes/character-classes';
 import {
-  CharacterRemovalButtonsProps,
   CharacterNameInputProps,
   CharacterNameInputState,
+  CharacterRemovalButtonsProps,
   CharacterClassSelectTopStatusBarProps,
-} from './CharacterClassesSelectInterfaces';
+} from './interfaces';
+import React from 'react';
+import { autoCharacterNames } from '../../classes/character-classes';
 import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
+import { assignStateBind, randomInt } from '../../classes/common-functions';
 
 function HelpText(props: CharacterClassSelectTopStatusBarProps): JSX.Element {
   return (
@@ -20,7 +20,7 @@ function HelpText(props: CharacterClassSelectTopStatusBarProps): JSX.Element {
 }
 
 function CharacterRemovalButtons(
-  props: CharacterRemovalButtonsProps
+  props: CharacterRemovalButtonsProps,
 ): JSX.Element {
   return (
     <span>
@@ -51,7 +51,7 @@ class CharacterNameInput extends React.PureComponent<
     this.state = { characterNameInput: props.characterNameInput ?? '' };
   }
 
-  assignState = Common.assignStateBind(this);
+  assignState = assignStateBind(this);
 
   setName = (input: string): void => {
     this.props.onCharacterNameInputChange(input);
@@ -62,9 +62,7 @@ class CharacterNameInput extends React.PureComponent<
     this.setName(event?.currentTarget?.value ?? '');
 
   setAutoName = (): void =>
-    this.setName(
-      autoCharacterNames[Common.randomInt(0, autoCharacterNames.length)]
-    );
+    this.setName(autoCharacterNames[randomInt(0, autoCharacterNames.length)]);
 
   render(): JSX.Element {
     return (
@@ -88,7 +86,7 @@ class CharacterNameInput extends React.PureComponent<
 }
 
 function ControlsToolbar(
-  props: CharacterClassSelectTopStatusBarProps
+  props: CharacterClassSelectTopStatusBarProps,
 ): JSX.Element {
   const isHavingNoCharacters = !props.allyCharacters.length;
   return (
@@ -107,8 +105,8 @@ function ControlsToolbar(
   );
 }
 
-function CharacterClassSelectTopStatusBar(
-  props: CharacterClassSelectTopStatusBarProps
+export function CharacterClassSelectTopStatusBar(
+  props: CharacterClassSelectTopStatusBarProps,
 ): JSX.Element {
   return (
     <div className="row">
@@ -117,5 +115,3 @@ function CharacterClassSelectTopStatusBar(
     </div>
   );
 }
-
-export default CharacterClassSelectTopStatusBar;

@@ -1,10 +1,10 @@
 import React from 'react';
-import WindowPane from '../WindowPane';
-import UnitDispatchTopStatusBar from './UnitDispatchTopStatusBar';
-import Board from '../board/Board';
-import { UnitDispatchWindowProps } from './UnitDispatchInterfaces';
+import { Board } from '../board/Board';
+import { WindowPane } from '../WindowPane';
+import { UnitDispatchWindowProps } from './interfaces';
+import { UnitDispatchTopStatusBar } from './UnitDispatchTopStatusBar';
 
-class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
+export class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
   render(): JSX.Element {
     return (
       <WindowPane paneTitle="Unit Dispatch">
@@ -14,7 +14,7 @@ class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
             characters={this.props.allyCharacters}
             width={this.props.boardWidth}
             height={this.props.boardHeight}
-            shadingFn={() => true}
+            isShaded={() => true}
             backgroundImage={this.props.boardBackgroundImage}
           />
         </div>
@@ -22,5 +22,3 @@ class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
     );
   }
 }
-
-export default UnitDispatchWindow;

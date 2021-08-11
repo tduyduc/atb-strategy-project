@@ -1,6 +1,15 @@
 import React from 'react';
 
-function HelpText(props: {}): JSX.Element {
+export function UnitDispatchTopStatusBar(): JSX.Element {
+  return (
+    <div className="row">
+      <HelpText />
+      <CharacterRemovalButtons />
+    </div>
+  );
+}
+
+function HelpText(): JSX.Element {
   return (
     <div className="col-lg-6">
       {1
@@ -10,19 +19,19 @@ function HelpText(props: {}): JSX.Element {
   );
 }
 
-function CharacterRemovalButtons(props: {}): JSX.Element {
+function CharacterRemovalButtons(): JSX.Element {
   return (
     <div className="col-lg-6 align-right">
       <button
         disabled={false}
-        onClick={() => {}}
+        onClick={() => void 0}
         title="Change starting location of the previous character."
       >
         Back
       </button>{' '}
       <button
         disabled={false}
-        onClick={() => {}}
+        onClick={() => void 0}
         title="Discard all starting location selections and set locations from scratch."
       >
         Reset All
@@ -30,14 +39,3 @@ function CharacterRemovalButtons(props: {}): JSX.Element {
     </div>
   );
 }
-
-function UnitDispatchTopStatusBar(props: {}): JSX.Element {
-  return (
-    <div className="row">
-      <HelpText {...props} />
-      <CharacterRemovalButtons {...props} />
-    </div>
-  );
-}
-
-export default UnitDispatchTopStatusBar;

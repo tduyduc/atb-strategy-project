@@ -1,13 +1,11 @@
 import React from 'react';
-import WindowPane from '../WindowPane';
+import { WindowPane } from '../WindowPane';
+import { CharacterSprite } from '../CharacterSprite';
+import { CharacterPaneProps, BottomCharacterPanesProps } from './interfaces';
 
-import {
-  CharacterPaneProps,
-  BottomCharacterPanesProps,
-} from './CharacterClassesSelectInterfaces';
-import CharacterSprite from '../CharacterSprite';
-
-function AddedCharactersGallery(props: BottomCharacterPanesProps): JSX.Element {
+export function AddedCharactersGallery(
+  props: BottomCharacterPanesProps,
+): JSX.Element {
   return (
     <WindowPane paneTitle="Added Characters">
       {renderCharactersGallery()}
@@ -55,5 +53,3 @@ function CharacterPane(props: CharacterPaneProps): JSX.Element {
     props.onCharacterRemoval(props.character);
   }
 }
-
-export default AddedCharactersGallery;

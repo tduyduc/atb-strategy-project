@@ -5,7 +5,7 @@ interface CharacterSpriteProps {
   characterClass: CharacterClass;
 }
 
-function CharacterSprite(props: CharacterSpriteProps): JSX.Element {
+export function CharacterSprite(props: CharacterSpriteProps): JSX.Element {
   return (
     <img
       src={props.characterClass.spritePath}
@@ -13,5 +13,3 @@ function CharacterSprite(props: CharacterSpriteProps): JSX.Element {
     />
   );
 }
-
-export default CharacterSprite;

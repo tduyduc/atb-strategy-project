@@ -1,15 +1,15 @@
-import { IAttributeDisplayObject } from './definitions/interfaces';
 import {
-  Common,
   CharacterClass,
-  CharacterAttributes,
   AttributesDisplay,
+  CharacterAttributes,
 } from './classes';
+import { prependResourcePath } from './common-functions';
+import { AttributeDisplayObjectInterface } from './definitions/interfaces';
 
-export const characterClasses: Readonly<CharacterClass[]> = [
+export const characterClasses: readonly CharacterClass[] = [
   new CharacterClass({
     className: 'Fighter',
-    spritePath: Common.prependResourcePath('cyan.gif'),
+    spritePath: prependResourcePath('cyan.gif'),
     defaultCharacterNames: ['Cyan', 'Firion', 'Cecil'],
     initialAttributes: new CharacterAttributes({
       hp: 500,
@@ -24,9 +24,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
+
   new CharacterClass({
     className: 'Black Belt',
-    spritePath: Common.prependResourcePath('sabin.gif'),
+    spritePath: prependResourcePath('sabin.gif'),
     defaultCharacterNames: ['Sabin', 'Yang', 'Galuf'],
     initialAttributes: new CharacterAttributes({
       hp: 400,
@@ -41,9 +42,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
+
   new CharacterClass({
     className: 'Archer',
-    spritePath: Common.prependResourcePath('edgar.gif'),
+    spritePath: prependResourcePath('edgar.gif'),
     defaultCharacterNames: ['Edgar', 'Ceodore', 'Edward'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -58,9 +60,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
+
   new CharacterClass({
     className: 'Assassin',
-    spritePath: Common.prependResourcePath('shadow.gif'),
+    spritePath: prependResourcePath('shadow.gif'),
     defaultCharacterNames: ['Shadow', 'Edge', 'Jinnai'],
     initialAttributes: new CharacterAttributes({
       hp: 250,
@@ -75,9 +78,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 3,
     }),
   }),
+
   new CharacterClass({
     className: 'Bomber',
-    spritePath: Common.prependResourcePath('relm.gif'),
+    spritePath: prependResourcePath('relm.gif'),
     defaultCharacterNames: ['Relm', 'Krile', 'Matoya'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -92,9 +96,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 2,
     }),
   }),
+
   new CharacterClass({
     className: 'White Mage',
-    spritePath: Common.prependResourcePath('terra.gif'),
+    spritePath: prependResourcePath('terra.gif'),
     defaultCharacterNames: ['Terra', 'Rosa', 'Refia'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -109,9 +114,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 1,
     }),
   }),
+
   new CharacterClass({
     className: 'Black Mage',
-    spritePath: Common.prependResourcePath('celes.gif'),
+    spritePath: prependResourcePath('celes.gif'),
     defaultCharacterNames: ['Celes', 'Rydia', 'Alba'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -126,9 +132,10 @@ export const characterClasses: Readonly<CharacterClass[]> = [
       movementRange: 1,
     }),
   }),
+
   new CharacterClass({
     className: 'Time Mage',
-    spritePath: Common.prependResourcePath('strago.gif'),
+    spritePath: prependResourcePath('strago.gif'),
     defaultCharacterNames: ['Strago', 'Leon', 'Palom'],
     initialAttributes: new CharacterAttributes({
       hp: 300,
@@ -145,12 +152,12 @@ export const characterClasses: Readonly<CharacterClass[]> = [
   }),
 ];
 
-export const autoCharacterNames: Readonly<string[]> = characterClasses.reduce(
-  (result: string[], { defaultCharacterNames }: CharacterClass): string[] =>
-    result.concat(defaultCharacterNames),
-  []
+export const autoCharacterNames: readonly string[] = characterClasses.reduce(
+  (result, { defaultCharacterNames }) => result.concat(defaultCharacterNames),
+  [] as string[],
 );
 
-export const classAttributeDisplayObjects: Readonly<IAttributeDisplayObject[][]> = characterClasses.map(
-  characterClass => AttributesDisplay.generate(characterClass.initialAttributes)
-);
+export const classAttributeDisplayObjects: readonly AttributeDisplayObjectInterface[][] =
+  characterClasses.map(characterClass =>
+    AttributesDisplay.generate(characterClass.initialAttributes),
+  );

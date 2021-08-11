@@ -2,10 +2,8 @@
 
 /**
  * Interface for the global config object.
- *
- * @interface IGlobalConfig
  */
-export interface IGlobalConfig {
+export interface GlobalConfigInterface {
   /** Milliseconds between event ticks.
    * @member {number}
    */
@@ -14,17 +12,17 @@ export interface IGlobalConfig {
   /** Playing mode (e.g. single player or zero player).
    * @member {PlayMode}
    */
-  playMode: any;
+  playMode: PlayMode;
 
   /** AI mode of the ally team (applicable on AI vs. AI play mode).
    * @member {AIMode}
    */
-  allyAIMode: any;
+  allyAIMode: AIMode;
 
   /** AI mode of the enemy team.
    * @member {AIMode}
    */
-  enemyAIMode: any;
+  enemyAIMode: AIMode;
 
   /** Number of character in a team.
    * @member {number}
@@ -47,79 +45,12 @@ export interface IGlobalConfig {
  *
  * @interface
  */
-export interface IPosition {
-  /** Abscissa.
-   * @member {number}
-   */
+export interface PositionInterface {
+  /** Abscissa. */
   x: number;
 
-  /** Ordinate.
-   * @member {number}
-   */
+  /** Ordinate. */
   y: number;
-}
-
-/**
- * Represents an in-game character class.
- *
- * @interface
- */
-export interface ICharacterClass {
-  /**
-   * Name of the character class.
-   * @member {string}
-   */
-  className: string;
-
-  /**
-   * Initial attributes of the class.
-   * @member {IAttributes}
-   */
-  initialAttributes: IAttributes;
-
-  /**
-   * Default character names for the class.
-   * @member {string[]}
-   */
-  defaultCharacterNames?: string[];
-
-  /**
-   * File path for the default sprite image of the class.
-   * @member {FilePath}
-   */
-  spritePath: FilePath;
-}
-
-/**
- * Wraps a string that is designated to be a file path.
- *
- * @typedef
- */
-export type FilePath = string;
-
-/**
- * Represents an in-game character. A character must be of a character class.
- *
- * @interface
- */
-export interface ICharacter {
-  /**
-   * Class to which the character belongs.
-   * @member {ICharacterClass}
-   */
-  characterClass: ICharacterClass;
-
-  /**
-   * Name of the character.
-   * @member {string}
-   */
-  characterName?: string;
-
-  /**
-   * Current attributes of the character.
-   * @member {IAttributes}
-   */
-  inGameAttributes?: IAttributes;
 }
 
 /**
@@ -127,78 +58,108 @@ export interface ICharacter {
  *
  * @interface
  */
-export interface IAttributes {
+export interface CharacterAttributesInterface {
   /**
-   * Hit points. Amount of damage a character can sustain before getting knocked out, unable to take any further action.
-   * @member {number}
+   * Hit points.
+   * Amount of damage a character can sustain before getting knocked out,
+   * unable to take any further action.
    */
   hp: number;
 
   /**
    * Magic points. Limits how many special abilities a character can use.
-   * @member {number}
    */
   mp: number;
 
   /**
-   * Physical attack power. Determines amount of damage dealt with physical attacks.
-   * @member {number}
+   * Physical attack power.
+   * Determines amount of damage dealt with physical attacks.
    */
   attack: number;
 
   /**
-   * Physical defense power. Determines amount of damage reduced with physical attacks.
-   * @member {number}
+   * Physical defense power.
+   * Determines amount of damage reduced with physical attacks.
    */
   defense: number;
 
   /**
-   * Magical attack power. Determines amount of damage dealt with magical attacks.
-   * @member {number}
+   * Magical attack power.
+   * Determines amount of damage dealt with magical attacks.
    */
   intelligence: number;
 
   /**
-   * Magical defense power. Determines amount of damage reduced with magical attacks.
-   * @member {number}
+   * Magical defense power.
+   * Determines amount of damage reduced with magical attacks.
    */
   mind: number;
 
   /**
-   * Attack range. Determines maximum distance an attack can reach from the character.
-   * @member {number}
+   * Attack range.
+   * Determines maximum distance an attack can reach from the character.
    */
   attackRange: number;
 
   /**
-   * Attack area. Determines maximum distance an attack can spread from the center of the damage position.
-   * @member {number}
+   * Attack area.
+   * Determines maximum distance an attack can spread from the center of the damage position.
    */
   attackArea: number;
 
   /**
    * Speed. Determines how fast the ATB bar is filled.
-   * @member {number}
    */
   speed: number;
 
   /**
    * Movement range. Determines maximum distance a character can move.
-   * @member {number}
    */
   movementRange: number;
 
   /**
    * Time. ATB bar filling progress.
-   * @member {number}
    */
   time?: number;
 
   /**
    * Position on the game board.
-   * @member {IPosition}
    */
-  position?: IPosition;
+  position?: PositionInterface;
+}
+
+/** Wraps a string that is designated to be a file path. */
+export type FilePath = string;
+
+/**
+ * Represents an in-game character class.
+ */
+export interface CharacterClassInterface {
+  /** Name of the character class. */
+  className: string;
+
+  /** Initial attributes of the class. */
+  initialAttributes: CharacterAttributesInterface;
+
+  /** Default character names for the class. */
+  defaultCharacterNames?: string[];
+
+  /** File path for the default sprite image of the class. */
+  spritePath: FilePath;
+}
+
+/**
+ * Represents an in-game character. A character must be of a character class.
+ */
+export interface CharacterInterface {
+  /** Class to which the character belongs. */
+  characterClass: CharacterClassInterface;
+
+  /** Name of the character. */
+  characterName?: string;
+
+  /** Current attributes of the character. */
+  inGameAttributes?: CharacterAttributesInterface;
 }
 
 /**
@@ -206,35 +167,27 @@ export interface IAttributes {
  *
  * @interface
  */
-export interface IAttributeDisplayObject {
-  /** Attribute friendly name.
-   * @member {number}
-   */
+export interface AttributeDisplayObjectInterface {
+  /** Attribute friendly name. */
   name: string;
 
-  /** Attribute value.
-   * @member {any}
-   */
-  value: any;
+  /** Attribute value. */
+  value: unknown;
 }
 
 /**
  * Stores friendly names of attributes.
- * @typedef
  */
-export type AttributeFriendlyNamesObject = {
-  [x in keyof IAttributes]?: string;
-};
+export interface AttributeFriendlyNamesInterface {
+  [x: keyof CharacterAttributesInterface]: string;
+}
 
 /**
  * Keeps track of the current game state.
  *
  * @interface
  */
-export interface IGameState {
-  /**
-   * Keeps track of character waiting to get a turn
-   * @member {ICharacter[]}
-   */
-  turnQueue: ICharacter[];
+export interface GameStateInterface {
+  /** Keeps track of characters waiting to get a turn. */
+  turnQueue: CharacterInterface[];
 }
