@@ -25,7 +25,7 @@ const globalConfig: GlobalConfig = new GlobalConfig({
   inactiveTurnLimit: 30,
 });
 
-export default class App extends React.Component<
+export default class App extends React.PureComponent<
   Record<string, never>,
   AppGlobalState
 > {
