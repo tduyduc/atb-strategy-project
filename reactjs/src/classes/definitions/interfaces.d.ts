@@ -1,5 +1,7 @@
 /* Interfaces */
 
+export type NonEmptyArray<T> = [T, ...T[]];
+
 /**
  * Interface for the global config object.
  */
@@ -142,7 +144,7 @@ export interface CharacterClassInterface {
   initialAttributes: CharacterAttributesInterface;
 
   /** Default character names for the class. */
-  defaultCharacterNames?: string[];
+  defaultCharacterNames?: NonEmptyArray<string>;
 
   /** File path for the default sprite image of the class. */
   spritePath: FilePath;

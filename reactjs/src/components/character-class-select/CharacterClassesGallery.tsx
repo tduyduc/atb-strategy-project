@@ -1,14 +1,11 @@
-import React from 'react';
-import {
-  characterClasses,
-  classAttributeDisplayObjects,
-} from '../../classes/character-classes';
 import {
   CharacterClassPaneProps,
   CharacterClassesGalleryProps,
 } from './interfaces';
+import React from 'react';
 import { WindowPane } from '../WindowPane';
 import { CharacterSprite } from '../CharacterSprite';
+import { characterClasses } from '../../classes/character-classes';
 import { CharacterAttributesTable } from '../CharacterAttributesTable';
 
 export class CharacterClassesGallery extends React.PureComponent<CharacterClassesGalleryProps> {
@@ -27,8 +24,7 @@ export class CharacterClassesGallery extends React.PureComponent<CharacterClasse
             <CharacterClassPane
               key={index}
               characterClass={characterClass}
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              attributeDisplayObject={classAttributeDisplayObjects[index]!}
+              attributeDisplayObject={characterClass.initialAttributes.getDisplayObject()}
               onCharacterClassSelection={this.props.onCharacterClassSelection}
             />
           ))}

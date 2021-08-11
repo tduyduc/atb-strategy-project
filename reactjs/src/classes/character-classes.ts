@@ -1,12 +1,8 @@
-import {
-  CharacterClass,
-  AttributesDisplay,
-  CharacterAttributes,
-} from './classes';
 import { prependResourcePath } from './common-functions';
-import { AttributeDisplayObjectInterface } from './definitions/interfaces';
+import { NonEmptyArray } from './definitions/interfaces';
+import { CharacterClass, CharacterAttributes } from './classes';
 
-export const characterClasses: readonly CharacterClass[] = [
+export const characterClasses: Readonly<NonEmptyArray<CharacterClass>> = [
   new CharacterClass({
     className: 'Fighter',
     spritePath: prependResourcePath('cyan.gif'),
@@ -150,14 +146,12 @@ export const characterClasses: readonly CharacterClass[] = [
       movementRange: 1,
     }),
   }),
-];
+] as NonEmptyArray<CharacterClass>;
 
-export const autoCharacterNames: readonly string[] = characterClasses.reduce(
-  (result, { defaultCharacterNames }) => result.concat(defaultCharacterNames),
+export const autoCharacterNames: Readonly<NonEmptyArray<
+  string
+>> = characterClasses.reduce(
+  (result, { defaultCharacterNames }) =>
+    [...result, ...defaultCharacterNames] as NonEmptyArray<string>,
   [] as string[],
-);
-
-export const classAttributeDisplayObjects: readonly AttributeDisplayObjectInterface[][] =
-  characterClasses.map(characterClass =>
-    AttributesDisplay.generate(characterClass.initialAttributes),
-  );
+) as NonEmptyArray<string>;

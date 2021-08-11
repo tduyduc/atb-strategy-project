@@ -7,7 +7,7 @@ import {
 import React from 'react';
 import { autoCharacterNames } from '../../classes/character-classes';
 import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
-import { assignStateBind, randomInt } from '../../classes/common-functions';
+import { assignStateBind, getRandomArrayElement } from '../../classes/common-functions';
 
 export function CharacterClassSelectTopStatusBar(
   props: CharacterClassSelectTopStatusBarProps,
@@ -73,8 +73,7 @@ class CharacterNameInput extends React.PureComponent<
     event => this.setName(event?.currentTarget?.value ?? '');
 
   private setAutoName() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.setName(autoCharacterNames[randomInt(0, autoCharacterNames.length)]!);
+    this.setName(getRandomArrayElement(autoCharacterNames));
   }
 
   override render(): JSX.Element {

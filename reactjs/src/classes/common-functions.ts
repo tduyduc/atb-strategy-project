@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilePath } from './definitions/interfaces';
+import { FilePath, NonEmptyArray } from './definitions/interfaces';
 
 /** Generates a random Boolean value. */
 export function randomBool(): boolean {
@@ -11,6 +11,14 @@ export function randomBool(): boolean {
  */
 export function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+/**
+ * Generates a random element of an array. Must be a non-empty array.
+ */
+export function getRandomArrayElement<T>(array: Readonly<NonEmptyArray<T>>): T {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return array[randomInt(0, array.length)]!;
 }
 
 export function prependResourcePath(fileName: FilePath): FilePath {

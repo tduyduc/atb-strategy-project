@@ -1,15 +1,15 @@
 import './index.css';
+// import './App.css';
 import React from 'react';
+// import logo from './logo.svg';
 import { AppGlobalState } from './AppInterfaces';
 import { WindowPane } from './components/WindowPane';
 import { GlobalConfig, Character } from './classes/classes';
 import { AppState, PlayMode, AIMode } from './classes/enums';
 import { boardBackgroundPaths } from './classes/board-backgrounds';
-import { assignStateBind, randomInt } from './classes/common-functions';
+import { assignStateBind, getRandomArrayElement, randomInt } from './classes/common-functions';
 import { UnitDispatchWindow } from './components/unit-dispatch/UnitDispatchWindow';
 import { CharacterClassSelectWindow } from './components/character-class-select/CharacterClassSelectWindow';
-// import logo from './logo.svg';
-// import './App.css';
 
 const globalConfig: GlobalConfig = new GlobalConfig({
   // this object is customizable!
@@ -33,8 +33,7 @@ export default class App extends React.Component<
     enemyCharacters: [],
     appState: AppState.CLASS_SELECT,
     boardBackgroundImage:
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)]!,
+      getRandomArrayElement(boardBackgroundPaths),
     ...this.getInitialAppState(globalConfig),
   };
 

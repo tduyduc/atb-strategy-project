@@ -1,11 +1,11 @@
-import { FilePath } from './definitions/interfaces';
+import { FilePath, NonEmptyArray } from './definitions/interfaces';
 import { prependResourcePath } from './common-functions';
 
-export const boardBackgroundPaths: readonly FilePath[] = [
+export const boardBackgroundPaths = [
   'beach.jpg',
   'grass.jpg',
   'hill.jpg',
   'meadow.jpg',
   'sea.jpg',
   'storm.jpg',
-].map(prependResourcePath);
+].map(prependResourcePath) as NonEmptyArray<FilePath>;

@@ -1,6 +1,7 @@
 import { PlayMode, AIMode } from './enums';
 import {
   FilePath,
+  NonEmptyArray,
   PositionInterface,
   CharacterInterface,
   GlobalConfigInterface,
@@ -13,7 +14,7 @@ import {
   DamageCalculatorInterface,
   DistanceCalculatorInterface,
 } from './definitions/static-interfaces';
-import { randomBool, randomInt } from './common-functions';
+import { getRandomArrayElement, randomBool } from './common-functions';
 
 /**
  * Stores global config of the entire application.
@@ -62,6 +63,43 @@ export class CharacterPosition implements PositionInterface {
 }
 
 /**
+ * Facilitates generating an object that shows character attributes in friendly names.
+ */
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export namespace AttributesDisplay {
+  const friendlyNames: Readonly<AttributeFriendlyNamesInterface> = {
+    hp: 'HP',
+    mp: 'MP',
+    attack: 'Attack',
+    defense: 'Defense',
+    intelligence: 'Int.',
+    mind: 'Mind',
+    attackRange: 'Range',
+    attackArea: 'Area',
+    speed: 'Speed',
+    movementRange: 'Move',
+  };
+
+  /**
+   * Generate an array of attributes, with display names.
+   */
+  export function generate(
+    actualAttributes: CharacterAttributesInterface,
+  ): AttributeDisplayObjectInterface[] {
+    const result: AttributeDisplayObjectInterface[] = [];
+    for (const field in friendlyNames) {
+      if (!(field in actualAttributes)) continue;
+
+      result.push({
+        name: friendlyNames[field as keyof AttributeFriendlyNamesInterface],
+        value: actualAttributes[field as keyof CharacterAttributesInterface],
+      });
+    }
+    return result;
+  }
+}
+
+/**
  * Stores attributes of a character.
  */
 export class CharacterAttributes implements CharacterAttributesInterface {
@@ -78,9 +116,13 @@ export class CharacterAttributes implements CharacterAttributesInterface {
   time: number = 0;
   position: CharacterPosition;
 
-  constructor(arg?: CharacterAttributesInterface) {
+  public constructor(arg?: CharacterAttributesInterface) {
     Object.assign<this, CharacterAttributesInterface | undefined>(this, arg);
     this.position = new CharacterPosition(arg?.position ?? undefined);
+  }
+
+  public getDisplayObject(): AttributeDisplayObjectInterface[] {
+    return AttributesDisplay.generate(this);
   }
 }
 
@@ -90,16 +132,18 @@ export class CharacterAttributes implements CharacterAttributesInterface {
 export class CharacterClass implements CharacterClassInterface {
   readonly className: string;
   readonly initialAttributes: CharacterAttributes;
-  readonly defaultCharacterNames: string[];
+  readonly defaultCharacterNames: NonEmptyArray<string>;
   readonly spritePath: FilePath;
 
   constructor(arg: CharacterClassInterface) {
     this.className = arg.className;
     this.spritePath = arg.spritePath;
     this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
-    this.defaultCharacterNames = Array.isArray(arg.defaultCharacterNames)
-      ? arg.defaultCharacterNames.slice()
-      : [''];
+    this.defaultCharacterNames =
+      Array.isArray(arg.defaultCharacterNames) &&
+      arg.defaultCharacterNames.length > 0
+        ? [...arg.defaultCharacterNames]
+        : [''];
   }
 }
 
@@ -108,8 +152,8 @@ export class CharacterClass implements CharacterClassInterface {
  */
 export class Character implements CharacterInterface {
   readonly id: number;
-  characterName: string;
-  characterClass: CharacterClass;
+  readonly characterName: string;
+  readonly characterClass: CharacterClass;
   inGameAttributes: CharacterAttributes;
 
   constructor(arg: CharacterInterface) {
@@ -118,9 +162,7 @@ export class Character implements CharacterInterface {
 
     this.characterName =
       arg.characterName ||
-      this.characterClass.defaultCharacterNames[
-        randomInt(0, this.characterClass.defaultCharacterNames.length)
-      ];
+      (getRandomArrayElement(this.characterClass.defaultCharacterNames) ?? '');
 
     this.inGameAttributes = new CharacterAttributes(
       arg.inGameAttributes ?? this.characterClass.initialAttributes,
@@ -132,17 +174,17 @@ export class Character implements CharacterInterface {
  * Static class that uses Manhattan distance formula
  * for calculating distance between two Position objects.
  */
-export class ManhattanDistance implements DistanceCalculatorInterface {
-  static calculate(a: PositionInterface, b: PositionInterface): number {
+export const ManhattanDistance: DistanceCalculatorInterface = {
+  calculate(a: PositionInterface, b: PositionInterface): number {
     return Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
-  }
-}
+  },
+};
 
 /**
  * Static class that uses damage calculation formula from League of Legends.
  */
-export class DefaultDamage implements DamageCalculatorInterface {
-  static calculate(
+export const DefaultDamage: DamageCalculatorInterface = {
+  calculate(
     originalDamage: number,
     defense: number,
     variation: number = 0,
@@ -154,46 +196,5 @@ export class DefaultDamage implements DamageCalculatorInterface {
       Math.floor(originalDamage * damageMultiplier + variedDamage),
       0,
     );
-  }
-}
-
-/**
- * Facilitates generating an object that shows character attributes in friendly names.
- */
-export class AttributesDisplay {
-  /**
-   * Friendly names of attributes, to display.
-   */
-  static friendlyNames: Readonly<AttributeFriendlyNamesInterface> = {
-    hp: 'HP',
-    mp: 'MP',
-    attack: 'Attack',
-    defense: 'Defense',
-    intelligence: 'Int.',
-    mind: 'Mind',
-    attackRange: 'Range',
-    attackArea: 'Area',
-    speed: 'Speed',
-    movementRange: 'Move',
-  };
-
-  /**
-   * Generate an array of attributes, with display names.
-   */
-  static generate(
-    actualAttributes: CharacterAttributesInterface,
-  ): AttributeDisplayObjectInterface[] {
-    const result: AttributeDisplayObjectInterface[] = [];
-    for (const field in this.friendlyNames) {
-      if (!(field in actualAttributes)) continue;
-
-      result.push({
-        name: this.friendlyNames[
-          field as keyof AttributeFriendlyNamesInterface
-        ],
-        value: actualAttributes[field as keyof CharacterAttributesInterface],
-      });
-    }
-    return result;
-  }
-}
+  },
+};
