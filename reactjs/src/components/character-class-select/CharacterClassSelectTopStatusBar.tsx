@@ -72,8 +72,9 @@ class CharacterNameInput extends React.PureComponent<
     this.assignState({ characterNameInput: input });
   }
 
-  private onCharacterNameInputChange: HTMLInputElementOnChangeCallback = event =>
-    this.setName(event?.currentTarget?.value ?? '');
+  private onCharacterNameInputChange: HTMLInputElementOnChangeCallback = (
+    event,
+  ): void => this.setName(event?.currentTarget?.value ?? '');
 
   private setAutoName() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
