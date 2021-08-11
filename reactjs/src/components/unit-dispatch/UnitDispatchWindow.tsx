@@ -3,7 +3,6 @@ import { Board } from '../board/Board';
 import { WindowPane } from '../WindowPane';
 import { CharacterPosition } from '../../classes/classes';
 import { UnitDispatchTopStatusBar } from './UnitDispatchTopStatusBar';
-import { PositionInterface } from '../../classes/definitions/interfaces';
 import { UnitDispatchWindowProps, UnitDispatchWindowState } from './interfaces';
 
 export class UnitDispatchWindow extends React.PureComponent<
@@ -15,11 +14,11 @@ export class UnitDispatchWindow extends React.PureComponent<
     this.state = { allyCharacters: [], currentCharacterIndex: 0 };
   }
 
-  private isSquareAvailable(position: PositionInterface): boolean {
+  private isSquareAvailable(position: CharacterPosition): boolean {
     return (
       position.x >=
         this.props.boardWidth - Math.trunc(this.props.boardWidth / 2) &&
-      !CharacterPosition.from(position).isOccupied(
+      !position.isOccupied(
         this.state.allyCharacters.slice(0, this.state.currentCharacterIndex),
       )
     );
