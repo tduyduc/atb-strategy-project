@@ -2,7 +2,7 @@ import './index.css';
 // import './App.css';
 import React from 'react';
 // import logo from './logo.svg';
-import { AppGlobalState } from './AppInterfaces';
+import { AppGlobalState } from './app-interfaces';
 import { WindowPane } from './components/WindowPane';
 import { GlobalConfig, Character } from './classes/classes';
 import { AppState, PlayMode, AIMode } from './classes/enums';

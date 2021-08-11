@@ -5,7 +5,7 @@ import { CharacterClassesGallery } from './CharacterClassesGallery';
 import { CharacterLineupConfirmationPane } from './CharacterLineupConfirmationPane';
 
 export class BottomCharacterPanes extends React.PureComponent<BottomCharacterPanesProps> {
-  render(): JSX.Element {
+  override render(): JSX.Element {
     return this.props.isCompletedClassLineup ? (
       <div className="row">
         <div className="col-lg-3">

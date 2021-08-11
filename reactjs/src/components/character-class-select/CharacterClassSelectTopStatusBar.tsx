@@ -6,7 +6,7 @@ import {
 } from './interfaces';
 import React from 'react';
 import { autoCharacterNames } from '../../classes/character-classes';
-import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
+import { HTMLInputElementOnChangeCallback } from '../../app-interfaces';
 import { assignStateBind, getRandomArrayElement } from '../../classes/common-functions';
 
 export function CharacterClassSelectTopStatusBar(
@@ -57,7 +57,7 @@ class CharacterNameInput extends React.PureComponent<
   CharacterNameInputProps,
   CharacterNameInputState
 > {
-  constructor(props: CharacterNameInputProps) {
+  public constructor(props: CharacterNameInputProps) {
     super(props);
     this.state = { characterNameInput: props.characterNameInput ?? '' };
   }

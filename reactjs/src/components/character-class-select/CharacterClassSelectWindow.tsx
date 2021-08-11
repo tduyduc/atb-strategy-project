@@ -13,7 +13,7 @@ export class CharacterClassSelectWindow extends React.PureComponent<
   CharacterClassSelectProps,
   CharacterClassSelectState
 > {
-  constructor(props: CharacterClassSelectProps) {
+  public constructor(props: CharacterClassSelectProps) {
     super(props);
     this.state = {
       characterNameInput: '',

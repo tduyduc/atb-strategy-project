@@ -20,15 +20,15 @@ import { getRandomArrayElement, randomBool } from './common-functions';
  * Stores global config of the entire application.
  */
 export class GlobalConfig implements GlobalConfigInterface {
-  battleSpeed: number = 2;
-  playMode: PlayMode = PlayMode.PLAYER_VS_AI;
-  allyAIMode: AIMode = AIMode.OFFENSIVE;
-  enemyAIMode: AIMode = AIMode.MONTE_CARLO;
-  teamSize: number = 3;
-  boardSize: number = 6;
-  inactiveTurnLimit: number = 30;
+  public readonly battleSpeed: number = 2;
+  public readonly playMode: PlayMode = PlayMode.PLAYER_VS_AI;
+  public readonly allyAIMode: AIMode = AIMode.OFFENSIVE;
+  public readonly enemyAIMode: AIMode = AIMode.MONTE_CARLO;
+  public readonly teamSize: number = 3;
+  public readonly boardSize: number = 6;
+  public readonly inactiveTurnLimit: number = 30;
 
-  constructor(arg?: GlobalConfigInterface) {
+  public constructor(arg?: GlobalConfigInterface) {
     Object.assign<this, GlobalConfigInterface | undefined>(this, arg);
   }
 }
@@ -37,17 +37,13 @@ export class GlobalConfig implements GlobalConfigInterface {
  * Represents in-game character position in 2D.
  */
 export class CharacterPosition implements PositionInterface {
-  x: number;
-  y: number;
+  public constructor(
+    public readonly x: number = -1,
+    public readonly y: number = -1,
+  ) {}
 
-  constructor(x: number | PositionInterface = -1, y: number = -1) {
-    if (typeof x === 'object') {
-      this.x = x.x;
-      this.y = x.y;
-    } else {
-      this.x = x;
-      this.y = y;
-    }
+  public static from({ x, y }: PositionInterface): CharacterPosition {
+    return new CharacterPosition(x, y);
   }
 
   equals(that: PositionInterface): boolean {
@@ -103,22 +99,25 @@ export namespace AttributesDisplay {
  * Stores attributes of a character.
  */
 export class CharacterAttributes implements CharacterAttributesInterface {
-  hp: number = 1;
-  mp: number = 1;
-  attack: number = 1;
-  defense: number = 1;
-  intelligence: number = 1;
-  mind: number = 1;
-  attackRange: number = 1;
-  attackArea: number = 0;
-  speed: number = 1;
-  movementRange: number = 1;
-  time: number = 0;
-  position: CharacterPosition;
+  public hp: number = 1;
+  public mp: number = 1;
+  public attack: number = 1;
+  public defense: number = 1;
+  public intelligence: number = 1;
+  public mind: number = 1;
+  public attackRange: number = 1;
+  public attackArea: number = 0;
+  public speed: number = 1;
+  public movementRange: number = 1;
+  public time: number = 0;
+  public position: CharacterPosition;
 
   public constructor(arg?: CharacterAttributesInterface) {
     Object.assign<this, CharacterAttributesInterface | undefined>(this, arg);
-    this.position = new CharacterPosition(arg?.position ?? undefined);
+    this.position =
+      arg?.position instanceof Object
+        ? CharacterPosition.from(arg.position)
+        : new CharacterPosition();
   }
 
   public getDisplayObject(): AttributeDisplayObjectInterface[] {
@@ -130,12 +129,12 @@ export class CharacterAttributes implements CharacterAttributesInterface {
  * Stores a concrete character class. A character extends a character class.
  */
 export class CharacterClass implements CharacterClassInterface {
-  readonly className: string;
-  readonly initialAttributes: CharacterAttributes;
-  readonly defaultCharacterNames: NonEmptyArray<string>;
-  readonly spritePath: FilePath;
+  public readonly className: string;
+  public readonly initialAttributes: CharacterAttributes;
+  public readonly defaultCharacterNames: NonEmptyArray<string>;
+  public readonly spritePath: FilePath;
 
-  constructor(arg: CharacterClassInterface) {
+  public constructor(arg: CharacterClassInterface) {
     this.className = arg.className;
     this.spritePath = arg.spritePath;
     this.initialAttributes = new CharacterAttributes(arg.initialAttributes);
@@ -151,13 +150,13 @@ export class CharacterClass implements CharacterClassInterface {
  * Stores a concrete character. A character extends a character class.
  */
 export class Character implements CharacterInterface {
-  readonly id: number;
-  readonly characterName: string;
-  readonly characterClass: CharacterClass;
-  inGameAttributes: CharacterAttributes;
+  public readonly id: number;
+  public readonly characterName: string;
+  public readonly characterClass: CharacterClass;
+  public inGameAttributes: CharacterAttributes;
 
-  constructor(arg: CharacterInterface) {
-    this.id = Date.now();
+  public constructor(arg: CharacterInterface & { id?: number }) {
+    this.id = arg.id ?? Date.now();
     this.characterClass = new CharacterClass(arg.characterClass);
 
     this.characterName =

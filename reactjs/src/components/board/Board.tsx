@@ -5,7 +5,7 @@ import { BoardProps } from './interfaces';
 import { CharacterPosition } from '../../classes/classes';
 
 export class Board extends React.PureComponent<BoardProps> {
-  render(): JSX.Element {
+  override render(): JSX.Element {
     return (
       <WindowPane paneTitle="Board">
         <div
@@ -46,7 +46,7 @@ export class Board extends React.PureComponent<BoardProps> {
   }
 
   private generateBoardSquare(rowIndex: number, colIndex: number): JSX.Element {
-    const thisPosition = new CharacterPosition({ x: colIndex, y: rowIndex });
+    const thisPosition = CharacterPosition.from({ x: colIndex, y: rowIndex });
     return (
       <Square
         character={null}
