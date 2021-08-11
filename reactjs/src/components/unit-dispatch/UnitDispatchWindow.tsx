@@ -1,10 +1,30 @@
 import React from 'react';
 import { Board } from '../board/Board';
 import { WindowPane } from '../WindowPane';
-import { UnitDispatchWindowProps } from './interfaces';
+import { CharacterPosition } from '../../classes/classes';
 import { UnitDispatchTopStatusBar } from './UnitDispatchTopStatusBar';
+import { PositionInterface } from '../../classes/definitions/interfaces';
+import { UnitDispatchWindowProps, UnitDispatchWindowState } from './interfaces';
 
-export class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
+export class UnitDispatchWindow extends React.PureComponent<
+  UnitDispatchWindowProps,
+  UnitDispatchWindowState
+> {
+  public constructor(props: UnitDispatchWindowProps) {
+    super(props);
+    this.state = { allyCharacters: [], currentCharacterIndex: 0 };
+  }
+
+  private isSquareAvailable(position: PositionInterface): boolean {
+    return (
+      position.x >=
+        this.props.boardWidth - Math.trunc(this.props.boardWidth / 2) &&
+      !CharacterPosition.from(position).isOccupied(
+        this.state.allyCharacters.slice(0, this.state.currentCharacterIndex),
+      )
+    );
+  }
+
   public render(): JSX.Element {
     return (
       <WindowPane paneTitle="Unit Dispatch">
@@ -14,8 +34,8 @@ export class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowPr
             characters={this.props.allyCharacters}
             width={this.props.boardWidth}
             height={this.props.boardHeight}
-            isShaded={() => true}
             backgroundImage={this.props.boardBackgroundImage}
+            isShaded={this.isSquareAvailable.bind(this)}
           />
         </div>
       </WindowPane>

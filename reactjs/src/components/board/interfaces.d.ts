@@ -1,5 +1,5 @@
-import { Character, CharacterPosition } from '../../classes/classes';
-import { FilePath } from '../../classes/definitions/interfaces';
+import { Character } from '../../classes/classes';
+import { FilePath, IPosition } from '../../classes/definitions/interfaces';
 
 export interface BoardProps {
   width: number;

@@ -7,3 +7,8 @@ export interface UnitDispatchWindowProps {
   allyCharacters: Character[];
   boardBackgroundImage: FilePath;
 }
+
+export interface UnitDispatchWindowState {
+  allyCharacters: Character[];
+  currentCharacterIndex: number;
+}
