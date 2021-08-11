@@ -13,6 +13,6 @@ export interface AppGlobalState {
   enemyCharacters: Character[];
 }
 
-export type HTMLInputElementOnChangeCallback = (
-  event: React.FormEvent<HTMLInputElement>,
-) => void;
+export interface HTMLInputElementOnChangeCallback {
+  (event: React.FormEvent<HTMLInputElement>): void;
+}

@@ -9,6 +9,17 @@ import { autoCharacterNames } from '../../classes/character-classes';
 import { HTMLInputElementOnChangeCallback } from '../../AppInterfaces';
 import { assignStateBind, randomInt } from '../../classes/common-functions';
 
+export function CharacterClassSelectTopStatusBar(
+  props: CharacterClassSelectTopStatusBarProps,
+): JSX.Element {
+  return (
+    <div className="row">
+      <HelpText {...props} />
+      <ControlsToolbar {...props} />
+    </div>
+  );
+}
+
 function HelpText(props: CharacterClassSelectTopStatusBarProps): JSX.Element {
   return (
     <div className="col-lg-6">
@@ -51,20 +62,22 @@ class CharacterNameInput extends React.PureComponent<
     this.state = { characterNameInput: props.characterNameInput ?? '' };
   }
 
-  assignState = assignStateBind(this);
+  private assignState = assignStateBind(this);
 
-  setName = (input: string): void => {
+  private setName(input: string) {
     this.props.onCharacterNameInputChange(input);
     this.assignState({ characterNameInput: input });
-  };
+  }
 
-  onCharacterNameInputChange: HTMLInputElementOnChangeCallback = event =>
-    this.setName(event?.currentTarget?.value ?? '');
+  private onCharacterNameInputChange: HTMLInputElementOnChangeCallback =
+    event => this.setName(event?.currentTarget?.value ?? '');
 
-  setAutoName = (): void =>
-    this.setName(autoCharacterNames[randomInt(0, autoCharacterNames.length)]);
+  private setAutoName() {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.setName(autoCharacterNames[randomInt(0, autoCharacterNames.length)]!);
+  }
 
-  render(): JSX.Element {
+  override render(): JSX.Element {
     return (
       <span>
         <input
@@ -72,10 +85,10 @@ class CharacterNameInput extends React.PureComponent<
           placeholder="Character name"
           title="Enter character name here before selecting a class. If you leave this field empty, an auto-name will be selected."
           value={this.state.characterNameInput}
-          onChange={this.onCharacterNameInputChange}
+          onChange={this.onCharacterNameInputChange.bind(this)}
         />{' '}
         <button
-          onClick={this.setAutoName}
+          onClick={this.setAutoName.bind(this)}
           title="Get a random name for this character."
         >
           Auto-Name
@@ -101,17 +114,6 @@ function ControlsToolbar(
         onCharacterBackspace={props.onCharacterBackspace}
         onCharacterResetAll={props.onCharacterResetAll}
       />
-    </div>
-  );
-}
-
-export function CharacterClassSelectTopStatusBar(
-  props: CharacterClassSelectTopStatusBarProps,
-): JSX.Element {
-  return (
-    <div className="row">
-      <HelpText {...props} />
-      <ControlsToolbar {...props} />
     </div>
   );
 }

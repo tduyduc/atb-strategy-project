@@ -1,7 +1,9 @@
 import { Character, CharacterClass } from '../../classes/classes';
 import { AttributeDisplayObjectInterface } from '../../classes/definitions/interfaces';
 
-type TextInputHandler = (input: string) => void;
+interface TextInputHandler {
+  (input: string): void;
+}
 
 interface CharacterNameInputChangeHandler {
   onCharacterNameInputChange: TextInputHandler;
@@ -42,16 +44,6 @@ export interface CharacterClassSelectProps extends TeamInfo {
 export interface CharacterClassSelectState {
   characterNameInput: string;
   allyCharacters: Character[];
-}
-
-export interface CharacterClassSelectMethods {
-  updateCharacterNameInput: TextInputHandler;
-  isCompletedClassLineup(): boolean;
-  selectCharacterClass(characterClass: CharacterClass): void;
-  removeLastCharacter(): void;
-  removeAllCharacters(): void;
-  removeCharacter(character: Character): void;
-  continueToUnitDispatch(): void;
 }
 
 export interface CharacterClassSelectTopStatusBarProps

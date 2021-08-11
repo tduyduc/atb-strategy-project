@@ -26,14 +26,15 @@ export default class App extends React.Component<
   Record<string, never>,
   AppGlobalState
 > {
-  state = {
+  override state = {
     globalConfig,
     appName: 'atb-strategy-project',
     allyCharacters: [],
     enemyCharacters: [],
     appState: AppState.CLASS_SELECT,
     boardBackgroundImage:
-      boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)]!,
     ...this.getInitialAppState(globalConfig),
   };
 
@@ -73,7 +74,7 @@ export default class App extends React.Component<
 
   // start of rendering methods
 
-  render(): JSX.Element {
+  override render(): JSX.Element {
     switch (this.state.appState) {
       case AppState.CLASS_SELECT:
         return this.renderCharacterClassSelectWindow();

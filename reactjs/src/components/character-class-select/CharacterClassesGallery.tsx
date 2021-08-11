@@ -12,7 +12,7 @@ import { CharacterSprite } from '../CharacterSprite';
 import { CharacterAttributesTable } from '../CharacterAttributesTable';
 
 export class CharacterClassesGallery extends React.PureComponent<CharacterClassesGalleryProps> {
-  render(): JSX.Element {
+  override render(): JSX.Element {
     const paneTitle = ''.concat(
       'Character ',
       String(this.props.allyCharacters.length + 1),
@@ -27,7 +27,8 @@ export class CharacterClassesGallery extends React.PureComponent<CharacterClasse
             <CharacterClassPane
               key={index}
               characterClass={characterClass}
-              attributeDisplayObject={classAttributeDisplayObjects[index]}
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              attributeDisplayObject={classAttributeDisplayObjects[index]!}
               onCharacterClassSelection={this.props.onCharacterClassSelection}
             />
           ))}

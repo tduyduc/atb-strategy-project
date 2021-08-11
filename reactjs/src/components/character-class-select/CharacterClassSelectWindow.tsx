@@ -1,7 +1,6 @@
 import {
   CharacterClassSelectProps,
   CharacterClassSelectState,
-  CharacterClassSelectMethods,
 } from './interfaces';
 import React from 'react';
 import { WindowPane } from '../WindowPane';
@@ -10,13 +9,10 @@ import { assignStateBind } from '../../classes/common-functions';
 import { CharacterClass, Character } from '../../classes/classes';
 import { CharacterClassSelectTopStatusBar } from './CharacterClassSelectTopStatusBar';
 
-export class CharacterClassSelectWindow
-  extends React.PureComponent<
-    CharacterClassSelectProps,
-    CharacterClassSelectState
-  >
-  implements CharacterClassSelectMethods
-{
+export class CharacterClassSelectWindow extends React.PureComponent<
+  CharacterClassSelectProps,
+  CharacterClassSelectState
+> {
   constructor(props: CharacterClassSelectProps) {
     super(props);
     this.state = {
@@ -25,16 +21,17 @@ export class CharacterClassSelectWindow
     };
   }
 
-  assignState = assignStateBind(this);
+  private assignState = assignStateBind(this);
 
-  isCompletedClassLineup = (): boolean =>
-    this.state.allyCharacters.length === this.props.teamSize;
+  private isCompletedClassLineup() {
+    return this.state.allyCharacters.length === this.props.teamSize;
+  }
 
-  updateCharacterNameInput = (input: string): void => {
+  private updateCharacterNameInput(input: string) {
     this.assignState({ characterNameInput: input });
-  };
+  }
 
-  selectCharacterClass = (characterClass: CharacterClass): void => {
+  private selectCharacterClass(characterClass: CharacterClass) {
     this.assignState({
       allyCharacters: this.state.allyCharacters.concat([
         new Character({
@@ -43,50 +40,50 @@ export class CharacterClassSelectWindow
         }),
       ]),
     });
-  };
+  }
 
-  removeLastCharacter = (): void => {
+  private removeLastCharacter() {
     this.assignState({
       allyCharacters: this.state.allyCharacters.slice(0, -1),
     });
-  };
+  }
 
-  removeAllCharacters = (): void => {
+  private removeAllCharacters() {
     this.assignState({ allyCharacters: [] });
-  };
+  }
 
-  removeCharacter = (character: Character): void => {
+  private removeCharacter(character: Character) {
     this.assignState({
       allyCharacters: this.state.allyCharacters.filter(
         current => character !== current,
       ),
     });
-  };
+  }
 
-  continueToUnitDispatch = (): void => {
+  private continueToUnitDispatch() {
     this.props.onSavingCharactersAndContinuationToUnitDispatch(
       this.state.allyCharacters,
     );
-  };
+  }
 
-  render(): JSX.Element {
+  override render(): JSX.Element {
     return (
       <WindowPane paneTitle="Character Class Select">
         <CharacterClassSelectTopStatusBar
           isCompletedClassLineup={this.isCompletedClassLineup()}
           allyCharacters={this.state.allyCharacters}
           teamSize={this.props.teamSize}
-          onCharacterNameInputChange={this.updateCharacterNameInput}
-          onCharacterBackspace={this.removeLastCharacter}
-          onCharacterResetAll={this.removeAllCharacters}
+          onCharacterNameInputChange={this.updateCharacterNameInput.bind(this)}
+          onCharacterBackspace={this.removeLastCharacter.bind(this)}
+          onCharacterResetAll={this.removeAllCharacters.bind(this)}
         />
         <BottomCharacterPanes
           isCompletedClassLineup={this.isCompletedClassLineup()}
           allyCharacters={this.state.allyCharacters}
           teamSize={this.props.teamSize}
-          onCharacterClassSelection={this.selectCharacterClass}
-          onCharacterRemoval={this.removeCharacter}
-          onContinuationToUnitDispatch={this.continueToUnitDispatch}
+          onCharacterClassSelection={this.selectCharacterClass.bind(this)}
+          onCharacterRemoval={this.removeCharacter.bind(this)}
+          onContinuationToUnitDispatch={this.continueToUnitDispatch.bind(this)}
         />
       </WindowPane>
     );

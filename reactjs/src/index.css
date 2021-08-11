@@ -14,14 +14,19 @@ code {
 }
 */
 
-body, button, input, select, label, textarea {
+body,
+button,
+input,
+select,
+label,
+textarea {
   font-family: Sans-Serif;
   font-size: 90%;
 }
 
 :root {
   --square-size: 4em;
-  --square-border-size: .1em;
+  --square-border-size: 0.1em;
 }
 
 [ng-cloak] {
@@ -37,13 +42,13 @@ body, button, input, select, label, textarea {
 }
 
 fieldset {
-  margin: 1em .5em;
+  margin: 1em 0.5em;
   border-style: groove;
-  border-radius: .4em;
+  border-radius: 0.4em;
 }
 
 fieldset[disabled] {
-  opacity: .3;
+  opacity: 0.3;
   pointer-events: none;
 }
 
