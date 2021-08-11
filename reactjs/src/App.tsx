@@ -95,7 +95,7 @@ export default class App extends React.Component<
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
-          onSavingCharactersAndContinuationToUnitDispatch={this.goToUnitDispatchWindow.bind(
+          onSaveCharacters={this.goToUnitDispatchWindow.bind(
             this,
           )}
         />

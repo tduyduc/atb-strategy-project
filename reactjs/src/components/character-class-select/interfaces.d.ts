@@ -36,9 +36,7 @@ interface TeamAdequatenessInfo {
 }
 
 export interface CharacterClassSelectProps extends TeamInfo {
-  onSavingCharactersAndContinuationToUnitDispatch(
-    allyCharacters: Character[],
-  ): void;
+  onSaveCharacters(allyCharacters: Character[]): void;
 }
 
 export interface CharacterClassSelectState {

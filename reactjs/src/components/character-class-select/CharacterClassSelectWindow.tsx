@@ -61,7 +61,7 @@ export class CharacterClassSelectWindow extends React.PureComponent<
   }
 
   private continueToUnitDispatch() {
-    this.props.onSavingCharactersAndContinuationToUnitDispatch(
+    this.props.onSaveCharacters(
       this.state.allyCharacters,
     );
   }
