@@ -3,7 +3,7 @@ import { SquareProps } from './interfaces';
 import { CharacterSprite } from '../CharacterSprite';
 
 export class Square extends React.PureComponent<SquareProps> {
-  public override render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <div
         className={this.props.isShaded ? 'square shaded' : 'square'}

@@ -148,10 +148,9 @@ export const characterClasses: Readonly<NonEmptyArray<CharacterClass>> = [
   }),
 ] as NonEmptyArray<CharacterClass>;
 
-export const autoCharacterNames: Readonly<NonEmptyArray<
-  string
->> = characterClasses.reduce(
-  (result, { defaultCharacterNames }) =>
-    [...result, ...defaultCharacterNames] as NonEmptyArray<string>,
-  [] as string[],
-) as NonEmptyArray<string>;
+export const autoCharacterNames: Readonly<NonEmptyArray<string>> =
+  characterClasses.reduce(
+    (result, { defaultCharacterNames }) =>
+      [...result, ...defaultCharacterNames] as NonEmptyArray<string>,
+    [] as string[],
+  ) as NonEmptyArray<string>;

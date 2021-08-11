@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilePath, NonEmptyArray } from './definitions/interfaces';
+import { FilePath } from './definitions/interfaces';
 
 /** Generates a random Boolean value. */
 export function randomBool(): boolean {
@@ -14,7 +14,7 @@ export function randomInt(min: number, max: number): number {
 }
 
 /**
- * Generates a random element of an array. Must be a non-empty array.
+ * Generates a random element of an array. Returns undefined if array is empty.
  */
 export function getRandomArrayElement<T>(array: readonly T[]): T | undefined {
   return array[randomInt(0, array.length)];

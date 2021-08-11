@@ -1,3 +1,7 @@
+import {
+  assignStateBind,
+  getRandomArrayElement,
+} from './classes/common-functions';
 import './index.css';
 // import './App.css';
 import React from 'react';
@@ -7,7 +11,6 @@ import { WindowPane } from './components/WindowPane';
 import { GlobalConfig, Character } from './classes/classes';
 import { AppState, PlayMode, AIMode } from './classes/enums';
 import { boardBackgroundPaths } from './classes/board-backgrounds';
-import { assignStateBind, getRandomArrayElement, randomInt } from './classes/common-functions';
 import { UnitDispatchWindow } from './components/unit-dispatch/UnitDispatchWindow';
 import { CharacterClassSelectWindow } from './components/character-class-select/CharacterClassSelectWindow';
 
@@ -26,7 +29,7 @@ export default class App extends React.Component<
   Record<string, never>,
   AppGlobalState
 > {
-  public override state = {
+  public state = {
     globalConfig,
     appName: 'atb-strategy-project',
     allyCharacters: [],
@@ -55,7 +58,7 @@ export default class App extends React.Component<
     this.assignState({
       boardBackgroundImage:
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)]!,
+        getRandomArrayElement(boardBackgroundPaths)!,
     });
   }
 
@@ -75,7 +78,7 @@ export default class App extends React.Component<
 
   // start of rendering methods
 
-  public override render(): JSX.Element {
+  public render(): JSX.Element {
     switch (this.state.appState) {
       case AppState.CLASS_SELECT:
         return this.renderCharacterClassSelectWindow();
@@ -97,9 +100,7 @@ export default class App extends React.Component<
         <CharacterClassSelectWindow
           allyCharacters={this.state.allyCharacters}
           teamSize={this.state.globalConfig.teamSize}
-          onSaveCharacters={this.goToUnitDispatchWindow.bind(
-            this,
-          )}
+          onSaveCharacters={this.goToUnitDispatchWindow.bind(this)}
         />
       </div>
     );

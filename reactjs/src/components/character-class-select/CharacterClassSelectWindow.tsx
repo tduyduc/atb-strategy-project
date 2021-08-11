@@ -61,12 +61,10 @@ export class CharacterClassSelectWindow extends React.PureComponent<
   }
 
   private continueToUnitDispatch() {
-    this.props.onSaveCharacters(
-      this.state.allyCharacters,
-    );
+    this.props.onSaveCharacters(this.state.allyCharacters);
   }
 
-  public override render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <WindowPane paneTitle="Character Class Select">
         <CharacterClassSelectTopStatusBar

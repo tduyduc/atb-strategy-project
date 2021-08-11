@@ -1,4 +1,8 @@
 import {
+  assignStateBind,
+  getRandomArrayElement,
+} from '../../classes/common-functions';
+import {
   CharacterNameInputProps,
   CharacterNameInputState,
   CharacterRemovalButtonsProps,
@@ -7,7 +11,6 @@ import {
 import React from 'react';
 import { autoCharacterNames } from '../../classes/character-classes';
 import { HTMLInputElementOnChangeCallback } from '../../app-interfaces';
-import { assignStateBind, getRandomArrayElement } from '../../classes/common-functions';
 
 export function CharacterClassSelectTopStatusBar(
   props: CharacterClassSelectTopStatusBarProps,
@@ -69,15 +72,15 @@ class CharacterNameInput extends React.PureComponent<
     this.assignState({ characterNameInput: input });
   }
 
-  private onCharacterNameInputChange: HTMLInputElementOnChangeCallback =
-    event => this.setName(event?.currentTarget?.value ?? '');
+  private onCharacterNameInputChange: HTMLInputElementOnChangeCallback = event =>
+    this.setName(event?.currentTarget?.value ?? '');
 
   private setAutoName() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.setName(getRandomArrayElement(autoCharacterNames)!);
   }
 
-  public override render(): JSX.Element {
+  public render(): JSX.Element {
     return (
       <span>
         <input
