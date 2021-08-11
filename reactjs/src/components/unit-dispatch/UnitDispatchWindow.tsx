@@ -5,7 +5,7 @@ import { UnitDispatchWindowProps } from './interfaces';
 import { UnitDispatchTopStatusBar } from './UnitDispatchTopStatusBar';
 
 export class UnitDispatchWindow extends React.PureComponent<UnitDispatchWindowProps> {
-  override render(): JSX.Element {
+  public override render(): JSX.Element {
     return (
       <WindowPane paneTitle="Unit Dispatch">
         <UnitDispatchTopStatusBar />

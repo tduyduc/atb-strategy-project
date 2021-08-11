@@ -76,7 +76,7 @@ class CharacterNameInput extends React.PureComponent<
     this.setName(getRandomArrayElement(autoCharacterNames));
   }
 
-  override render(): JSX.Element {
+  public override render(): JSX.Element {
     return (
       <span>
         <input

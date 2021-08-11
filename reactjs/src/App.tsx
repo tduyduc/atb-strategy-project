@@ -26,7 +26,7 @@ export default class App extends React.Component<
   Record<string, never>,
   AppGlobalState
 > {
-  override state = {
+  public override state = {
     globalConfig,
     appName: 'atb-strategy-project',
     allyCharacters: [],
@@ -73,7 +73,7 @@ export default class App extends React.Component<
 
   // start of rendering methods
 
-  override render(): JSX.Element {
+  public override render(): JSX.Element {
     switch (this.state.appState) {
       case AppState.CLASS_SELECT:
         return this.renderCharacterClassSelectWindow();

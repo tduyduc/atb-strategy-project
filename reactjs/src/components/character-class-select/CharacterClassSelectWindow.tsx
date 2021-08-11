@@ -66,7 +66,7 @@ export class CharacterClassSelectWindow extends React.PureComponent<
     );
   }
 
-  override render(): JSX.Element {
+  public override render(): JSX.Element {
     return (
       <WindowPane paneTitle="Character Class Select">
         <CharacterClassSelectTopStatusBar

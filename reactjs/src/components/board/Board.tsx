@@ -5,7 +5,7 @@ import { BoardProps } from './interfaces';
 import { CharacterPosition } from '../../classes/classes';
 
 export class Board extends React.PureComponent<BoardProps> {
-  override render(): JSX.Element {
+  public override render(): JSX.Element {
     return (
       <WindowPane paneTitle="Board">
         <div
