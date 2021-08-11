@@ -33,7 +33,8 @@ export default class App extends React.Component<
     enemyCharacters: [],
     appState: AppState.CLASS_SELECT,
     boardBackgroundImage:
-      getRandomArrayElement(boardBackgroundPaths),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      getRandomArrayElement(boardBackgroundPaths)!,
     ...this.getInitialAppState(globalConfig),
   };
 
@@ -53,7 +54,8 @@ export default class App extends React.Component<
   private setBoardBackgroundImage() {
     this.assignState({
       boardBackgroundImage:
-        boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        boardBackgroundPaths[randomInt(0, boardBackgroundPaths.length)]!,
     });
   }
 

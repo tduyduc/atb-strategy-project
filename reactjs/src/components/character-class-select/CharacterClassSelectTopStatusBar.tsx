@@ -73,7 +73,8 @@ class CharacterNameInput extends React.PureComponent<
     event => this.setName(event?.currentTarget?.value ?? '');
 
   private setAutoName() {
-    this.setName(getRandomArrayElement(autoCharacterNames));
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.setName(getRandomArrayElement(autoCharacterNames)!);
   }
 
   public override render(): JSX.Element {

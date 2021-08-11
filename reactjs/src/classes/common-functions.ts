@@ -16,9 +16,8 @@ export function randomInt(min: number, max: number): number {
 /**
  * Generates a random element of an array. Must be a non-empty array.
  */
-export function getRandomArrayElement<T>(array: Readonly<NonEmptyArray<T>>): T {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return array[randomInt(0, array.length)]!;
+export function getRandomArrayElement<T>(array: readonly T[]): T | undefined {
+  return array[randomInt(0, array.length)];
 }
 
 export function prependResourcePath(fileName: FilePath): FilePath {
